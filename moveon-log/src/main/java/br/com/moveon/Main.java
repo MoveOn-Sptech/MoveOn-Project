@@ -40,10 +40,11 @@ public class Main {
         Thread.sleep(1000);
 
         // O sistema bloqueia o usuário após as tentativas falhas
-        System.out.println(Log.create(TypeLog.SECURITY, LevelLog.FATAL, "Usuário 'Joao' bloqueado devido a múltiplas tentativas de acesso inválido"));
+        System.err.println(Log.create(TypeLog.SECURITY, LevelLog.FATAL, "Usuário 'Joao' bloqueado devido a múltiplas tentativas de acesso inválido"));
         Thread.sleep(3000);
 
         System.out.println(Log.create(TypeLog.AUTHENTICATION, LevelLog.INFO, "Desconectando o usuário 'Joao' da aplicação."));
         Thread.sleep(1000);
+
     }
 }
