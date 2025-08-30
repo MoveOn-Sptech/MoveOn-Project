@@ -1,0 +1,106 @@
+/* Arquivo para estilos que são usados em todas as páginas */
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* Reset css */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    height: 60px;
+    align-items: center;
+    padding: 0px 30px;
+}
+
+.header_div_logo {
+    width: 10%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.header_div_links {
+    display: flex;
+    justify-content: space-around;
+    width: 40%;
+}
+
+.header_div_links a {
+    font-size: 16px;
+    font-weight: 400;
+    text-decoration: none;
+    color: #303030;
+    font-family: "Barlow", sans-serif;
+}
+
+.header_div_links a strong {
+    color: #DEB200;
+}
+
+.header_div_links a:hover {
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+/* Rodapé */
+
+.rodape {
+    background-color: #f5f6f7;
+    padding: 0px 8rem;
+    display: flex;
+    justify-content: space-between;
+    height: 250px;
+    align-items: center;
+}
+
+.rodape_div_infos {
+    display: flex;
+    flex-direction: column;
+    height: 80%;
+    justify-content: space-around;
+    width: 50%;
+}
+
+.rodape_div_infos p {
+    font-size: 16px;
+    font-weight: 400;
+    color: #303030;
+    font-family: "Barlow", sans-serif;
+}
+
+.rodape_div_infos strong {
+    color: #010358;
+}
+
+.rodape_div_infos img {
+    width: 100px;
+}
+
+.div_social {
+    display: flex;
+    flex-direction: column;
+    height: 70%;
+    width: 50%;
+    gap: 15px;
+    justify-content: end;
+    align-items: center;
+}
+
+.div_social p {
+    width: 50%;
+    font-size: 16px;
+    font-weight: bold;
+    color: #010358;
+    font-family: "Barlow", sans-serif;
+}
+
+.div_social_links {
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+    gap: 15px;
+    align-items: center;
+}
