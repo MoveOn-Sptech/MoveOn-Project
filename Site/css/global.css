@@ -1,5 +1,6 @@
 /* Arquivo para estilos que são usados em todas as páginas */
 @import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css');
 
 /* Reset css */
 * {
@@ -50,6 +51,22 @@
     text-decoration: underline;
     font-weight: 500;
 }
+
+/* Botão hambúrguer */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.hamburger span {
+    height: 3px;
+    width: 25px;
+    background: #303030;
+    margin: 4px 0;
+    border-radius: 2px;
+}
+
 
 /* Rodapé */
 
@@ -109,4 +126,97 @@
     width: 50%;
     gap: 15px;
     align-items: center;
+}
+
+
+/* Tablet */
+@media (min-width: 765px) and (max-width: 1024px) {
+    .header {
+        justify-content: space-around;
+    }
+
+    .header_div_links {
+        width: 50%;
+    }
+}
+
+/* Mobile */
+@media (max-width: 764px) {
+
+    /*Header*/
+    .hamburger {
+        display: flex;
+        width: 10%;
+    }
+
+    .header_div_links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        right: 10px;
+        background: white;
+        border: 1px solid #ccc;
+        padding: 10px;
+        width: 200px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .header_div_links a {
+        padding: 10px;
+        display: block;
+        color: #303030;
+    }
+
+    .header_div_links.active {
+        display: flex;
+    }
+
+    /*Rodapé*/
+
+    .rodape {
+        padding: 0px 1rem;
+    }
+
+    .rodape_div_infos {
+        display: flex;
+        flex-direction: column;
+        height: 80%;
+        justify-content: space-around;
+        width: 70%;
+    }
+
+    .rodape_div_infos p {
+        font-size: 14px;
+    }
+
+    .rodape_div_infos img {
+        width: 80px;
+    }
+
+    .div_social {
+        display: flex;
+        flex-direction: column;
+        height: 70%;
+        width: 30%;
+        gap: 0px;
+        justify-content: end;
+        align-items: left;
+    }
+
+    .div_social p {
+        font-size: 14px;
+        font-weight: bold;
+        color: #010358;
+        font-family: "Barlow", sans-serif;
+    }
+
+    .div_social_links {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        gap: 5px;
+        align-items: center;
+    }
+
 }
