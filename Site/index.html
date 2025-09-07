@@ -17,7 +17,15 @@
                 <img src="./imagens/logo.png" alt="Logo da MoveOn">
             </a>
         </div>
-        <div class="header_div_links">
+
+        <!-- Ícone do menu hamburguer -->
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <div class="header_div_links" id="menu">
             <a href="./index.html">Home</a>
             <a href="#sobre_nos">Sobre</a>
             <a href="#problemas">Problema</a>
@@ -28,7 +36,7 @@
     </header>
 
     <section class="section_banner">
-        <h1>Mapeamento <br>De Acidentes <br>Em Rodovias</h1>
+        <h1>Mapeamento De <br> Acidentes Em Rodovias</h1>
     </section>
 
     <section class="section_diferenciais">
@@ -37,24 +45,32 @@
 
         <div class="div_cards_diferenciais">
 
+            <div class="img_seta_esquerda arrows" id="prevDiferenciais">
+                <i class="fa-solid fa-arrow-left"></i>
+            </div>
+
             <div class="cards_diferenciais">
-                <img src="./imagens/icones/icone_mapeamento.png" alt="">
+                <img src="./imagens/icones/icone_mapeamento.png" alt="" data-idCardDiferenciais="1">
                 <p class="titulo_card_diferenciais">Mapeamento preciso</p>
                 <p class="paragrafo_card_diferenciais">Com a MoveOn você tem maior precisão no mapeamento dos acidentes.
                 </p>
             </div>
 
             <div class="cards_diferenciais">
-                <img src="./imagens/icones/icone_disponibilidade.png" alt="">
+                <img src="./imagens/icones/icone_disponibilidade.png" alt="" data-idCardDiferenciais="2">
                 <p class="titulo_card_diferenciais">Disponibilidade 24 horas</p>
                 <p class="paragrafo_card_diferenciais">Nosso sistema tem uma disponibilidade completa durante toda sua
                     operação.</p>
             </div>
 
             <div class="cards_diferenciais">
-                <img src="./imagens/icones/icone_priorizacao.png" alt="">
+                <img src="./imagens/icones/icone_priorizacao.png" alt="" data-idCardDiferenciais="3">
                 <p class="titulo_card_diferenciais">Priorização completa</p>
                 <p class="paragrafo_card_diferenciais">Com a MoveOn, você será nosso centro de atenção.</p>
+            </div>
+
+            <div class="img_seta_direita arrows" id="nextDiferenciais">
+                <i class="fa-solid fa-arrow-right"></i>
             </div>
 
         </div>
@@ -135,40 +151,44 @@
 
         <h1>Problema Das Concessionária Nas Rodovias</h1>
 
-        <div class="div_cards_superior">
+        <div class="div_carrossel div_cardsProblemas">
 
-            <div class="div_cards card-branco">
+             <div class="img_seta_esquerda arrows" id="prevProblemas">
+                <i class="fa-solid fa-arrow-left"></i>
+            </div>
+
+            <div class="div_cards card-branco cards_problemas" data-idCardProblemas="1">
                 <img src="./imagens/icones/pavimento.png" alt="">
                 <p>Pavimento De Má Qualidade</p>
             </div>
 
-            <div class="div_cards card-azul">
+            <div class="div_cards card-azul cards_problemas" data-idCardProblemas="2">
                 <img src="./imagens/icones/sinalizacao.png" alt="">
                 <p>Sinalização Deficiente</p>
             </div>
 
-            <div class="div_cards card-branco">
+            <div class="div_cards card-branco cards_problemas" data-idCardProblemas="3">
                 <img src="./imagens/icones/geometria.png" alt="">
                 <p>Geometria Da Via Inadequada</p>
             </div>
 
-        </div>
-
-        <div class="div_cards_inferior">
-
-            <div class="div_cards card-azul">
+            <div class="div_cards card-azul cards_problemas" data-idCardProblemas="4">
                 <img src="./imagens/icones/exigencia.png" alt="">
                 <p>Exigência de Ações Punitivas e Corretivas</p>
             </div>
 
-            <div class="div_cards card-branco">
+            <div class="div_cards card-branco cards_problemas" data-idCardProblemas="5">
                 <img src="./imagens/icones/danos.png" alt="">
                 <p>Danos à Imagem das Concessionária</p>
             </div>
 
-            <div class="div_cards card-azul">
+            <div class="div_cards card-azul cards_problemas" data-idCardProblemas="6">
                 <img src="./imagens/icones/animais.png" alt="">
                 <p>Animais Na Pista</p>
+            </div>
+
+             <div class="img_seta_direita" id="nextProblemas">
+                <i class="fa-solid fa-arrow-right"></i>
             </div>
 
         </div>
@@ -208,41 +228,44 @@
 
         <h1>Recursos Da Nossa Solução</h1>
 
-        <div class="div_cards_superior">
+        <div class="div_carrossel div_cardsRecursos">
 
-            <div class="div_cards card-branco">
+             <div class="img_seta_esquerda" id="prevRecursos">
+                <i class="fa-solid fa-arrow-left"></i>
+            </div>
+
+            <div class="div_cards card-branco cards_recursos" data-idCardSolucao="1">
                 <img src="./imagens/icones/tratamentoDados.png" alt="">
                 <p>Tratamento de dados</p>
             </div>
 
-            <div class="div_cards card-azul">
+            <div class="div_cards card-azul cards_recursos" data-idCardSolucao="2">
                 <img src="./imagens/icones/mapeamento.png" alt="">
                 <p>Mapeamento de acidentes</p>
             </div>
 
-            <div class="div_cards card-branco">
+            <div class="div_cards card-branco cards_recursos" data-idCardSolucao="3">
                 <img src="./imagens/icones/dashboards.png" alt="">
                 <p>Dashboards e métricas</p>
             </div>
 
-        </div>
-
-
-        <div class="div_cards_inferior">
-
-            <div class="div_cards card-azul">
+            <div class="div_cards card-azul cards_recursos" data-idCardSolucao="4">
                 <img src="./imagens/icones/exigencia.png" alt="">
                 <p>Responsividade e intuitividade</p>
             </div>
 
-            <div class="div_cards card-branco">
+            <div class="div_cards card-branco cards_recursos" data-idCardSolucao="5">
                 <img src="./imagens/icones/danos.png" alt="">
                 <p>Segurança de acesso</p>
             </div>
 
-            <div class="div_cards card-azul">
+            <div class="div_cards card-azul cards_recursos" data-idCardSolucao="6">
                 <img src="./imagens/icones/atualizacao.png" alt="">
                 <p>Atualização contínua de dados</p>
+            </div>
+
+             <div class="img_seta_direita" id="nextRecursos">
+                <i class="fa-solid fa-arrow-right"></i>
             </div>
 
         </div>
@@ -309,3 +332,85 @@
 </body>
 
 </html>
+
+<script>
+
+    //Menú hamburguer
+    const hamburger = document.getElementById("hamburger");
+    const menu = document.getElementById("menu");
+
+    hamburger.addEventListener("click", () => {
+        menu.classList.toggle("active");
+    });
+
+
+    //Carrossel cards diferenciais
+    const cardsDiferenciais = document.querySelectorAll('.cards_diferenciais');
+    const prevDiferenciais = document.getElementById('prevDiferenciais');
+    const nextDiferenciais = document.getElementById('nextDiferenciais');
+    let indexDiferenciais = 0;
+
+    function mostrarCardDiferencial() {
+        cardsDiferenciais.forEach(card => card.classList.remove('active'));
+        cardsDiferenciais[indexDiferenciais].classList.add('active');
+    }
+
+    mostrarCardDiferencial();
+
+    nextDiferenciais.addEventListener('click', () => {
+        indexDiferenciais = (indexDiferenciais + 1) % cardsDiferenciais.length;
+        mostrarCardDiferencial();
+    });
+
+    prevDiferenciais.addEventListener('click', () => {
+        indexDiferenciais = (indexDiferenciais - 1 + cardsDiferenciais.length) % cardsDiferenciais.length;
+        mostrarCardDiferencial();
+    });
+
+    //Carrossel cards problemas
+    const cardsProblemas = document.querySelectorAll('.cards_problemas');
+    const prevProblemas = document.getElementById('prevProblemas');
+    const nextProblemas = document.getElementById('nextProblemas');
+    let indexProblemas = 0;
+
+    function mostrarCardProblemas() {
+        cardsProblemas.forEach(card => card.classList.remove('active'));
+        cardsProblemas[indexProblemas].classList.add('active');
+    }
+
+    mostrarCardProblemas();
+
+    nextProblemas.addEventListener('click', () => {
+        indexProblemas = (indexProblemas + 1) % cardsProblemas.length;
+        mostrarCardProblemas();
+    });
+
+    prevProblemas.addEventListener('click', () => {
+        indexProblemas = (indexProblemas - 1 + cardsProblemas.length) % cardsProblemas.length;
+        mostrarCardProblemas();
+    });
+
+    //Carrossel cards Recursos
+    const cardsRecursos = document.querySelectorAll('.cards_recursos');
+    const prevRecursos = document.getElementById('prevRecursos');
+    const nextRecursos = document.getElementById('nextRecursos');
+    let indexRecursos = 0;
+
+    function mostrarCardRecursos() {
+        cardsRecursos.forEach(card => card.classList.remove('active'));
+        cardsRecursos[indexRecursos].classList.add('active');
+    }
+
+    mostrarCardRecursos();
+
+    nextRecursos.addEventListener('click', () => {
+        indexRecursos = (indexRecursos + 1) % cardsRecursos.length;
+        mostrarCardRecursos();
+    });
+
+    prevRecursos.addEventListener('click', () => {
+        indexRecursos = (indexRecursos - 1 + cardsRecursos.length) % cardsRecursos.length;
+        mostrarCardRecursos();
+    });
+
+</script>
