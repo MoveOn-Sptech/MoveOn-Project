@@ -27,11 +27,6 @@ public class Logger {
     String ANSI_CYAN = "\u001B[36m";
     String ANSI_WHITE = "\u001B[37m";
 
-    /**
-     * @param levelLog    nivel de escopo do log(debug, info, warning, error, fatal)
-     * @param description descrição do evento do log
-     * @return retorna um log formatado em  YYYY-MM-DDThh:mm:ss  levelLog --- [moveon] : description
-     */
     String create(
             String levelLog,
             String description
@@ -43,8 +38,10 @@ public class Logger {
             default -> ANSI_GREEN;
         };
 
+        // concateção das cores
         levelLog = ANSI_COLOR.concat(levelLog.concat(ANSI_RESET));
 
+        // https://medium.com/@AlexanderObregon/javas-instant-now-method-explained-5403bac7ec1e
         String createdAtFormated = Instant.now().toString();
         String templateLog = "%s %s --- [moveon] : %s";
 

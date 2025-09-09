@@ -17,13 +17,13 @@ public class AccessApplicationExample {
         Thread.sleep(3000);
 
         // Tentativas de login inválidas com o usuário "admin"
-        logger.warn("Tentativa de login falhou: usuário='admin', senha inválida.");
+        logger.warn("Tentativa invalida, usuario: joão não autorizado.");
         Thread.sleep(1000);
 
-        logger.warn("Tentativa de login falhou: usuário='admin', senha inválida.");
+        logger.warn("Tentativa invalida, usuario: joão não autorizado.");
         Thread.sleep(1000);
 
-        logger.warn("Tentativa de login falhou: usuário='admin', senha inválida.");
+        logger.warn("Tentativa invalida, usuario: joão não autorizado.");
         Thread.sleep(1000);
 
         // Bloqueio após múltiplas falhas
