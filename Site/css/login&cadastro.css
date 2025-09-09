@@ -17,10 +17,18 @@ html {
   scroll-behavior: smooth;
 }
 
-.container {
+.container_cadastro {
     width: 100vw;
     height: 100vh;
     background-image: url(../imagens/fundo_cadastro.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.container_login {
+    width: 100vw;
+    height: 100vh;
+    background-image: url(../imagens/fundo_login.png);
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -36,11 +44,25 @@ html {
 }
 
 .logo img {
-   width: 30vw; 
+   width: 40vw; 
    padding-bottom: 30vh;
 }
 
-.cadastro {
+.bemvindo {
+    display: flex;
+    position: absolute;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    width: 60vw;
+    height: 100vh; 
+    color: white;
+    font-family: "Poppins", sans-serif;
+    font-size: 3.5vw;
+    font-weight: 400;
+}
+
+.card {
     display: flex;
     position: absolute;
     right: 0;
@@ -52,25 +74,25 @@ html {
     border-radius: 30px;
 }
 
-.cadastro h1 {
+.card h1 {
     font-family: "Poppins", sans-serif;
     font-size: 3vw;
     font-weight: 800;
     color: #010358;
 }
 
-.cadastro button {
+.card button {
     margin-top: 5vh;
     width: 12vw;
     height: 7vh;
     background-color: #010358;
     color: white;
-    font-weight: 800;
-    font-size: 1.2vw;
+    font-weight: 600;
+    font-size: 1.5vw;
     border-radius: 20px;
 }
 
-.cadastro button:hover {
+.card button:hover {
   cursor: pointer;
   transform: scale(1.1);
 }
@@ -83,9 +105,28 @@ html {
 }
 
 .formulario input {
-    width: 15vw;
+    width: 12vw;
+    margin-left: 1.5vw;
     background-color: transparent;
     border-top: transparent;
     border-left: transparent;
     border-right: transparent;
+}
+
+.campo {
+    margin-bottom: 2vh;
+}
+
+.campo p {
+    margin-bottom: 0.5vh;
+}
+
+.campo img {
+    width: 1.5vw;
+    position: absolute;
+}
+
+.campo .see_password {
+    position: absolute;
+    margin-right: 2vw;
 }

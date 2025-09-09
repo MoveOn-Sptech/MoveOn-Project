@@ -8,47 +8,58 @@
 
   <title>MoveOn | Cadastro</title>
 
-  <link rel="stylesheet" href="css/cadastro.css" />
+  <link rel="stylesheet" href="css/login&cadastro.css" />
   <link rel="icon" href="imagens/logo_alternativa_branca.png">
 </head>
 
 <body>
   
-<div class="container">
+<div class="container_cadastro">
 
     <div class="logo">
         <img src="imagens/logo_branca.png">
     </div>
 
-    <div class="cadastro">
+    <div class="bemvindo">
+      <span>Seja Bem-Vindo!</span>
+    </div>
+
+    <div class="card">
 
         <div class="formulario">
                   
-                <h1>Cadastre-se</h1>
+          <h1>Cadastre-se</h1>
                   
           <div class="campo">
             <p>Nome completo</p>
+            <img src="imagens/icones/user.png">
             <input id="input_nome" type="text" placeholder="Digite seu nome" />
           </div>
           <div class="campo">
             <p>E-mail corporativo</p>
+            <img src="imagens/icones/email.png">
             <input id="input_email" type="text" placeholder="Digite seu e-mail" />
           </div>
           <div class="campo">
             <p>Senha</p>
+            <img src="imagens/icones/lock.png">
             <input id="input_senha" type="password" placeholder="Digite sua senha" />
+            <img class="see_password" src="imagens/icones/see_password.png">
           </div>
           <div class="campo">
             <p>Confirmar senha</p>
+            <img src="imagens/icones/lock.png">
             <input id="confirmacao_senha_input" type="password" placeholder="Confirme sua senha" />
+            <img class="see_password" src="imagens/icones/see_password.png">
           </div>
           <div class="campo">
             <p>Cargo/função</p>
+            <img src="imagens/icones/bag.png">
             <input id="input_cargo" type="text" placeholder="Digite seu cargo" />
           </div>
 
-                <button class="cadastrar" onclick="cadastrar()">Cadastrar</button>
-            <p class="temConta"><b>Já tem uma conta?</b> <a href="login.html">Faça o login</a></p>
+            <button class="cadastrar" onclick="cadastrar()">Cadastrar</button>
+            <p class="temConta">Já tem uma conta? <a href="login.html"><b>Faça o login</b></a></p>
 
 
         </div>
