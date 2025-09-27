@@ -11,5 +11,6 @@ CREATE TABLE usuario (
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	nome VARCHAR(50),
 	email VARCHAR(50),
-	senha VARCHAR(50)
+	senha VARCHAR(512),
+	cargo VARCHAR(50) CHECK (cargo IN ('admin', 'funcionario'))
 );
