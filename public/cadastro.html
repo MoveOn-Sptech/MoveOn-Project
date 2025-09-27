@@ -78,3 +78,47 @@
     </div>
   </body>
 </html>
+
+<script>
+  function cadastrar() {
+    const nome = document.getElementById("input_nome").value;
+    const email = document.getElementById("input_email").value;
+    const senha = document.getElementById("input_senha").value;
+    const confirmacao_senha = document.getElementById(
+      "confirmacao_senha_input"
+    ).value;
+    const cargo = document.getElementById("input_cargo").value;
+
+    // Verifica se as senhas coincidem
+    if (senha !== confirmacao_senha) {
+      alert("As senhas não coincidem. Por favor, tente novamente.");
+      return;
+    }
+
+    fetch("/usuarios", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        nome: nome,
+        email: email,
+        senha: senha,
+        cargo: cargo,
+      }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          alert("Cadastro realizado com sucesso!");
+          window.location.href = "./login.html"; // Redireciona para a página de login
+        } else {
+          return response.json().then((data) => {
+            throw new Error(data.message || "Erro ao cadastrar usuário.");
+          });
+        }
+      })
+      .catch((error) => {
+        alert("erro em se cadastrar: " + error.message);
+      });
+  }
+</script>
