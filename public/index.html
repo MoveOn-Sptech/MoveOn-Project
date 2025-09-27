@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/global.css" />
+    <link rel="stylesheet" href="./css/home.css" />
+    <title>Página Inicial</title>
+  </head>
+
+  <body>
+    <header class="header">
+      <div class="header_div_logo">
+        <a href="./index.html">
+          <img src="./imagens/logo.png" alt="Logo da MoveOn" />
+        </a>
+      </div>
+
+      <!-- Ícone do menu hamburguer -->
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <div class="header_div_links" id="menu">
+        <a href="./index.html">Home</a>
+        <a href="#sobre_nos">Sobre</a>
+        <a href="#problemas">Problema</a>
+        <a href="#solucao">Solução</a>
+        <a href="#contato"><strong>Contate-nos</strong></a>
+      </div>
+    </header>
+
+    <section class="section_banner">
+      <h1>
+        Mapeamento De <br />
+        Acidentes Em Rodovias
+      </h1>
+    </section>
+
+    <section class="section_diferenciais">
+      <h1>Diferenciais</h1>
+
+      <div class="div_cards_diferenciais">
+        <div class="img_seta_esquerda arrows" id="prevDiferenciais">
+          <i class="fa-solid fa-arrow-left"></i>
+        </div>
+
+        <div class="cards_diferenciais">
+          <img
+            src="./imagens/icones/icone_mapeamento.png"
+            alt=""
+            data-idCardDiferenciais="1"
+          />
+          <p class="titulo_card_diferenciais">Mapeamento preciso</p>
+          <p class="paragrafo_card_diferenciais">
+            Com a MoveOn você tem maior precisão no mapeamento dos acidentes.
+          </p>
+        </div>
+
+        <div class="cards_diferenciais">
+          <img
+            src="./imagens/icones/icone_disponibilidade.png"
+            alt=""
+            data-idCardDiferenciais="2"
+          />
+          <p class="titulo_card_diferenciais">Disponibilidade 24 horas</p>
+          <p class="paragrafo_card_diferenciais">
+            Nosso sistema tem uma disponibilidade completa durante toda sua
+            operação.
+          </p>
+        </div>
+
+        <div class="cards_diferenciais">
+          <img
+            src="./imagens/icones/icone_priorizacao.png"
+            alt=""
+            data-idCardDiferenciais="3"
+          />
+          <p class="titulo_card_diferenciais">Priorização completa</p>
+          <p class="paragrafo_card_diferenciais">
+            Com a MoveOn, você será nosso centro de atenção.
+          </p>
+        </div>
+
+        <div class="img_seta_direita arrows" id="nextDiferenciais">
+          <i class="fa-solid fa-arrow-right"></i>
+        </div>
+      </div>
+    </section>
+
+    <section class="section_sobre_nos" id="sobre_nos">
+      <div class="div_imagem"></div>
+
+      <div class="div_card_sobre_nos">
+        <div>
+          <h1>Sobre a MoveOn</h1>
+        </div>
+
+        <div>
+          <p>
+            MoveOn, empresa que leva segurança nas rodovias de São Paulo através
+            da análise de dados.
+          </p>
+          <p>
+            Realizamos o <strong>mapeamento</strong> de dados sobre acidentes
+            nas rodovias estaduais de São Paulo para encontrar causas raiz do
+            problema.
+          </p>
+        </div>
+
+        <div>
+          <button>Contate-nos</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section_acidentes">
+      <h1>Acidentes rodoviarios em São Paulo</h1>
+
+      <div class="div_cards_acidentes">
+        <div class="card_acidentes">
+          <div class="div_card_acidente_paragrafo">
+            <p>
+              Apenas em 2023, a Rodovia Anhanguera (SP-330) registrou 130
+              acidentes fatais que resultaram em 140 mortes, enquanto a Rodovia
+              Presidente Dutra (SP-060), no trecho de Guarulhos, contabilizou 23
+              acidentes fatais e 24 óbitos.
+            </p>
+          </div>
+
+          <div class="div_card_acidente_imagem">
+            <img src="./imagens/imagem_acidente1.png" alt="" />
+            <p>11 de abril de 2025 rodovia anhanguera</p>
+          </div>
+        </div>
+
+        <div class="card_acidentes">
+          <div class="div_card_acidente_imagem">
+            <img src="./imagens/imagem_acidente2.png" alt="" />
+            <p>29 de janeiro de 203 rodovia anhanguera</p>
+          </div>
+
+          <div class="div_card_acidente_paragrafo">
+            <p>
+              Segundo o levantamento baseado em números do Ministério da Saúde,
+              entre 2015 e 2024 o total de pessoas atendidas pelo SUS por causa
+              desses acidentes passou de 157,6 mil pessoas para 227,6 mil no ano
+              passado.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section_problemas_concessionarias" id="problemas">
+      <h1>Problema Das Concessionária Nas Rodovias</h1>
+
+      <div class="div_carrossel div_cardsProblemas">
+        <div class="img_seta_esquerda arrows" id="prevProblemas">
+          <i class="fa-solid fa-arrow-left"></i>
+        </div>
+
+        <div
+          class="div_cards card-branco cards_problemas"
+          data-idCardProblemas="1"
+        >
+          <img src="./imagens/icones/pavimento.png" alt="" />
+          <p>Pavimento De Má Qualidade</p>
+        </div>
+
+        <div
+          class="div_cards card-azul cards_problemas"
+          data-idCardProblemas="2"
+        >
+          <img src="./imagens/icones/sinalizacao.png" alt="" />
+          <p>Sinalização Deficiente</p>
+        </div>
+
+        <div
+          class="div_cards card-branco cards_problemas"
+          data-idCardProblemas="3"
+        >
+          <img src="./imagens/icones/geometria.png" alt="" />
+          <p>Geometria Da Via Inadequada</p>
+        </div>
+
+        <div
+          class="div_cards card-azul cards_problemas"
+          data-idCardProblemas="4"
+        >
+          <img src="./imagens/icones/exigencia.png" alt="" />
+          <p>Exigência de Ações Punitivas e Corretivas</p>
+        </div>
+
+        <div
+          class="div_cards card-branco cards_problemas"
+          data-idCardProblemas="5"
+        >
+          <img src="./imagens/icones/danos.png" alt="" />
+          <p>Danos à Imagem das Concessionária</p>
+        </div>
+
+        <div
+          class="div_cards card-azul cards_problemas"
+          data-idCardProblemas="6"
+        >
+          <img src="./imagens/icones/animais.png" alt="" />
+          <p>Animais Na Pista</p>
+        </div>
+
+        <div class="img_seta_direita" id="nextProblemas">
+          <i class="fa-solid fa-arrow-right"></i>
+        </div>
+      </div>
+    </section>
+
+    <section class="sections_dados">
+      <div class="div_card_dados">
+        <div>
+          <h1>Dados para Crescimento</h1>
+        </div>
+
+        <div>
+          <p>
+            A MoveOn acredita que através dos dados podemos levar maior
+            acetividade e devido cuidado com rodovias e possiveis causas de
+            acidentes
+          </p>
+          <p>
+            Hoje a cidade de São Paulo ocupa a primeira posição quanto ao número
+            de mortes no trânsito nos últimos doze meses
+          </p>
+        </div>
+
+        <div>
+          <button>Contate-nos</button>
+        </div>
+      </div>
+
+      <div class="div_imagem_dados"></div>
+    </section>
+
+    <section class="section_recursos_solucao" id="solucao">
+      <h1>Recursos Da Nossa Solução</h1>
+
+      <div class="div_carrossel div_cardsRecursos">
+        <div class="img_seta_esquerda" id="prevRecursos">
+          <i class="fa-solid fa-arrow-left"></i>
+        </div>
+
+        <div
+          class="div_cards card-branco cards_recursos"
+          data-idCardSolucao="1"
+        >
+          <img src="./imagens/icones/tratamentoDados.png" alt="" />
+          <p>Tratamento de dados</p>
+        </div>
+
+        <div class="div_cards card-azul cards_recursos" data-idCardSolucao="2">
+          <img src="./imagens/icones/mapeamento.png" alt="" />
+          <p>Mapeamento de acidentes</p>
+        </div>
+
+        <div
+          class="div_cards card-branco cards_recursos"
+          data-idCardSolucao="3"
+        >
+          <img src="./imagens/icones/dashboards.png" alt="" />
+          <p>Dashboards e métricas</p>
+        </div>
+
+        <div class="div_cards card-azul cards_recursos" data-idCardSolucao="4">
+          <img src="./imagens/icones/exigencia.png" alt="" />
+          <p>Responsividade e intuitividade</p>
+        </div>
+
+        <div
+          class="div_cards card-branco cards_recursos"
+          data-idCardSolucao="5"
+        >
+          <img src="./imagens/icones/danos.png" alt="" />
+          <p>Segurança de acesso</p>
+        </div>
+
+        <div class="div_cards card-azul cards_recursos" data-idCardSolucao="6">
+          <img src="./imagens/icones/atualizacao.png" alt="" />
+          <p>Atualização contínua de dados</p>
+        </div>
+
+        <div class="img_seta_direita" id="nextRecursos">
+          <i class="fa-solid fa-arrow-right"></i>
+        </div>
+      </div>
+    </section>
+
+    <section class="section_contato" id="contato">
+      <h1>Contate-nos</h1>
+      <p>Ficou interessado? Entre em contato conosco!</p>
+
+      <div class="form_contato">
+        <input type="text" placeholder="Nome" required class="inputs_forms" />
+        <input
+          type="email"
+          placeholder="E-mail"
+          required
+          class="inputs_forms"
+        />
+        <input
+          type="text"
+          placeholder="Empresa"
+          required
+          class="inputs_forms"
+        />
+        <input
+          type="tel"
+          placeholder="Telefone"
+          required
+          class="inputs_forms"
+        />
+
+        <textarea
+          name="mensagem"
+          id="text_area_mensagem"
+          placeholder="Mensagem"
+        ></textarea>
+
+        <div class="div_btn">
+          <button class="btn_enviar">Enviar</button>
+        </div>
+      </div>
+    </section>
+
+    <footer class="rodape">
+      <div class="rodape_div_infos">
+        <p class="paragrafos_infos">
+          <strong>Endereço:</strong>
+          6391 Elgin St. Celina, Delaware 10299
+        </p>
+        <p class="paragrafos_infos">
+          <strong>Telefone:</strong>
+          +55 11 96633-4545
+        </p>
+        <p class="paragrafos_infos">
+          <strong>E-mail:</strong>
+          moveon@gmail.com
+        </p>
+
+        <img src="./imagens/logo.png" alt="" />
+      </div>
+
+      <div class="div_social">
+        <p>Social:</p>
+
+        <div class="div_social_links">
+          <img src="./imagens/icones/akar-icons_facebook-fill.png" alt="" />
+          <img
+            src="./imagens/icones/entypo-social_linkedin-with-circle.png"
+            alt=""
+          />
+          <img
+            src="./imagens/icones/entypo-social_twitter-with-circle.png"
+            alt=""
+          />
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<script>
+  //Menú hamburguer
+  const hamburger = document.getElementById("hamburger");
+  const menu = document.getElementById("menu");
+
+  hamburger.addEventListener("click", () => {
+    menu.classList.toggle("active");
+  });
+
+  //Carrossel cards diferenciais
+  const cardsDiferenciais = document.querySelectorAll(".cards_diferenciais");
+  const prevDiferenciais = document.getElementById("prevDiferenciais");
+  const nextDiferenciais = document.getElementById("nextDiferenciais");
+  let indexDiferenciais = 0;
+
+  function mostrarCardDiferencial() {
+    cardsDiferenciais.forEach((card) => card.classList.remove("active"));
+    cardsDiferenciais[indexDiferenciais].classList.add("active");
+  }
+
+  mostrarCardDiferencial();
+
+  nextDiferenciais.addEventListener("click", () => {
+    indexDiferenciais = (indexDiferenciais + 1) % cardsDiferenciais.length;
+    mostrarCardDiferencial();
+  });
+
+  prevDiferenciais.addEventListener("click", () => {
+    indexDiferenciais =
+      (indexDiferenciais - 1 + cardsDiferenciais.length) %
+      cardsDiferenciais.length;
+    mostrarCardDiferencial();
+  });
+
+  //Carrossel cards problemas
+  const cardsProblemas = document.querySelectorAll(".cards_problemas");
+  const prevProblemas = document.getElementById("prevProblemas");
+  const nextProblemas = document.getElementById("nextProblemas");
+  let indexProblemas = 0;
+
+  function mostrarCardProblemas() {
+    cardsProblemas.forEach((card) => card.classList.remove("active"));
+    cardsProblemas[indexProblemas].classList.add("active");
+  }
+
+  mostrarCardProblemas();
+
+  nextProblemas.addEventListener("click", () => {
+    indexProblemas = (indexProblemas + 1) % cardsProblemas.length;
+    mostrarCardProblemas();
+  });
+
+  prevProblemas.addEventListener("click", () => {
+    indexProblemas =
+      (indexProblemas - 1 + cardsProblemas.length) % cardsProblemas.length;
+    mostrarCardProblemas();
+  });
+
+  //Carrossel cards Recursos
+  const cardsRecursos = document.querySelectorAll(".cards_recursos");
+  const prevRecursos = document.getElementById("prevRecursos");
+  const nextRecursos = document.getElementById("nextRecursos");
+  let indexRecursos = 0;
+
+  function mostrarCardRecursos() {
+    cardsRecursos.forEach((card) => card.classList.remove("active"));
+    cardsRecursos[indexRecursos].classList.add("active");
+  }
+
+  mostrarCardRecursos();
+
+  nextRecursos.addEventListener("click", () => {
+    indexRecursos = (indexRecursos + 1) % cardsRecursos.length;
+    mostrarCardRecursos();
+  });
+
+  prevRecursos.addEventListener("click", () => {
+    indexRecursos =
+      (indexRecursos - 1 + cardsRecursos.length) % cardsRecursos.length;
+    mostrarCardRecursos();
+  });
+</script>
