@@ -118,6 +118,15 @@
     ).value;
     const cargo = document.getElementById("input_cargo").value;
 
+    if (!nome || !email || !senha || !confirmacao_senha || !cargo) {
+      Swal.fire({
+        icon: "error",
+        title: "Erro",
+        text: "Por favor, preencha todos os campos!",
+      });
+      return;
+    }
+
     // Verifica se as senhas coincidem
     if (senha !== confirmacao_senha) {
       Swal.fire({
