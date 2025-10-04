@@ -1,453 +1,266 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/global.css" />
-    <link rel="stylesheet" href="./css/home.css" />
-    <title>Página Inicial</title>
-  </head>
 
-  <body>
-    <header class="header">
-      <div class="header_div_logo">
-        <a href="./index.html">
-          <img src="./imagens/logo.png" alt="Logo da MoveOn" />
-        </a>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> MoveOn | Página Inicial</title>
+
+  <!-- CSS Externos -->
+  <link rel="stylesheet" href="css/estilo.css">
+  <link rel="stylesheet" href="css/ResponsividadeIndex.css">
+
+  <!-- Fontes Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"> -->
+
+  <!-- Ícone -->
+  
+
+</head>
+
+<body>
+
+  <div class="navbar">
+    <div class="nav"></div>
+    <div class="navbar-Child">
+
+      <img id="logo1" src="./assets/logo_branca.png" alt="Logo">
+
+      <nav id="nav">
+        <button class="menu" aria-label="Abrir Menu" id="btn-mobile" aria-haspopup="true" aria-controls="menu" aria-expanded="false">
+          <span id="hamburger"></span>
+        </button>
+        <ul class="menu" id="menu" role="menu">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#servicos">Serviços</a></li>
+          <li><a href="https://techmentorproject.atlassian.net/servicedesk/customer/portal/1">Contato</a></li>
+          <li><a href="cadastro.html">Painel de Análise</a></li>
+          <li><a href="cadastro.html">Minha Conta</a></li>
+        </ul>
+      </nav>  
+
+      <li class="nav-padrao">Home</li>
+      <a href="#servicos"><li class="nav-padrao">Serviços</li></a>
+      <a href="#contato"><li class="nav-padrao">Contato</li></a>
+      <a href="cadastro.html"><li class="nav-padrao">Painel de Análise</li></a>
+      <a href="login.html">
+        <li class="botaoConta nav-padrao"><img src="assets/ícone-conta.svg" alt="Ícone Conta">Minha Conta</li>
+      </a>
+    </div>
+  </div>
+
+  <div class="secao1">
+    <div class="elementos">
+      <div class="text">
+        <h1>MAPEAMENTO DE ACIDENTES EM RODOVIAS <br></h1>
+         
+      </div>
+      <div class="botoes">
+        <a href="#beneficio"><button class="servicos">VEJA OS BENEFÍCIOS <img src="assets/seta-secao1.svg"></button></a>
+        <a href="#contato"><button class="contato">CONTATO<img src="assets/seta-secao1.svg"></button></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="secao2">
+    <div class="lado-esquerdo">
+      <img src="assets/imagem_sobre.png" alt="">
+    </div>
+
+    <div class="meio">
+      <div></div>
+      <div></div>
+    </div>
+
+    <div class="lado-direito">
+      <div class="titulo">
+        <span>BEM VINDO A MOVE<span class="texto-azul">ON</span></span>
       </div>
 
-      <!-- Ícone do menu hamburguer -->
-      <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
+      <div class="texto">
+        <h1>Dados para Crescimento Estratégico. </h1><br>
+        <p>MoveOn, empresa que leva segurança nas rodovias de São Paulo através da análise de dados.
+
+Realizamos o mapeamento de dados sobre acidentes nas rodovias estaduais de São Paulo para encontrar causas raiz do problema.</p>
       </div>
 
-      <div class="header_div_links" id="menu">
-        <a href="./index.html">Home</a>
-        <a href="#sobre_nos">Sobre</a>
-        <a href="#problemas">Problema</a>
-        <a href="#solucao">Solução</a>
-        <a href="#contato"><strong>Contate-nos</strong></a>
-      </div>
-    </header>
-
-    <section class="section_banner">
-      <h1>
-        Mapeamento De <br />
-        Acidentes Em Rodovias
-      </h1>
-    </section>
-
-    <section class="section_diferenciais">
-      <h1>Diferenciais</h1>
-
-      <div class="div_cards_diferenciais">
-        <div class="img_seta_esquerda arrows" id="prevDiferenciais">
-          <i class="fa-solid fa-arrow-left"></i>
-        </div>
-
-        <div class="cards_diferenciais">
-          <img
-            src="./imagens/icones/icone_mapeamento.png"
-            alt=""
-            data-idCardDiferenciais="1"
-          />
-          <p class="titulo_card_diferenciais">Mapeamento preciso</p>
-          <p class="paragrafo_card_diferenciais">
-            Com a MoveOn você tem maior precisão no mapeamento dos acidentes.
-          </p>
-        </div>
-
-        <div class="cards_diferenciais">
-          <img
-            src="./imagens/icones/icone_disponibilidade.png"
-            alt=""
-            data-idCardDiferenciais="2"
-          />
-          <p class="titulo_card_diferenciais">Disponibilidade 24 horas</p>
-          <p class="paragrafo_card_diferenciais">
-            Nosso sistema tem uma disponibilidade completa durante toda sua
-            operação.
-          </p>
-        </div>
-
-        <div class="cards_diferenciais">
-          <img
-            src="./imagens/icones/icone_priorizacao.png"
-            alt=""
-            data-idCardDiferenciais="3"
-          />
-          <p class="titulo_card_diferenciais">Priorização completa</p>
-          <p class="paragrafo_card_diferenciais">
-            Com a MoveOn, você será nosso centro de atenção.
-          </p>
-        </div>
-
-        <div class="img_seta_direita arrows" id="nextDiferenciais">
-          <i class="fa-solid fa-arrow-right"></i>
-        </div>
-      </div>
-    </section>
-
-    <section class="section_sobre_nos" id="sobre_nos">
-      <div class="div_imagem"></div>
-
-      <div class="div_card_sobre_nos">
+      <div class="ganhos">
         <div>
-          <h1>Sobre a MoveOn</h1>
+          <img src="assets/analytics-section2.svg" alt="">
+          <span>Análise Detalhada de Dados</span>
         </div>
-
         <div>
-          <p>
-            MoveOn, empresa que leva segurança nas rodovias de São Paulo através
-            da análise de dados.
-          </p>
-          <p>
-            Realizamos o <strong>mapeamento</strong> de dados sobre acidentes
-            nas rodovias estaduais de São Paulo para encontrar causas raiz do
-            problema.
-          </p>
+          <img src="assets/opportunity-section2.svg" alt="">
+          <span>Identificação de Oportunidade</span>
         </div>
+      </div>
 
+      <div class="div-botao">
+        <a href="cadastro.html"><button>CONTRATE JÁ</button></a>
+      </div>
+    </div>
+  </div>
+
+  <section id="servicos" class="secao3">
+    <div class="elementos">
+      <div class="titulo1">
+        <h2>MISSÃO, VISÃO E VALORES</h2>
+      </div>
+      <div class="titulo2">
+        <h1>Explore Nossas Soluções para Maximizar Seu <br> Potencial de Crescimento</h1>
+      </div>
+
+      <div class="blocos">
+        <div class="bloco1"><img src="assets/Icone1.svg" alt=""> <h1>Missão</h1> <p>Promover mobilidade segura usando dados para identificar acidentes, reduzir riscos e apoiar decisões mais eficazes.</p> <img class="vetor" src="assets/Vector 5.svg" alt=""></div>
+        <div class="bloco2"><img src="assets/Icone2.svg" alt=""> <h1>Visão</h1> <p>Ser referência em inteligência de dados no trânsito, tornando rodovias mais seguras e reduzindo acidentes e mortes.</p> <img class="vetor" src="assets/Vector 5.svg" alt=""></div>
+        <div class="bloco3"><img src="assets/Icone3.svg" alt=""><h1>Valores</h1> <p>Orientação por dados, Inovação, Compromisso com a segurança, Transparência, Colaboração e Excelência no atendimento</p> <img class="vetor" src="assets/Vector 5.svg" alt=""></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="secao4">
+    <div class="lado-esquerdo">
+      <div class="titulo">
+        <span>BASE DE DADOS</span>
+      </div>
+
+      <div class="texto">
+        <h1>A Base para Suas Decisões Estratégicas</h1>
+        <p>Para oferecer a melhor base para a gestão eficiente da mobilidade urbana, a MoveOn acredita que, através dos dados, é possível trazer maior assertividade e cuidado com as rodovias, identificando possíveis causas de acidentes. Nossas análises são fundamentadas em informações confiáveis, que permitem compreender padrões e antecipar riscos. Hoje, a cidade de São Paulo ocupa a primeira posição em número de mortes no trânsito nos últimos doze meses — um alerta que reforça a importância de soluções inteligentes para salvar vidas e promover deslocamentos mais seguros.</p>
+      </div>
+
+      <div class="ganhos">
         <div>
-          <button>Contate-nos</button>
+          <img src="assets/map-section4.svg" alt="">
+          <span>Mapeamento Estratégico</span>
         </div>
-      </div>
-    </section>
-
-    <section class="section_acidentes">
-      <h1>Acidentes rodoviarios em São Paulo</h1>
-
-      <div class="div_cards_acidentes">
-        <div class="card_acidentes">
-          <div class="div_card_acidente_paragrafo">
-            <p>
-              Apenas em 2023, a Rodovia Anhanguera (SP-330) registrou 130
-              acidentes fatais que resultaram em 140 mortes, enquanto a Rodovia
-              Presidente Dutra (SP-060), no trecho de Guarulhos, contabilizou 23
-              acidentes fatais e 24 óbitos.
-            </p>
-          </div>
-
-          <div class="div_card_acidente_imagem">
-            <img src="./imagens/imagem_acidente1.png" alt="" />
-            <p>11 de abril de 2025 rodovia anhanguera</p>
-          </div>
-        </div>
-
-        <div class="card_acidentes">
-          <div class="div_card_acidente_imagem">
-            <img src="./imagens/imagem_acidente2.png" alt="" />
-            <p>29 de janeiro de 203 rodovia anhanguera</p>
-          </div>
-
-          <div class="div_card_acidente_paragrafo">
-            <p>
-              Segundo o levantamento baseado em números do Ministério da Saúde,
-              entre 2015 e 2024 o total de pessoas atendidas pelo SUS por causa
-              desses acidentes passou de 157,6 mil pessoas para 227,6 mil no ano
-              passado.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section_problemas_concessionarias" id="problemas">
-      <h1>Problema Das Concessionária Nas Rodovias</h1>
-
-      <div class="div_carrossel div_cardsProblemas">
-        <div class="img_seta_esquerda arrows" id="prevProblemas">
-          <i class="fa-solid fa-arrow-left"></i>
-        </div>
-
-        <div
-          class="div_cards card-branco cards_problemas"
-          data-idCardProblemas="1"
-        >
-          <img src="./imagens/icones/pavimento.png" alt="" />
-          <p>Pavimento De Má Qualidade</p>
-        </div>
-
-        <div
-          class="div_cards card-azul cards_problemas"
-          data-idCardProblemas="2"
-        >
-          <img src="./imagens/icones/sinalizacao.png" alt="" />
-          <p>Sinalização Deficiente</p>
-        </div>
-
-        <div
-          class="div_cards card-branco cards_problemas"
-          data-idCardProblemas="3"
-        >
-          <img src="./imagens/icones/geometria.png" alt="" />
-          <p>Geometria Da Via Inadequada</p>
-        </div>
-
-        <div
-          class="div_cards card-azul cards_problemas"
-          data-idCardProblemas="4"
-        >
-          <img src="./imagens/icones/exigencia.png" alt="" />
-          <p>Exigência de Ações Punitivas e Corretivas</p>
-        </div>
-
-        <div
-          class="div_cards card-branco cards_problemas"
-          data-idCardProblemas="5"
-        >
-          <img src="./imagens/icones/danos.png" alt="" />
-          <p>Danos à Imagem das Concessionária</p>
-        </div>
-
-        <div
-          class="div_cards card-azul cards_problemas"
-          data-idCardProblemas="6"
-        >
-          <img src="./imagens/icones/animais.png" alt="" />
-          <p>Animais Na Pista</p>
-        </div>
-
-        <div class="img_seta_direita" id="nextProblemas">
-          <i class="fa-solid fa-arrow-right"></i>
-        </div>
-      </div>
-    </section>
-
-    <section class="sections_dados">
-      <div class="div_card_dados">
         <div>
-          <h1>Dados para Crescimento</h1>
-        </div>
-
-        <div>
-          <p>
-            A MoveOn acredita que através dos dados podemos levar maior
-            acetividade e devido cuidado com rodovias e possiveis causas de
-            acidentes
-          </p>
-          <p>
-            Hoje a cidade de São Paulo ocupa a primeira posição quanto ao número
-            de mortes no trânsito nos últimos doze meses
-          </p>
-        </div>
-
-        <div>
-          <button>Contate-nos</button>
+          <img src="assets/data-section4.svg" alt="">
+          <span>Perfil Populacional</span>
         </div>
       </div>
+    </div>
 
-      <div class="div_imagem_dados"></div>
-    </section>
+    <div class="meio">
+      <div></div>
+      <div></div>
+    </div>
 
-    <section class="section_recursos_solucao" id="solucao">
-      <h1>Recursos Da Nossa Solução</h1>
+    <div class="lado-direito">
+      <img src="assets/cloud-section4.svg" alt="">
+    </div>
+  </div>
 
-      <div class="div_carrossel div_cardsRecursos">
-        <div class="img_seta_esquerda" id="prevRecursos">
-          <i class="fa-solid fa-arrow-left"></i>
-        </div>
-
-        <div
-          class="div_cards card-branco cards_recursos"
-          data-idCardSolucao="1"
-        >
-          <img src="./imagens/icones/tratamentoDados.png" alt="" />
-          <p>Tratamento de dados</p>
-        </div>
-
-        <div class="div_cards card-azul cards_recursos" data-idCardSolucao="2">
-          <img src="./imagens/icones/mapeamento.png" alt="" />
-          <p>Mapeamento de acidentes</p>
-        </div>
-
-        <div
-          class="div_cards card-branco cards_recursos"
-          data-idCardSolucao="3"
-        >
-          <img src="./imagens/icones/dashboards.png" alt="" />
-          <p>Dashboards e métricas</p>
-        </div>
-
-        <div class="div_cards card-azul cards_recursos" data-idCardSolucao="4">
-          <img src="./imagens/icones/exigencia.png" alt="" />
-          <p>Responsividade e intuitividade</p>
-        </div>
-
-        <div
-          class="div_cards card-branco cards_recursos"
-          data-idCardSolucao="5"
-        >
-          <img src="./imagens/icones/danos.png" alt="" />
-          <p>Segurança de acesso</p>
-        </div>
-
-        <div class="div_cards card-azul cards_recursos" data-idCardSolucao="6">
-          <img src="./imagens/icones/atualizacao.png" alt="" />
-          <p>Atualização contínua de dados</p>
-        </div>
-
-        <div class="img_seta_direita" id="nextRecursos">
-          <i class="fa-solid fa-arrow-right"></i>
-        </div>
+  <div id="beneficio" class="secao5">
+    <div class="lado-esquerdo">
+      <div class="titulo">
+        <span>BENEFÍCIOS</span>
       </div>
-    </section>
-
-    <section class="section_contato" id="contato">
-      <h1>Contate-nos</h1>
-      <p>Ficou interessado? Entre em contato conosco!</p>
-
-      <div class="form_contato">
-        <input type="text" placeholder="Nome" required class="inputs_forms" />
-        <input
-          type="email"
-          placeholder="E-mail"
-          required
-          class="inputs_forms"
-        />
-        <input
-          type="text"
-          placeholder="Empresa"
-          required
-          class="inputs_forms"
-        />
-        <input
-          type="tel"
-          placeholder="Telefone"
-          required
-          class="inputs_forms"
-        />
-
-        <textarea
-          name="mensagem"
-          id="text_area_mensagem"
-          placeholder="Mensagem"
-        ></textarea>
-
-        <div class="div_btn">
-          <button class="btn_enviar">Enviar</button>
-        </div>
+      <div class="texto">
+        <h1>Benefícios Exclusivos da Nossa Solução</h1>
+        <p>Aproveite os recursos adicionais que tornam nossa oferta ainda mais valiosa para sua expansão.</p>
       </div>
-    </section>
+      <div class="beneficios">
+        <div><img src="assets/check-section5.svg" alt=""><span>Acesso Prioritário</span></div>
+        <div><img src="assets/check-section5.svg" alt=""><span>Consultoria Personalizada</span></div>
+        <div><img src="assets/check-section5.svg" alt=""><span>Atualizações Contínuas</span></div>
+      </div>
+      <div class="div-botao">
+        <a href="cadastro.html"><button>COMECE AGORA!</button></a>
+      </div>
+    </div>
 
-    <footer class="rodape">
-      <div class="rodape_div_infos">
-        <p class="paragrafos_infos">
-          <strong>Endereço:</strong>
-          6391 Elgin St. Celina, Delaware 10299
-        </p>
-        <p class="paragrafos_infos">
-          <strong>Telefone:</strong>
-          +55 11 96633-4545
-        </p>
-        <p class="paragrafos_infos">
-          <strong>E-mail:</strong>
-          moveon@gmail.com
-        </p>
+    <div class="lado-direito">
+      <div class="parte-esquerda">
+        <div><img src="assets/suport-section5.svg" alt=""><span>SUPORTE PREMIUM</span></div>
+        <div><img src="assets/report-section5.svg" alt=""><span>RELATÓRIOS COMPLETOS</span></div>
+      </div>
+      <div class="parte-direita">
+        <div><img src="assets/management-section5.svg" alt=""><span>RECURSOS ADICIONAIS</span></div>
+        <div><img src="assets/verified-section5.svg" alt=""><span>SEGURANÇA</span></div>
+      </div>
+    </div>
+  </div>
 
-        <img src="./imagens/logo.png" alt="" />
+  <div class="secao6">
+    <div class="titulo1"><span>PARA CONTRATAR</span></div>
+    <div class="titulo2"><h1>Como Trabalhamos com Você</h1></div>
+
+    <div class="caixas">
+      <div class="caixa1">
+        <div class="div-img"><img src="assets/img-box1-section6.svg" alt=""></div>
+        <div class="texto">
+          <h1>Cadastre-se</h1>
+          <p>Junte-se à MoveOn e contribua para aumentar a segurança nas rodovias de São Paulo.</p>
+        </div>
+        <div class="numero"><span>1</span></div>
       </div>
 
-      <div class="div_social">
-        <p>Social:</p>
+      <div class="seta1"><img src="assets/arrow-section6.svg" alt=""></div>
 
-        <div class="div_social_links">
-          <img src="./imagens/icones/akar-icons_facebook-fill.png" alt="" />
-          <img
-            src="./imagens/icones/entypo-social_linkedin-with-circle.png"
-            alt=""
-          />
-          <img
-            src="./imagens/icones/entypo-social_twitter-with-circle.png"
-            alt=""
-          />
+      <div class="caixa2">
+        <div class="div-img"><img src="assets/img-box2-section6.svg" alt=""></div>
+        <div class="texto">
+          <h1>Entrega dos dados</h1>
+          <p>Realizamos o mapeamento de acidentes nas rodovias estaduais, identificando padrões críticos e causas raiz.</p>
         </div>
+        <div class="numero"><span>2</span></div>
       </div>
-    </footer>
-  </body>
-</html>
 
-<script>
-  //Menú hamburguer
-  const hamburger = document.getElementById("hamburger");
-  const menu = document.getElementById("menu");
+      <div class="seta2"><img src="assets/arrow-section6.svg" alt=""></div>
 
-  hamburger.addEventListener("click", () => {
-    menu.classList.toggle("active");
-  });
+      <div class="caixa3">
+        <div class="div-img"><img src="assets/img-box3-section6.svg" alt=""></div>
+        <div class="texto">
+          <h1>Plano de Ação</h1>
+          <p>Com os dados em mãos, é possível tomar decisões mais assertivas, implementar soluções eficazes e reduzir riscos nas rodovias.</p>
+        </div>
+        <div class="numero"><span>3</span></div>
+      </div>
+    </div>
+  </div>
 
-  //Carrossel cards diferenciais
-  const cardsDiferenciais = document.querySelectorAll(".cards_diferenciais");
-  const prevDiferenciais = document.getElementById("prevDiferenciais");
-  const nextDiferenciais = document.getElementById("nextDiferenciais");
-  let indexDiferenciais = 0;
+  <!-- FOOTER -->
+  <footer>
+    <div id="contato" class="parte1">
+      <img src="./assets/logo_branca.png" alt="Logo">
+      <span>Líder em soluções tecnológicas inovadoras, comprometida com a excelência e o sucesso de seus clientes.</span>
+    </div>
 
-  function mostrarCardDiferencial() {
-    cardsDiferenciais.forEach((card) => card.classList.remove("active"));
-    cardsDiferenciais[indexDiferenciais].classList.add("active");
-  }
+    <div class="parte2">
+      <h1>Informações de Contato</h1>
+      <div class="telefone"><img src="assets/tel-icon.svg" alt=""><span>(11) 97742-1795</span></div>
+      <div class="email"><img src="assets/email-icon.svg" alt=""><span>moveon@gmail.com</span></div>
+      <div class="localizacao"><img src="assets/loc-icon.svg" alt=""><span>Rua Haddock Lobo, 595 - Cerqueira César, São Paulo - SP, 01414-905</span></div>
+      <span class="direitos">Copyright © 2025 MoveOn. All rights reserved.</span>
+    </div>
 
-  mostrarCardDiferencial();
+    <div class="parte3">
+      <h1>Links Úteis</h1>
+      <a href="cadastro.html"><span>Cadastrar</span></a>
+      <a href="#servicos"><span>Serviços</span></a>
+      <a href="#contato"><span>Contato</span></a>
+      <a href="cadastro.html"><span>Painel de Análise</span></a>
+    </div>
+  </footer>
 
-  nextDiferenciais.addEventListener("click", () => {
-    indexDiferenciais = (indexDiferenciais + 1) % cardsDiferenciais.length;
-    mostrarCardDiferencial();
-  });
+ 
+  <script>
+    
+  const btnMobile = document.getElementById('btn-mobile');
+  const nav = document.getElementById('nav');
 
-  prevDiferenciais.addEventListener("click", () => {
-    indexDiferenciais =
-      (indexDiferenciais - 1 + cardsDiferenciais.length) %
-      cardsDiferenciais.length;
-    mostrarCardDiferencial();
-  });
-
-  //Carrossel cards problemas
-  const cardsProblemas = document.querySelectorAll(".cards_problemas");
-  const prevProblemas = document.getElementById("prevProblemas");
-  const nextProblemas = document.getElementById("nextProblemas");
-  let indexProblemas = 0;
-
-  function mostrarCardProblemas() {
-    cardsProblemas.forEach((card) => card.classList.remove("active"));
-    cardsProblemas[indexProblemas].classList.add("active");
-  }
-
-  mostrarCardProblemas();
-
-  nextProblemas.addEventListener("click", () => {
-    indexProblemas = (indexProblemas + 1) % cardsProblemas.length;
-    mostrarCardProblemas();
-  });
-
-  prevProblemas.addEventListener("click", () => {
-    indexProblemas =
-      (indexProblemas - 1 + cardsProblemas.length) % cardsProblemas.length;
-    mostrarCardProblemas();
-  });
-
-  //Carrossel cards Recursos
-  const cardsRecursos = document.querySelectorAll(".cards_recursos");
-  const prevRecursos = document.getElementById("prevRecursos");
-  const nextRecursos = document.getElementById("nextRecursos");
-  let indexRecursos = 0;
-
-  function mostrarCardRecursos() {
-    cardsRecursos.forEach((card) => card.classList.remove("active"));
-    cardsRecursos[indexRecursos].classList.add("active");
-  }
-
-  mostrarCardRecursos();
-
-  nextRecursos.addEventListener("click", () => {
-    indexRecursos = (indexRecursos + 1) % cardsRecursos.length;
-    mostrarCardRecursos();
-  });
-
-  prevRecursos.addEventListener("click", () => {
-    indexRecursos =
-      (indexRecursos - 1 + cardsRecursos.length) % cardsRecursos.length;
-    mostrarCardRecursos();
+  btnMobile.addEventListener('click', () => {
+    nav.classList.toggle('active');
+    const expanded = btnMobile.getAttribute('aria-expanded') === 'true' || false;
+    btnMobile.setAttribute('aria-expanded', !expanded);
   });
 </script>
+
+  
+</body>
+
+</html>

@@ -1,0 +1,978 @@
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration-line: none;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+  font-family: 'Barlow', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+
+:root {
+  --cor-azul-claro: #43BAFF;
+  --cor-azul-escuro: #080501;
+}
+
+/* Nav Bar */
+.navbar {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  height: 10vh;
+
+}
+
+#nav {
+  display: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-Child {
+  display: flex;
+  flex-direction: row;
+  font-weight: 900;
+  background-color: rgb(10, 13, 20);
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100vw;
+  list-style-type: none;
+  padding: 0 10vw;
+}
+
+.navbar img {
+  width: 10%;
+}
+
+#logo1 {
+  padding-top: 12px;
+  width: 77px;
+}
+
+.navbar li {
+  cursor: pointer;
+  color: white;
+  font-size: 1.1rem;
+  /* font-family: "Poppins"; */
+  font-weight: 650;
+  user-select: none;
+  transition: 0.3s ease-in-out;
+}
+
+.botaoConta {
+  color: var(--cor-azul-claro) !important;
+}
+
+.botaoConta img {
+  width: 15%;
+  margin-right: 5px;
+  margin-bottom: -5px;
+}
+
+.botaoConta:hover {
+  color: #ffffff !important;
+}
+
+.navbar li:hover {
+  transform: scale(1.1);
+  color: var(--cor-azul-claro);
+
+}
+
+/* SEÇÃO 1 */
+.secao1 {
+  width: 100vw;
+  height: 95vh;
+  margin-top: -10vh;
+  background-image: url("../assets/banner.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.secao1 .elementos {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 40%;
+  width: 40%;
+  margin-right: 30%;
+}
+
+.secao1 .elementos .text {
+  width: 100%;
+  height: 50%;
+
+  color: white;
+}
+
+.secao1 .elementos h1 {
+  font-size: 2rem;
+  line-height: 1.7;
+  width: 200%;
+margin-top: 100px;  /* desce o texto */
+  margin-bottom: 10px; 
+}
+
+
+
+
+.secao1 .elementos .botoes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 68%;
+  height: 15%;
+  padding-top: -20%;
+}
+
+.secao1 .elementos .botoes button {
+  /* font-family: "Inter"; */
+  border: none;
+  padding-left: 1.2vw;
+  padding-right: 1.2vw;
+  padding-top: 1.7vh;
+  padding-bottom: 1.7vh;
+  border-radius: 0.3vw;
+  font-weight: 800;
+  cursor: pointer;
+  padding: auto;
+  
+}
+
+.secao1 .elementos .botoes .servicos {
+  background-color: var(--cor-azul-claro);
+  color: white;
+  transition: 0.5s ease-in-out;
+}
+
+.secao1 .elementos .botoes .servicos:hover {
+  background-color: #01182B;
+  transform: scale(1.05);
+}
+
+.secao1 .elementos .botoes .contato {
+  background-color: white;
+  padding-right: 1.5vw;
+  gap: 10%;
+  display: flex;
+  align-items: center;
+  transition: 0.5s ease-in-out;
+}
+
+.secao1 .elementos .botoes .contato:hover {
+  color: white;
+  background-color: #01182B;
+  transform: scale(1.05);
+}
+
+
+
+
+
+/* SEÇÃO 2 */
+.secao2 {
+  width: 100vw;
+  height: 90vh;
+  background-image: url("../assets/antena-secsvg");
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+/* LADO ESQUERDO */
+.secao2 .lado-esquerdo {
+  width: 30%;
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.secao2 .lado-esquerdo img {
+  width: 100%;
+  height: auto;
+}
+
+.secao2 .meio {
+  width: 3.5%;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  gap: 4%;
+  margin-left: 0.5%;
+}
+
+.secao2 .meio div:first-of-type {
+  background-color: var(--cor-azul-escuro);
+  width: 35%;
+  height: 10%;
+}
+
+.secao2 .meio div:last-of-type {
+  background-color: var(--cor-azul-claro);
+  width: 35%;
+  height: 40%;
+}
+
+/* LADO DIREITO */
+.secao2 .lado-direito {
+  width: 35%;
+  height: 80%;
+}
+
+.secao2 .lado-direito .titulo {
+  /* font-family: "Inter"; */
+  font-weight: 1000;
+  font-size: 0.8rem;
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+  text-decoration-color: var(--cor-azul-claro);
+  text-decoration-thickness: 0.05rem;
+  margin-top: 3%;
+}
+
+.secao2 .lado-direito .titulo .texto-azul {
+  color: var(--cor-azul-claro);
+}
+
+.secao2 .lado-direito .texto h1 {
+  /* font-family: "Montserrat"; */
+  margin-top: 1%;
+  font-weight: 800;
+  font-size: 17px;
+}
+
+.secao2 .lado-direito .texto p {
+  /* font-family: "Inter"; */
+  line-height: 1.7;
+  width: 80%;
+  font-size: 1rem;
+  margin-top: 2%;
+  margin-bottom: 5%;
+}
+
+.secao2 .lado-direito .ganhos {
+  /* font-family: "Prompt"; */
+  display: flex;
+}
+
+.secao2 .lado-direito .ganhos div {
+  display: flex;
+  align-items: center;
+  gap: 2%;
+}
+
+.secao2 .lado-direito .ganhos div:first-of-type img {
+  width: 25%;
+}
+
+.secao2 .lado-direito .ganhos div:last-of-type img {
+  width: 23%;
+}
+
+.secao2 .lado-direito .ganhos div span {
+  font-weight: 500;
+  width: 60%;
+}
+
+.secao2 .lado-direito .div-botao {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  height: 15%;
+}
+
+.secao2 .lado-direito button {
+  /* font-family: "Inter"; */
+  border: none;
+  padding-left: 3.5vw;
+  padding-right: 3.5vw;
+  padding-top: 1.7vh;
+  padding-bottom: 1.7vh;
+  border-radius: 0.5vw;
+  font-weight: 700;
+  word-spacing: 0.3rem;
+  cursor: pointer;
+  color: white;
+  background-color: var(--cor-azul-claro);
+  transition: 0.3s ease-in-out;
+}
+
+.secao2 .lado-direito button:hover {
+  color: white;
+  background-color: #01182B;
+  transform: scale(1.05);
+}
+
+
+/* SEÇÃO 3 */
+
+.secao3 {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  width: 100vw;
+  height: 90vh;
+  background-color: #01182B;
+}
+
+.elementos {
+  padding: 0 10vw;
+}
+
+.secao3 .titulo1 {
+  padding-top: 10vh;
+  padding-left: 5%;
+  width: 24%;
+  font-size: 0.5rem;
+  /* font-family: 'Inter', sans-serif; */
+}
+
+.secao3 .titulo1 h2 {
+  width: 60%;
+  border-bottom: 1px solid var(--cor-azul-claro);
+}
+
+.secao3 .titulo2 {
+  width: 80vw;
+  text-align: center;
+  display: flex;
+  padding-top: 2vh;
+  font-size: 1.4rem;
+  line-height: 1.2;
+  /* font-family: 'Montserrat', sans-serif; */
+  font-weight: 900;
+  justify-content: center;
+}
+
+.blocos {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-top: 5%;
+  width: 80vw;
+  height: 100%;
+  gap: 8%;
+}
+
+
+.bloco1,
+.bloco2,
+.bloco3 {
+  display: flex;
+  flex-direction: column;
+  gap: 5%;
+  padding-top: 4%;
+  text-align: center;
+  align-items: center;
+  width: 25%;
+  height: 45%;
+  border-radius: 7px;
+  background-color: #000000;
+}
+
+
+.bloco1 img,
+.bloco2 img,
+.bloco3 img {
+  width: 18%;
+  padding-bottom: 2%;
+}
+
+.bloco1 .vetor,
+.bloco2 .vetor,
+.bloco3 .vetor {
+  margin-top: 2.5vh;
+  width: 95%;
+}
+
+.bloco1 h1,
+.bloco2 h1,
+.bloco3 h1 {
+  font-size: 1.0rem;
+  /* font-family: 'Prompt', sans-serif; */
+  font-weight: 600;
+
+}
+
+.bloco1 p,
+.bloco2 p,
+.bloco3 p {
+  padding: 0 3%;
+  line-height: 2;
+  /* font-family: 'Inter', sans-serif; */
+  font-size: 0.73rem;
+  color: #ffffff;
+}
+
+
+
+
+
+
+
+/* SEÇÃO 4 */
+.secao4 {
+  width: 100vw;
+  height: 90vh;
+  background-image: url("../assets/antena-secsvg");
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+
+/* LADO ESQUERDO */
+.secao4 .lado-esquerdo {
+  width: 35%;
+  height: 80%;
+}
+
+.secao4 .lado-esquerdo .titulo {
+  /* font-family: "Inter"; */
+  font-weight: 900;
+  font-size: 0.8rem;
+  text-decoration: underline;
+  text-underline-offset: 0.3rem;
+  text-decoration-color: var(--cor-azul-claro);
+  text-decoration-thickness: 0.05rem;
+}
+
+.secao4 .lado-esquerdo .titulo .texto-azul {
+  color: var(--cor-azul-claro);
+}
+
+.secao4 .lado-esquerdo .texto h1 {
+  /* font-family: "Montserrat"; */
+  margin-top: 2%;
+  font-weight: 800;
+}
+
+.secao4 .lado-esquerdo .texto p {
+  /* font-family: "Inter"; */
+  line-height: 1.7;
+  font-size: 0.9rem;
+  margin-top: 2%;
+  margin-bottom: 5%;
+}
+
+.secao4 .lado-esquerdo .ganhos {
+  /* font-family: "Prompt"; */
+  display: flex;
+}
+
+.secao4 .lado-esquerdo .ganhos div {
+  display: flex;
+  align-items: center;
+  gap: 2%;
+}
+
+.secao4 .lado-esquerdo .ganhos div:first-of-type img {
+  width: 25%;
+}
+
+.secao4 .lado-esquerdo .ganhos div:last-of-type img {
+  width: 23%;
+}
+
+.secao4 .lado-esquerdo .ganhos div span {
+  font-weight: 500;
+  width: 60%;
+}
+
+
+
+.secao4 .meio {
+  width: 2.5%;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  justify-content: start;
+  gap: 4%;
+  margin-right: 0.5%;
+}
+
+.secao4 .meio div:first-of-type {
+  background-color: var(--cor-azul-escuro);
+  width: 45%;
+  height: 10%;
+}
+
+.secao4 .meio div:last-of-type {
+  background-color: var(--cor-azul-claro);
+  width: 45%;
+  height: 40%;
+}
+
+
+
+/* LADO DIREITO */
+.secao4 .lado-direito {
+  width: 30%;
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.secao4 .lado-direito img {
+  width: 100%;
+  height: auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* SEÇÃO 5 */
+.secao5 {
+  width: 100vw;
+  height: 90vh;
+  background-image: url("../assets/background-section5.svg");
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+/* LADO ESQUERDO */
+.secao5 .lado-esquerdo {
+  width: 30%;
+  margin-left: 5%;
+  color: white;
+  height: 90%;
+  margin-top: 10%;
+}
+
+.secao5 .lado-esquerdo .titulo {
+  /* font-family: "Inter"; */
+  font-weight: 900;
+  font-size: 0.8rem;
+  text-decoration: underline;
+  text-underline-offset: 0.3rem;
+  text-decoration-color: var(--cor-azul-claro);
+  text-decoration-thickness: 0.05rem;
+}
+
+.secao5 .lado-esquerdo .texto h1 {
+  /* font-family: "Montserrat"; */
+  margin-top: 2%;
+  font-weight: 800;
+}
+
+.secao5 .lado-esquerdo .texto p {
+  /* font-family: "Inter"; */
+  line-height: 1.7;
+  font-size: 1rem;
+  margin-top: 2%;
+  margin-bottom: 5%;
+  width: 75%;
+}
+
+.secao5 .lado-esquerdo .beneficios {
+  gap: 15%;
+  width: 100%;
+  height: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.secao5 .lado-esquerdo .beneficios div {
+  gap: 4%;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: start;
+}
+
+.secao5 .lado-esquerdo .beneficios div span {
+  /* font-family: "Inter"; */
+  font-size: 0.9rem;
+}
+
+.secao5 .lado-esquerdo .div-botao {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 55%;
+  height: 15%;
+}
+
+.secao5 .lado-esquerdo button {
+  /* font-family: "Inter"; */
+  border: none;
+  padding-left: 3.5vw;
+  padding-right: 3.5vw;
+  padding-top: 1.7vh;
+  padding-bottom: 1.7vh;
+  border-radius: 0.5vw;
+  font-weight: 700;
+  word-spacing: 0.3rem;
+  cursor: pointer;
+  color: white;
+  background-color: var(--cor-azul-claro);
+  transition: 0.3s ease-in-out;
+}
+
+.secao5 .lado-esquerdo button:hover {
+  background-color: #01182B;
+  transform: scale(1.05);
+}
+
+
+/* LADO DIREITO */
+.secao5 .lado-direito {
+  /* font-family: "Montserrat"; */
+  width: 40%;
+  display: flex;
+  height: 80%;
+  align-items: center;
+  justify-content: center;
+}
+
+.secao5 .lado-direito .parte-esquerda,
+.secao5 .lado-direito .parte-direita {
+  width: 50%;
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+
+.secao5 .lado-direito div div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5%;
+  background-color: rgba(3, 24, 67, 0.52);
+  border: 0.1rem solid #0088FF;
+  border-radius: 0.3rem;
+  width: 75%;
+  height: 40%;
+  gap: 10%;
+}
+
+.secao5 .lado-direito div div img {
+  width: 3.5rem;
+  height: auto;
+}
+
+
+.secao5 .lado-direito div div span {
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+
+
+
+
+
+
+
+
+/* SEÇÃO 6 */
+.secao6 {
+  width: 100vw;
+  height: 79vh;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  flex-direction: column;
+}
+
+.secao6 .titulo1 {
+  width: 58%;
+  height: 15%;
+  align-items: center;
+  justify-content: start;
+  display: flex;
+}
+
+.secao6 .titulo1 span {
+  /* font-family: "Inter"; */
+  font-weight: 900;
+  font-size: 0.8rem;
+  text-decoration: underline;
+  text-underline-offset: 0.3rem;
+  text-decoration-color: var(--cor-azul-claro);
+  text-decoration-thickness: 0.05rem;
+}
+
+.secao6 .titulo2 h1 {
+  /* font-family: "Prompt"; */
+  font-weight: 600;
+}
+
+
+
+/* CAIXAS */
+.secao6 .caixas {
+      display: flex;
+      align-items: center;
+      width: 71%;
+      justify-content: center;
+      height: 68%;
+      margin-top: 1%;
+}
+
+.secao6 .caixa1,
+.secao6 .caixa2,
+.secao6 .caixa3 {
+  width: 27.5%;
+  height: 100%;
+}
+
+.secao6 .caixa1 .div-img,
+.secao6 .caixa2 .div-img,
+.secao6 .caixa3 .div-img {
+  width: 100%;
+  height: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.secao6 .caixa1 .div-img img,
+.secao6 .caixa2 .div-img img,
+.secao6 .caixa3 .div-img img {
+  width: auto;
+  height: 120%;
+  margin-top: 25%;
+  filter: drop-shadow(0 0 20px rgba(67, 186, 255, 1));
+}
+
+
+.secao6 .caixa1 .texto,
+.secao6 .caixa2 .texto,
+.secao6 .caixa3 .texto {
+  width: 94%;
+  margin-left: 3%;
+  margin-right: 3%;
+  gap: 3%;
+  height: 63%;
+  background-color: #01273C;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 0.25rem;
+  -webkit-box-shadow: 0px 0px 20px 1px rgba(67, 186, 255, 1);
+  -moz-box-shadow: 0px 0px 20px 1px rgba(67, 186, 255, 1);
+  box-shadow: 0px 0px 20px 1px rgba(67, 186, 255, 1);
+}
+
+.secao6 .caixa1 .texto h1,
+.secao6 .caixa2 .texto h1,
+.secao6 .caixa3 .texto h1 {
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 500;
+  /* font-family: "Prompt"; */
+}
+
+.secao6 .caixa1 .texto p,
+.secao6 .caixa2 .texto p,
+.secao6 .caixa3 .texto p {
+  color: white;
+  text-align: center;
+  font-size: 0.8rem;
+  padding-left: 2%;
+  padding-right: 2%;
+  word-spacing: 0.04rem;
+  line-height: 1.8;
+  font-weight: 300;
+  /* font-family: "Inter"; */
+}
+
+.secao6 .caixa1 .numero,
+.secao6 .caixa2 .numero,
+.secao6 .caixa3 .numero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -22%;
+  height: 35%;
+}
+
+.secao6 .caixa1 .numero span,
+.secao6 .caixa2 .numero span,
+.secao6 .caixa3 .numero span {
+  width: 21%;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--cor-azul-claro);
+  height: 25%;
+  filter: drop-shadow(0 0 20px rgba(67, 186, 255, 1));
+  border: black solid 0.05rem;
+  color: white;
+  /* font-family: "Inter"; */
+  font-weight: 300;
+  font-size: 2rem;
+  min-height: 40%;
+}
+
+.secao6 .seta1,
+.secao6 .seta2 {
+  width: 8.75%;
+}
+
+.secao6 .seta1 img,
+.secao6 .seta2 img {
+  width: 100%;
+  height: auto;
+}
+
+
+
+
+
+/* FOOTER */
+footer {
+  background-color: #111111;
+  border-top: 0.3rem solid var(--cor-azul-claro);
+  display: flex;
+  width: 100vw;
+  height: 43vh;
+  align-items: start;
+  justify-content: center;
+  color: #D9D9D9;
+  /* font-family: "Inter"; */
+  gap: 3%;
+  margin-top: 10%;
+}
+
+footer .parte1,
+footer .parte2,
+footer .parte3 {
+  width: 20%;
+  height: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+
+
+/* PARTE 1 */
+footer .parte1 {
+  margin-top: 2%;
+  justify-content: start;
+  gap: 4%;
+}
+
+footer .parte1 img {
+  width: 40%;
+  height: auto;
+}
+
+footer .parte1 span {
+  font-size: 1rem;
+  line-height: 1.4;
+  word-spacing: 0.1rem;
+}
+
+
+
+/* PARTE 2 */
+footer .parte2 {
+  margin-top: 4%;
+  gap: 5%;
+}
+
+footer .parte2 h1 {
+  color: var(--cor-azul-claro);
+  font-size: 1.2rem;
+}
+
+footer .parte2 div {
+  display: flex;
+  gap: 3%;
+}
+
+footer .parte2 .telefone img {
+  width: 10%;
+  height: auto;
+}
+
+footer .parte2 .email img {
+  width: 9%;
+  height: auto;
+}
+
+footer .parte2 .localizacao img {
+  width: 5%;
+  height: auto;
+  margin-bottom: 5%;
+}
+
+footer .parte2 div span {
+  font-size: 1rem;
+}
+
+footer .parte2 .direitos {
+  margin-top: 12%;
+  width: 110%;
+  font-weight: 800;
+  font-size: 0.8rem;
+}
+
+
+
+/* PARTE 3 */
+footer .parte3 {
+  margin-top: 2.6%;
+  gap: 5%;
+}
+
+footer .parte3 h1 {
+  color: var(--cor-azul-claro);
+  font-size: 1.2rem;
+  margin-bottom: 2%;
+}
+
+footer .parte3 span {
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: 0.3s ease-in-out;
+}
+
+footer .parte3 span:hover {
+  color: var(--cor-azul-claro);
+  transform: scale(1.1);
+}
