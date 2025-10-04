@@ -4,7 +4,10 @@
 FROM node:20
 
 # 2 - ter a web data viz
-COPY . .
+RUN git clone https://github.com/MoveOn-Sptech/MoveOn-Project
+
+# 2.1 - entrar na pasta do projeto
+WORKDIR /MoveOn-Project
 
 # 2.1 - configurar variaveis ambiente
 ENV APP_PORT=3000
