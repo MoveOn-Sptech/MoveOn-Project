@@ -9,6 +9,8 @@
 
     <link rel="stylesheet" href="./css/login&cadastro.css" />
     <link rel="icon" href="./imagens/logo_alternativa_branca.png" />
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
 
   <body>
@@ -47,7 +49,11 @@
               type="password"
               placeholder="Digite sua senha"
             />
-            <img class="see_password" src="./imagens/icones/see_password.png" />
+            <img
+              id="see_password"
+              class="see_password"
+              src="./imagens/icones/see_password.png"
+            />
           </div>
           <div class="campo">
             <p>Confirmar senha</p>
@@ -57,7 +63,11 @@
               type="password"
               placeholder="Confirme sua senha"
             />
-            <img class="see_password" src="./imagens/icones/see_password.png" />
+            <img
+              id="see_password_confirmacao"
+              class="see_password"
+              src="./imagens/icones/see_password.png"
+            />
           </div>
           <div class="campo">
             <p>Cargo/função</p>
@@ -80,6 +90,25 @@
 </html>
 
 <script>
+  // Função para alternar a visibilidade da senha
+  document
+    .getElementById("see_password")
+    .addEventListener("click", function () {
+      const senhaInput = document.getElementById("input_senha");
+      const type =
+        senhaInput.getAttribute("type") === "password" ? "text" : "password";
+      senhaInput.setAttribute("type", type);
+    });
+
+  document
+    .getElementById("see_password_confirmacao")
+    .addEventListener("click", function () {
+      const senhaInput = document.getElementById("confirmacao_senha_input");
+      const type =
+        senhaInput.getAttribute("type") === "password" ? "text" : "password";
+      senhaInput.setAttribute("type", type);
+    });
+
   function cadastrar() {
     const nome = document.getElementById("input_nome").value;
     const email = document.getElementById("input_email").value;
@@ -89,9 +118,32 @@
     ).value;
     const cargo = document.getElementById("input_cargo").value;
 
+    let campos = [];
+
+    if (!nome) campos.push("nome");
+    if (!email) campos.push("email");
+    if (!senha) campos.push("senha");
+    if (!confirmacao_senha) campos.push("confirmacao de senha");
+    if (!cargo) campos.push("cargo");
+
+    if (!nome || !email || !senha || !confirmacao_senha || !cargo) {
+      Swal.fire({
+        icon: "error",
+        title: "Erro",
+        text:
+          "Por favor, preencha todos os campos! " +
+          campos.join(", ").concat("."),
+      });
+      return;
+    }
+
     // Verifica se as senhas coincidem
     if (senha !== confirmacao_senha) {
-      alert("As senhas não coincidem. Por favor, tente novamente.");
+      Swal.fire({
+        icon: "error",
+        title: "Erro",
+        text: "As senhas não coincidem!",
+      });
       return;
     }
 
@@ -108,17 +160,26 @@
       }),
     })
       .then((response) => {
-        if (response.ok) {
-          alert("Cadastro realizado com sucesso!");
-          window.location.href = "./login.html"; // Redireciona para a página de login
-        } else {
-          return response.json().then((data) => {
-            throw new Error(data.message || "Erro ao cadastrar usuário.");
+        if (response.status == 200) {
+          Swal.fire({
+            icon: "success",
+            title: "Sucesso",
+            text: "Usuário cadastrado com sucesso!",
+          }).then(() => {
+            window.location.href = "login.html";
           });
+        } else if (response.status == 401) {
+          throw new Error("Este email já está cadastrado!");
+        } else {
+          throw new Error("Erro ao se cadastrar");
         }
       })
       .catch((error) => {
-        alert("erro em se cadastrar: " + error.message);
+        Swal.fire({
+          icon: "error",
+          title: "Erro",
+          text: "Erro ao se cadastrar: " + error.message,
+        });
       });
   }
 </script>
