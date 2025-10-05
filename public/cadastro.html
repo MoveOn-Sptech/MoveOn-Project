@@ -118,11 +118,21 @@
     ).value;
     const cargo = document.getElementById("input_cargo").value;
 
+    let campos = [];
+
+    if (!nome) campos.push("nome");
+    if (!email) campos.push("email");
+    if (!senha) campos.push("senha");
+    if (!confirmacao_senha) campos.push("confirmacao de senha");
+    if (!cargo) campos.push("cargo");
+
     if (!nome || !email || !senha || !confirmacao_senha || !cargo) {
       Swal.fire({
         icon: "error",
         title: "Erro",
-        text: "Por favor, preencha todos os campos!",
+        text:
+          "Por favor, preencha todos os campos! " +
+          campos.join(", ").concat("."),
       });
       return;
     }
@@ -150,7 +160,7 @@
       }),
     })
       .then((response) => {
-        if (response.ok) {
+        if (response.status == 200) {
           Swal.fire({
             icon: "success",
             title: "Sucesso",
@@ -158,10 +168,10 @@
           }).then(() => {
             window.location.href = "login.html";
           });
+        } else if (response.status == 401) {
+          throw new Error("Este email já está cadastrado!");
         } else {
-          return response.json().then((data) => {
-            throw new Error(data.message || "Erro ao se cadastrar");
-          });
+          throw new Error("Erro ao se cadastrar");
         }
       })
       .catch((error) => {

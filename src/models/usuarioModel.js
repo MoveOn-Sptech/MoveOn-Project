@@ -19,7 +19,16 @@ function cadastrar(nome, email, senha, cargo) {
     return database.executar(instrucaoSql);
 }
 
+
+function buscarPorEmail(email) {
+
+    var instrucaoSql = `SELECT * FROM usuario WHERE email = '${email}';`;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     autenticar,
-    cadastrar
+    cadastrar,
+    buscarPorEmail
 };
