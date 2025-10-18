@@ -1,1 +1,135 @@
 /* Estilização páginas de concessionaria */
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.cabecalho {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+    width: 100%;
+    background-color: #010358;
+}
+
+.cabecalho div {
+    width: 30%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
+}
+
+.cabecalho_div_logo img {
+    width: 50%;
+}
+
+.cabecalho_div_links {
+    gap: 15px;
+}
+
+.titulo_dashboard {
+    color: #010358;
+    text-align: center;
+    font-weight: 700;
+    font-size: 40px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.section_principal {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.div_container_concessionarias {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    width: 40%;
+    background-color: #010358;
+    gap: 20px;
+    padding: 20px 0;
+    border-radius: 10px;
+    border: 1px solid #010358;
+}
+
+.div_container_concessionarias h2 {
+    text-align: center;
+    color: white;
+}
+
+.div_pesquisar_concessionarias {
+    margin: 0 auto;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.div_pesquisar_concessionarias p {
+    color: white;
+    font-size: 18px;
+}
+
+.div_pesquisar_concessionarias input {
+    height: 35px;
+    background-color: #c6c6c6;
+    text-align: center;
+    border: 1px solid #c6c6c6;
+    border-radius: 8px;
+}
+
+.div_filtrar {
+    margin: 0 auto;
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.div_filtrar p {
+    color: white;
+    font-size: 18px;
+}
+
+.div_filtrar select {
+    height: 35px;
+    background-color: #c6c6c6;
+    text-align: center;
+    border: 1px solid #c6c6c6;
+    border-radius: 8px;
+    padding: 5px;
+}
+
+table {
+    text-align: center;
+    width: 60%;
+    margin: 0 auto;
+    border-collapse: separate;
+    border-spacing: 0 12px;
+}
+
+thead {
+    color: white;
+    font-size: 20px;
+}
+
+.tr_concessionaria {
+    height: 30px;
+}
+
+.positivo {
+    background-color: #bfff9c;
+}
+
+.negativo {
+    background-color: #f19c9c;
+}
