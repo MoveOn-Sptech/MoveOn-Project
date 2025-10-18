@@ -20,7 +20,7 @@
         </div>
         <div class="cabecalho_div_links">
             <p>Dashboard</p>
-            <img src="" alt="Ícone de usuário">
+            <img src="../assets/icon/user.png" alt="Ícone de usuário">
         </div>
 
     </header>
@@ -66,6 +66,46 @@
                         <td>VIAOESTE</td>
                         <td>-8,8%</td>
                     </tr>
+                    <tr class="positivo tr_concessionaria">
+                        <td>COLINAS</td>
+                        <td>+10%</td>
+                    </tr>
+
+                    <tr class="negativo tr_concessionaria">
+                        <td>VIAOESTE</td>
+                        <td>-8,8%</td>
+                    </tr>
+                    <tr class="positivo tr_concessionaria">
+                        <td>COLINAS</td>
+                        <td>+10%</td>
+                    </tr>
+
+                    <tr class="negativo tr_concessionaria">
+                        <td>VIAOESTE</td>
+                        <td>-8,8%</td>
+                    </tr>
+                    <tr class="positivo tr_concessionaria">
+                        <td>COLINAS</td>
+                        <td>+10%</td>
+                    </tr>
+
+                    <tr class="negativo tr_concessionaria">
+                        <td>VIAOESTE</td>
+                        <td>-8,8%</td>
+                    </tr>
+                    <tr class="positivo tr_concessionaria">
+                        <td>COLINAS</td>
+                        <td>+10%</td>
+                    </tr>
+
+                    <tr class="negativo tr_concessionaria">
+                        <td>VIAOESTE</td>
+                        <td>-8,8%</td>
+                    </tr>
+                    <tr class="negativo tr_concessionaria">
+                        <td>VIAOESTE</td>
+                        <td>-8,8%</td>
+                    </tr>
 
                 </tbody>
 
@@ -82,15 +122,25 @@
                 <input type="date">
             </div>
 
-            <div>
+            <div class="div_graficos">
 
-            </div>
+                <div class="div_grafico">
 
-            <div>
+                    <canvas id="myChart" class="grafico"></canvas>
 
-            </div>
+                </div>
 
-            <div>
+                <div class="div_grafico">
+
+                    <canvas id="myChart2" class="grafico"></canvas>
+
+                </div>
+
+                <div class="div_grafico">
+
+                    <canvas id="myChart3" class="grafico"></canvas>
+
+                </div>
 
             </div>
 
@@ -101,3 +151,127 @@
 </body>
 
 </html>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+    const ctx = document.getElementById('myChart');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ["Município 1", "Município 1", "Município 1", "Município 1", "Município 1",
+                "Município 1", "Município 1", "Município 1", "Município 1", "Município 1",],
+            datasets: [{
+                data: [12, 19, 3, 5, 2, 3, 6, 4, 3, 6],
+                borderWidth: 1,
+                backgroundColor: ['#010358']
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            layout: { padding: 10 },
+            plugins: {
+                legend: {
+                    display: false 
+                },
+                title: {
+                    display: true, 
+                    text: 'Municípios com mais acidentes', 
+                    font: {
+                        size: 20,
+                        weight: 'bold'
+                    },
+                    color: '#010358'
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    const ctx2 = document.getElementById('myChart2');
+
+    new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: ["Município 1", "Município 1", "Município 1", "Município 1", "Município 1",
+                "Município 1", "Município 1", "Município 1", "Município 1", "Município 1",],
+            datasets: [{
+                data: [12, 19, 3, 5, 2, 3, 6, 4, 3, 6],
+                borderWidth: 1,
+                backgroundColor: ['#010358']
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            layout: { padding: 10 },
+            plugins: {
+                legend: {
+                    display: false 
+                },
+                title: {
+                    display: true, 
+                    text: 'Acidentes por regional DER', 
+                    font: {
+                        size: 20,
+                        weight: 'bold'
+                    },
+                    color: '#010358'
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    const ctx3 = document.getElementById('myChart3');
+
+    new Chart(ctx3, {
+        type: 'bar',
+        data: {
+            labels: ["Município 1", "Município 1", "Município 1", "Município 1", "Município 1",
+                "Município 1", "Município 1", "Município 1", "Município 1", "Município 1",],
+            datasets: [{
+                data: [12, 19, 3, 5, 2, 3, 6, 4, 3, 6],
+                borderWidth: 1,
+                backgroundColor: ['#010358']
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            layout: { padding: 10 },
+            plugins: {
+                legend: {
+                    display: false 
+                },
+                title: {
+                    display: true, 
+                    text: 'Acidentes por regional ADM', 
+                    font: {
+                        size: 20,
+                        weight: 'bold'
+                    },
+                    color: '#010358'
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+
+</script>
