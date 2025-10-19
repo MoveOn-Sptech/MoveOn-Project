@@ -1,11 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
+    <title>Visão Geral | Rodovias</title>
+
+    <link rel="stylesheet" href="../css/dashboard/rodovia.css" />
+    <link rel="icon" href="../imagens/logo_alternativa_branca.png" />
 </head>
+
 <body>
-    
+
+    <nav>
+
+        <span class="logo_nav">
+            <a href="visao-geral-rodovia.html"><img src="../assets/logo_branca.png" alt=""></a>
+        </span>
+        <span class="user_name">
+            <p>Técnico de monitoramento - ARTESP</p>
+        </span>
+        <span class="page_link">
+            <p><u>Dashboard</u></p>
+        </span>
+        <span class="user_icon">
+            <img src="../assets/icon/user-dash.png" alt="">
+        </span>
+
+    </nav>
+
+    <section class="geral_main">
+
+        <span class="title">
+            <h1>VISÃO <b>GERAL</b></h1>
+        </span>
+
+        <div class="card_rodovias">
+
+            <h2>Rodovias com mais acidentes</h2>
+
+            <span class="pesquisar_rodovia">
+                <label for="input_rodovia">Pesquisar rodovia:</label>
+                <input id="input_rodovia" type="text" placeholder=" Pesquisar">
+            </span>
+
+            <span class="filtrar_rodovia">
+                <label for="aplicar_filtro">Aplicar um filtro:</label>
+                <select name="aplicar_filtro" id="aplicar_filtro">
+                    <option selected value="#">Escolher filtro</option>
+                    <option value="50+">Rodovias com 50+ acidentes</option>
+                    <option value="100+">Rodovias com 100+ acidentes</option>
+                    <option value="500+">Rodovias com 500+ acidentes</option>
+                    <option value="1000+">Rodovias com 1000+ acidentes</option>
+                    <option value="norte">Rodovias na região norte</option>
+                    <option value="sul">Rodovias na região sul</option>
+                    <option value="leste">Rodovias na região leste</option>
+                    <option value="oeste">Rodovias na região oeste</option>
+                </select>
+            </span>
+
+            <table>
+
+                <table class="table_rodovias">
+
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Quantidade</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <tr class="rodovia">
+                            <td>SP348</td>
+                            <td>50</td>
+                        </tr>
+                        <tr class="rodovia">
+                            <td>SP348</td>
+                            <td>50</td>
+                        </tr>
+                        <tr class="rodovia">
+                            <td>SP348</td>
+                            <td>50</td>
+                        </tr>
+                        <tr class="rodovia">
+                            <td>SP348</td>
+                            <td>50</td>
+                        </tr>
+                        <tr class="rodovia">
+                            <td>SP348</td>
+                            <td>50</td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </table>
+
+        </div>
+
+        <div class="card_rodovia">
+
+            <h2>Rodovia com mais acidentes</h2>
+
+            <span class="info">
+
+                <p>Denominação: <b>ANHANGUERA</b></p>
+                <p>Concessionária: <b>ANHANGUERA</b></p>
+                <p>Município: <b>Campinas</b></p>
+                <p>Regional DER: <b>Campinas</b></p>
+
+            </span>
+
+            <button onclick="verMais()" id="ver_mais">Ver mais</button>
+
+
+            <div id="div_aguardar" class="loading-div">
+                <img src="../assets/tela_carregamento.gif" id="loading-gif">
+            </div>
+
+        </div>
+
+    </section>
+
 </body>
+
 </html>
+
+<script>
+
+    // mostra a tela de redirecionamento
+    function aguardar() {
+        document.getElementById("div_aguardar").style.display = "flex";
+    }
+
+    function verMais() {
+        aguardar();
+
+        setTimeout(() => {
+            window.location = "pagina-rodovia.html";
+        }, 1500);
+    }
+
+</script>

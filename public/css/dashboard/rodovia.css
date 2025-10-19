@@ -1,1 +1,545 @@
-/* Estilização páginas de rodovia */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Inter", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+    background-image: url(../../assets/imgs/fundo-dashboard.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* NAVBAR */
+
+nav {
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    color: white;
+    font-family: "Poppins", sans-serif;
+    font-weight: 800;
+    background-color: #010358;
+}
+
+nav .logo_nav {
+    width: 20%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+nav .logo_nav a {
+    width: 70%;
+}
+
+nav .logo_nav img {
+    width: 80%;
+}
+
+nav .user_name {
+    width: 60%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 150%;
+}
+
+nav .page_link {
+    width: 10%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 120%;
+}
+
+nav .user_icon {
+    width: 10%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+nav .user_icon img {
+    width: 30%;
+}
+
+nav .user_icon img:hover {
+    cursor: pointer;
+}
+
+/* VISÃO GERAL RODOVIAS */
+
+.geral_main {
+    width: 100%;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+}
+
+.title {
+    position: absolute;
+    right: 0;
+    margin-bottom: 30%;
+    margin-right: 9%;
+    font-family: "Poppins", sans-serif;
+    color: #010358;
+    font-size: 200%;
+}
+
+.card_rodovias {
+    width: 40%;
+    height: 85%;
+    margin-left: 3%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    background-color: #010358;
+    border-radius: 20px;
+    box-shadow: 5px 5px 20px 0px black;
+}
+
+.card_rodovias h2 {
+    font-family: "Poppins", sans-serif;
+    margin-top: 5%;
+}
+
+.card_rodovias .pesquisar_rodovia {
+    margin-top: 2%;
+    width: 80%;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+}
+
+.card_rodovias .pesquisar_rodovia input {
+    border-radius: 8px;
+    margin-left: 1%;
+    height: 45%;
+    background-color: #f5f5f5;
+    text-align: center;
+    border: 1px solid #f5f5f5;
+}
+
+.card_rodovias .filtrar_rodovia {
+    width: 80%;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+}
+
+.card_rodovias .filtrar_rodovia select {
+    border-radius: 8px;
+    margin-left: 1%;
+    height: 45%;
+}
+
+.card_rodovias .filtrar_rodovia select:hover {
+    cursor: pointer;
+}
+
+table {
+    text-align: center;
+    width: 80%;
+    margin: 0 auto;
+    border-collapse: separate;
+    border-spacing: 0 11px;
+}
+
+thead {
+    color: white;
+    font-size: 100%;
+}
+
+.card_rodovias tbody {
+    display: block;       /* faz tbody se comportar como bloco separado */
+    max-height: 420px;    /* altura máxima visível antes de aparecer o scroll */
+    overflow-y: auto;     /* ativa rolagem vertical */
+}
+
+.card_rodovias thead,
+.card_rodovias tbody tr {
+    display: table;       /* mantém o layout de tabela correto */
+    width: 100%;          /* mantém colunas alinhadas */
+    table-layout: fixed;  /* evita que colunas se desalinhem */
+}
+
+.card_rodovias .rodovia {
+    color: #010358;
+    font-size: 110%;
+    font-weight: 600;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    margin-top: 2%;
+}
+
+.card_rodovias .rodovia:hover {
+    cursor: pointer;
+}
+
+.card_rodovia {
+    width: 40%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    right: 0;
+    margin-right: 3%;
+    color: white;
+    background-color: #010358;
+    border-radius: 20px;
+    box-shadow: 5px 5px 20px 0px black;
+}
+
+.card_rodovia h2 {
+    font-family: "Poppins", sans-serif;
+    margin-top: 5%;
+}
+
+.card_rodovia .info {
+    width: 90%;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 5%;
+    font-size: 110%;
+    font-weight: 600;
+}
+
+.card_rodovia button {
+    height: 12%;
+    width: 20%;
+    font-weight: 700;
+    font-size: 120%;
+    border-radius: 15px;
+}
+
+.card_rodovia button:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.loading-div {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.loading-div img {
+    width: 100%;
+    height: 100%;
+}
+
+/* PÁGINA RODOVIA DASHBOARD */
+
+.rodovia_main {
+    width: 100%;
+    height: 220vh;
+    display: flex;
+}
+
+.title2 {
+    width: 100%;
+    position: absolute;
+    margin-top: 2%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30%;
+    margin-right: 9%;
+    font-family: "Poppins", sans-serif;
+    color: #010358;
+    font-size: 200%;
+}
+
+.voltar {
+    background-color: #010358;
+    position: absolute;
+    margin-top: 3.5%;
+    margin-left: 5%;
+    width: 5%;
+    height: 4%;
+    border-radius: 5px;
+}
+
+.voltar button {
+    width: 100%;
+    height: 100%;
+    color: white;
+    font-weight: 700;
+    background-color: #010358;
+    border-radius: 5px;
+}
+
+.voltar button:hover {
+    cursor: pointer;
+}
+
+.card_rodovia2 {
+    width: 41%;
+    height: 75%;
+    position: absolute;
+    margin-top: 10%;
+    margin-left: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    background-color: #010358;
+    border-radius: 15px;
+    box-shadow: 5px 5px 20px 0px #00000086;
+}
+
+.card_rodovia2 h2 {
+    font-family: "Poppins", sans-serif;
+    margin-top: 5%;
+}
+
+.card_rodovia2 .info {
+    width: 90%;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 5%;
+    font-size: 110%;
+    font-weight: 600;
+}
+
+.filter {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 0;
+    margin-top: 10%;
+    margin-right: 22%;
+    width: 30%;
+    gap: 1%;
+    color: #010358;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+}
+
+.filter input {
+    background-color: transparent;
+    border-color: #010358;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.filter input:hover {
+    cursor: pointer;
+}
+
+.kpis {
+    position: absolute;
+    right: 0;
+    margin-top: 11%;
+    margin-right: 3%;
+    width: 50%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3%;
+}
+
+.kpi:hover {
+    cursor: zoom-in;
+    transform: scale(1.2);
+    transition-duration: 1s;
+}
+
+.kpi {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #010358;
+    width: 30%;
+    height: 80%;
+    border-radius: 15px;
+    box-shadow: 5px 5px 10px 0px #00000068;
+    color: white;
+    font-family: "Poppins", sans-serif;
+}
+
+.kpi_text {
+    font-weight: 600;
+}
+
+.kpi_data {
+    font-weight: 800;
+    font-size: 300%;
+}
+
+.card_frequencia {
+    position: absolute;
+    right: 0;
+    width: 48%;
+    height: 50%;
+    margin-top: 22%;
+    margin-right: 4%;
+    border-radius: 15px;
+    box-shadow: 5px 5px 10px 0px #00000068;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #b5b5b5;
+}
+
+.card_clima {
+    position: absolute;
+    width: 20%;
+    height: 50%;
+    margin-top: 47%;
+    margin-left: 5%;
+    border-radius: 15px;
+    box-shadow: 5px 5px 10px 0px #00000068;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #010358;
+}
+
+.card_veiculos {
+    position: absolute;
+    width: 20%;
+    height: 50%;
+    margin-top: 47%;
+    margin-left: 26%;
+    border-radius: 15px;
+    box-shadow: 5px 5px 10px 0px #00000068;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #010358;
+}
+
+.card_vitimas {
+    position: absolute;
+    right: 0;
+    width: 48%;
+    height: 50%;
+    margin-top: 47%;
+    margin-right: 4%;
+    border-radius: 15px;
+    box-shadow: 5px 5px 10px 0px #00000068;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #b5b5b5;
+}
+
+.card_periodos {
+    position: absolute;
+    width: 41%;
+    height: 50%;
+    margin-top: 73%;
+    margin-left: 5%;
+    border-radius: 15px;
+    box-shadow: 5px 5px 10px 0px #00000068;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #b5b5b5;
+}
+
+.card_marcokm {
+    position: absolute;
+    right: 0;
+    width: 48%;
+    height: 50%;
+    margin-top: 73%;
+    margin-right: 4%;
+    border-radius: 15px;
+    box-shadow: 5px 5px 10px 0px #00000068;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #b5b5b5;
+}
+
+
+.card_text {
+    color: #010358;
+    font-family: "Poppins", sans-serif;
+    font-size: 140%;
+    font-weight: 700;
+    margin-top: 4%;
+}
+
+.card_text2 {
+    color: white;
+    font-family: "Poppins", sans-serif;
+    font-size: 130%;
+    font-weight: 600;
+    margin-top: 4%;
+}
+
+.up {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width: 50px;
+    height: 50px;
+    background-color: #010358;
+    text-decoration: none;
+    border-radius: 30px;
+}
+.up::after {
+    content: "↑";
+    font-size: 32px;
+    font-weight: bold;
+    color: aliceblue;
+    transition: margin-top 250ms;
+}
+
+.up:hover::after {
+    margin-top:-8px;
+}
+
+.grafico_barra {
+    width: 85%;
+    height: 80%;
+}
+
+.grafico_pizza {
+    width: 85%;
+    height: 80%;
+}
+
+.grafico_rosca {
+    width: 85%;
+    height: 80%;
+}
