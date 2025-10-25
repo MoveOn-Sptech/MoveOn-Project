@@ -12,5 +12,5 @@ CREATE TABLE usuario (
 	nome VARCHAR(50),
 	email VARCHAR(50),
 	senha VARCHAR(512),
-	cargo VARCHAR(50) CHECK (cargo IN ('admin', 'funcionario'))
+	cargo VARCHAR(50) CHECK (cargo IN ('Estratégico', 'Operacional'))
 );

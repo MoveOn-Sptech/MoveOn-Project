@@ -104,7 +104,7 @@ html {
     align-items: center; 
 }
 
-.formulario input {
+.formulario input, select {
     width: 12vw;
     margin-left: 1.5vw;
     background-color: transparent;

@@ -10,6 +10,8 @@
 
   <link rel="stylesheet" href="./css/login&cadastro.css" />
   <link rel="icon" href="./imagens/logo_alternativa_branca.png" />
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -35,6 +37,7 @@
           <p>Senha</p>
           <img src="./imagens/icones/lock.png" />
           <input id="input_senha" type="password" placeholder="Digite sua senha" />
+          <img id="see_password" class="see_password" src="./imagens/icones/see_password.png" />
         </div>
 
         <button class="login" onclick="login()">Entrar</button>
@@ -48,15 +51,36 @@
 
 </html>
 
-
 <script>
 
+  // Função para alternar a visibilidade da senha
+  document
+    .getElementById("see_password")
+    .addEventListener("click", function () {
+      const senhaInput = document.getElementById("input_senha");
+      const type =
+        senhaInput.getAttribute("type") === "password" ? "text" : "password";
+      senhaInput.setAttribute("type", type);
+    });
+
   function login() {
+
     var email = document.getElementById("input_email").value;
     var senha = document.getElementById("input_senha").value;
 
-    if (email == "" || senha == "") {
-      alert("Erro: E-mail ou senha inválido")
+    let campos = [];
+
+    if (!email) campos.push("email");
+    if (!senha) campos.push("senha");
+
+    if (!email || !senha) {
+      Swal.fire({
+        icon: "error",
+        title: "Erro",
+        text:
+          "Por favor, preencha todos os campos! " +
+          campos.join(", ").concat("."),
+      });
     } else {
       fetch("/usuarios/autenticar", {
         method: "POST",
@@ -70,16 +94,34 @@
       })
         .then((response) => {
           if (response.ok) {
-            alert("Login realizado com sucesso!");
-            window.location.href = "index.html"
+
+            Swal.fire({
+              icon: "success",
+              title: "Sucesso",
+              text: "Autenticação realizado com sucesso!",
+            })
+
+            response.json().then(data => {
+              if (data.cargoUsuario == "Estratégico") {
+                window.location.href = "/dashboard/visao-geral-concessionaria.html";
+              }
+              if (data.cargoUsuario == "Operacional") {
+                window.location.href = "/dashboard/visao-geral-rodovia.html";
+              }
+            })
+
           } else {
             return response.json().then((data) => {
-              throw new Error(data.message || "Erro ao logar.");
+              throw new Error(data.message || "Erro ao autenticar.");
             });
           }
         })
         .catch((error) => {
-          alert("erro ao logar: " + error.message);
+          Swal.fire({
+            icon: "error",
+            title: "Erro",
+            text: "Erro ao se autenticar: " + error.message,
+          });
         });
     }
 

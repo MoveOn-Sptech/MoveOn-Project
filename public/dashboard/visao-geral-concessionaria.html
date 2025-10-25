@@ -6,24 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard: Visão geral concessionárias</title>
     <link rel="stylesheet" href="../css/dashboard/visao_geral_concessionaria.css">
+    <link rel="icon" href="../imagens/logo_alternativa_branca.png" />
 </head>
 
 <body>
 
-    <header class="cabecalho">
+    <nav>
 
-        <div class="cabecalho_div_logo">
-            <img src="../assets/logo_branca.png" alt="Logo da MoveOn">
-        </div>
-        <div class="cabecalho_div_paragrafo">
-            <p>Diretora de planejamento - ARTESP</p>
-        </div>
-        <div class="cabecalho_div_links">
-            <p>Dashboard</p>
-            <img src="../assets/icon/user.png" alt="Ícone de usuário">
-        </div>
+        <span class="logo_nav">
+            <a href="./visao-geral-concessionaria.html"><img src="../assets/logo_branca.png" alt=""></a>
+        </span>
+        <span class="user_name">
+            <p>Monitoramento estratégico - ARTESP</p>
+        </span>
+        <span class="page_link">
+            <p><u>Dashboard</u></p>
+        </span>
+        <span class="user_icon">
+            <img src="../assets/icon/user-dash.png" alt="">
+        </span>
 
-    </header>
+    </nav>
 
     <h1 class="titulo_dashboard">Visão geral</h1>
 
@@ -57,52 +60,52 @@
 
                 <tbody>
 
-                    <tr class="positivo tr_concessionaria">
+                    <tr class="negativo tr_concessionaria" onclick="direcionarPaginaConcessionaria()">
                         <td>COLINAS</td>
                         <td>+10%</td>
                     </tr>
 
-                    <tr class="negativo tr_concessionaria">
+                    <tr class="negativo tr_concessionaria" onclick="direcionarPaginaConcessionaria()">
                         <td>VIAOESTE</td>
-                        <td>-8,8%</td>
+                        <td>+8,8%</td>
                     </tr>
-                    <tr class="positivo tr_concessionaria">
+                    <tr class="negativo tr_concessionaria" onclick="direcionarPaginaConcessionaria()">
                         <td>COLINAS</td>
                         <td>+10%</td>
                     </tr>
 
-                    <tr class="negativo tr_concessionaria">
+                    <tr class="negativo tr_concessionaria" onclick="direcionarPaginaConcessionaria()">
                         <td>VIAOESTE</td>
-                        <td>-8,8%</td>
+                        <td>+8,8%</td>
                     </tr>
-                    <tr class="positivo tr_concessionaria">
+                    <tr class="negativo tr_concessionaria" onclick="direcionarPaginaConcessionaria()">
                         <td>COLINAS</td>
                         <td>+10%</td>
                     </tr>
 
-                    <tr class="negativo tr_concessionaria">
+                    <tr class="negativo tr_concessionaria" onclick="direcionarPaginaConcessionaria()">
                         <td>VIAOESTE</td>
-                        <td>-8,8%</td>
+                        <td>+8,8%</td>
                     </tr>
-                    <tr class="positivo tr_concessionaria">
+                    <tr class="negativo tr_concessionaria" onclick="direcionarPaginaConcessionaria()">
                         <td>COLINAS</td>
                         <td>+10%</td>
                     </tr>
 
-                    <tr class="negativo tr_concessionaria">
+                    <tr class="negativo tr_concessionaria" onclick="direcionarPaginaConcessionaria()">
                         <td>VIAOESTE</td>
-                        <td>-8,8%</td>
+                        <td>+8,8%</td>
                     </tr>
-                    <tr class="positivo tr_concessionaria">
+                    <tr class="negativo tr_concessionaria" onclick="direcionarPaginaConcessionaria()">
                         <td>COLINAS</td>
                         <td>+10%</td>
                     </tr>
 
-                    <tr class="negativo tr_concessionaria">
+                    <tr class="negativo tr_concessionaria" onclick="direcionarPaginaConcessionaria()">
                         <td>VIAOESTE</td>
-                        <td>-8,8%</td>
+                        <td>+8,8%</td>
                     </tr>
-                    <tr class="negativo tr_concessionaria">
+                    <tr class="positivo tr_concessionaria" onclick="direcionarPaginaConcessionaria()">
                         <td>VIAOESTE</td>
                         <td>-8,8%</td>
                     </tr>
@@ -115,12 +118,12 @@
 
         <div class="div_container_graficos">
 
-            <div class="div_filtro_data">
+            <span class="filter">
                 <p>Filtro por data: </p>
                 <input type="date">
                 <p>até</p>
                 <input type="date">
-            </div>
+            </span>
 
             <div class="div_graficos">
 
@@ -156,6 +159,12 @@
 
 <script>
 
+    function direcionarPaginaConcessionaria() {
+
+        window.location.href = "./pagina-concessionaria.html";
+
+    }
+
     const ctx = document.getElementById('myChart');
 
     new Chart(ctx, {
@@ -175,11 +184,11 @@
             layout: { padding: 10 },
             plugins: {
                 legend: {
-                    display: false 
+                    display: false
                 },
                 title: {
-                    display: true, 
-                    text: 'Municípios com mais acidentes', 
+                    display: true,
+                    text: 'Municípios com mais acidentes',
                     font: {
                         size: 20,
                         weight: 'bold'
@@ -214,11 +223,11 @@
             layout: { padding: 10 },
             plugins: {
                 legend: {
-                    display: false 
+                    display: false
                 },
                 title: {
-                    display: true, 
-                    text: 'Acidentes por regional DER', 
+                    display: true,
+                    text: 'Acidentes por regional DER',
                     font: {
                         size: 20,
                         weight: 'bold'
@@ -253,11 +262,11 @@
             layout: { padding: 10 },
             plugins: {
                 legend: {
-                    display: false 
+                    display: false
                 },
                 title: {
-                    display: true, 
-                    text: 'Acidentes por regional ADM', 
+                    display: true,
+                    text: 'Acidentes por regional ADM',
                     font: {
                         size: 20,
                         weight: 'bold'

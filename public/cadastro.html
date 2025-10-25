@@ -1,92 +1,74 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>MoveOn | Cadastro</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="./css/login&cadastro.css" />
-    <link rel="icon" href="./imagens/logo_alternativa_branca.png" />
-    <!-- SweetAlert2 -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  </head>
+  <title>MoveOn | Cadastro</title>
 
-  <body>
-    <div class="container_cadastro">
-      <div class="logo">
-        <img src="./imagens/logo_branca.png" />
-      </div>
+  <link rel="stylesheet" href="./css/login&cadastro.css" />
+  <link rel="icon" href="./imagens/logo_alternativa_branca.png" />
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
 
-      <div class="bemvindo">
-        <span>Seja Bem-Vindo!</span>
-      </div>
+<body>
+  <div class="container_cadastro">
+    <div class="logo">
+      <img src="./imagens/logo_branca.png" />
+    </div>
 
-      <div class="card">
-        <div class="formulario">
-          <h1>Cadastre-se</h1>
+    <div class="bemvindo">
+      <span>Seja Bem-Vindo!</span>
+    </div>
 
-          <div class="campo">
-            <p>Nome completo</p>
-            <img src="./imagens/icones/user.png" />
-            <input id="input_nome" type="text" placeholder="Digite seu nome" />
-          </div>
-          <div class="campo">
-            <p>E-mail corporativo</p>
-            <img src="./imagens/icones/email.png" />
-            <input
-              id="input_email"
-              type="text"
-              placeholder="Digite seu e-mail"
-            />
-          </div>
-          <div class="campo">
-            <p>Senha</p>
-            <img src="./imagens/icones/lock.png" />
-            <input
-              id="input_senha"
-              type="password"
-              placeholder="Digite sua senha"
-            />
-            <img
-              id="see_password"
-              class="see_password"
-              src="./imagens/icones/see_password.png"
-            />
-          </div>
-          <div class="campo">
-            <p>Confirmar senha</p>
-            <img src="./imagens/icones/lock.png" />
-            <input
-              id="confirmacao_senha_input"
-              type="password"
-              placeholder="Confirme sua senha"
-            />
-            <img
-              id="see_password_confirmacao"
-              class="see_password"
-              src="./imagens/icones/see_password.png"
-            />
-          </div>
-          <div class="campo">
-            <p>Cargo/função</p>
-            <img src="./imagens/icones/bag.png" />
-            <input
-              id="input_cargo"
-              type="text"
-              placeholder="Digite seu cargo"
-            />
-          </div>
+    <div class="card">
+      <div class="formulario">
+        <h1>Cadastre-se</h1>
 
-          <button class="cadastrar" onclick="cadastrar()">Cadastrar</button>
-          <p class="temConta">
-            Já tem uma conta? <a href="./login.html"><b>Faça o login</b></a>
-          </p>
+        <div class="campo">
+          <p>Nome completo</p>
+          <img src="./imagens/icones/user.png" />
+          <input id="input_nome" type="text" placeholder="Digite seu nome" />
         </div>
+        <div class="campo">
+          <p>E-mail corporativo</p>
+          <img src="./imagens/icones/email.png" />
+          <input id="input_email" type="text" placeholder="Digite seu e-mail" />
+        </div>
+        <div class="campo">
+          <p>Senha</p>
+          <img src="./imagens/icones/lock.png" />
+          <input id="input_senha" type="password" placeholder="Digite sua senha" />
+          <img id="see_password" class="see_password" src="./imagens/icones/see_password.png" />
+        </div>
+        <div class="campo">
+          <p>Confirmar senha</p>
+          <img src="./imagens/icones/lock.png" />
+          <input id="confirmacao_senha_input" type="password" placeholder="Confirme sua senha" />
+          <img id="see_password_confirmacao" class="see_password" src="./imagens/icones/see_password.png" />
+        </div>
+        <div class="campo">
+          <p>Cargo/função</p>
+          <img src="./imagens/icones/bag.png" />
+          <select name="select_cargo" id="cargoSelect">
+            <option value="#" selected disabled >Escolha um cargo</option>
+            <option value="Estratégico">Estratégico</option>
+            <option value="Operacional">Operacional</option>
+          </select>
+        </div>
+
+        <button class="cadastrar" onclick="cadastrar()">Cadastrar</button>
+        <p class="temConta">
+          Já tem uma conta? <a href="./login.html"><b>Faça o login</b></a>
+        </p>
       </div>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>
 
 <script>
@@ -116,7 +98,7 @@
     const confirmacao_senha = document.getElementById(
       "confirmacao_senha_input"
     ).value;
-    const cargo = document.getElementById("input_cargo").value;
+    const cargo = document.getElementById("cargoSelect").value;
 
     let campos = [];
 

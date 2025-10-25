@@ -6,31 +6,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard: Concessionária</title>
     <link rel="stylesheet" href="../css/dashboard/concessionaria.css">
+    <link rel="icon" href="../imagens/logo_alternativa_branca.png" />
 </head>
 
 <body>
 
-    <header class="cabecalho">
+    <nav>
 
-        <div class="cabecalho_div_logo">
-            <img src="../assets/logo_branca.png" alt="Logo da MoveOn">
-        </div>
-        <div class="cabecalho_div_paragrafo">
-            <p>Diretora de planejamento - ARTESP</p>
-        </div>
-        <div class="cabecalho_div_links">
-            <p>Dashboard</p>
-            <img src="../assets/icon/user.png" alt="Ícone de usuário">
-        </div>
+        <span class="logo_nav">
+            <a href="./visao-geral-concessionaria.html"><img src="../assets/logo_branca.png" alt=""></a>
+        </span>
+        <span class="user_name">
+            <p>Monitoramento Estratégico - ARTESP</p>
+        </span>
+        <span class="page_link">
+            <p><u>Dashboard</u></p>
+        </span>
+        <span class="user_icon">
+            <img src="../assets/icon/user-dash.png" alt="">
+        </span>
 
-    </header>
+    </nav>
 
     <h1 class="titulo_dashboard">Concessionária</h1>
 
     <section class="section_principal">
 
         <div class="div_container_concessionarias">
-
 
             <h2>Rodovias com mais acidentes</h2>
 
@@ -58,52 +60,52 @@
 
                 <tbody>
 
-                    <tr class="tr_rodovia">
+                    <tr class="tr_rodovia" onclick="direcionarPaginaRodovia()">
                         <td>COLINAS</td>
                         <td>10</td>
                     </tr>
 
-                    <tr class="negativo tr_rodovia">
+                    <tr class="negativo tr_rodovia" onclick="direcionarPaginaRodovia()">
                         <td>VIAOESTE</td>
                         <td>8</td>
                     </tr>
-                    <tr class="tr_rodovia">
+                    <tr class="tr_rodovia" onclick="direcionarPaginaRodovia()">
                         <td>COLINAS</td>
                         <td>10</td>
                     </tr>
 
-                    <tr class="negativo tr_rodovia">
+                    <tr class="negativo tr_rodovia" onclick="direcionarPaginaRodovia()">
                         <td>VIAOESTE</td>
                         <td>8</td>
                     </tr>
-                    <tr class="tr_rodovia">
+                    <tr class="tr_rodovia" onclick="direcionarPaginaRodovia()">
                         <td>COLINAS</td>
                         <td>10</td>
                     </tr>
 
-                    <tr class="negativo tr_rodovia">
+                    <tr class="negativo tr_rodovia" onclick="direcionarPaginaRodovia()">
                         <td>VIAOESTE</td>
                         <td>8</td>
                     </tr>
-                    <tr class="tr_rodovia">
+                    <tr class="tr_rodovia" onclick="direcionarPaginaRodovia()">
                         <td>COLINAS</td>
                         <td>10</td>
                     </tr>
 
-                    <tr class="negativo tr_rodovia">
+                    <tr class="negativo tr_rodovia" onclick="direcionarPaginaRodovia()">
                         <td>VIAOESTE</td>
                         <td>8</td>
                     </tr>
-                    <tr class="tr_rodovia">
+                    <tr class="tr_rodovia" onclick="direcionarPaginaRodovia()">
                         <td>COLINAS</td>
                         <td>10</td>
                     </tr>
 
-                    <tr class="negativo tr_rodovia">
+                    <tr class="negativo tr_rodovia" onclick="direcionarPaginaRodovia()">
                         <td>VIAOESTE</td>
                         <td>8</td>
                     </tr>
-                    <tr class="negativo tr_rodovia">
+                    <tr class="negativo tr_rodovia" onclick="direcionarPaginaRodovia()">
                         <td>VIAOESTE</td>
                         <td>8</td>
                     </tr>
@@ -112,16 +114,20 @@
 
             </table>
 
+            <div class="div_btn">
+                <button class="btn_gerarRelatorio">Gerar relatório</button>
+            </div>
+
         </div>
 
         <div class="div_container_graficos">
 
-            <div class="div_filtro_data">
+            <span class="filter">
                 <p>Filtro por data: </p>
                 <input type="date">
                 <p>até</p>
                 <input type="date">
-            </div>
+            </span>
 
             <div class="div_graficos">
 
@@ -162,6 +168,12 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
+
+    function direcionarPaginaRodovia() {
+
+        window.location.href = "./pagina-rodovia.html";
+
+    }
 
     const ctx = document.getElementById('myChart');
 
@@ -308,7 +320,7 @@
                 borderColor: 'rgb(54, 162, 235)', // Cor Azul
                 backgroundColor: 'rgba(54, 162, 235, 0.5)',
                 tension: 0.3,
-                fill: false, 
+                fill: false,
             },
             {
                 label: 'Ano Atual (2025)', // Linha 2: Período de 5 meses do ano atual
