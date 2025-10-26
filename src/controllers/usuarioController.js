@@ -17,7 +17,7 @@ function autenticar(req, res) {
                     console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`);
 
                     if (resultadoAutenticar.length == 0) {
-                        res.status(403).send("Email e/ou senha inválido(s)");
+                        res.status(403).json({ message: "Email e/ou senha inválido(s)" });
                     } else {
                         var cargo = resultadoAutenticar[0].cargo
                         res.status(200).json(
