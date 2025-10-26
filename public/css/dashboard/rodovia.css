@@ -7,7 +7,7 @@
 }
 
 html {
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
 body {
@@ -168,16 +168,22 @@ thead {
 }
 
 .card_rodovias tbody {
-    display: block;       /* faz tbody se comportar como bloco separado */
-    max-height: 420px;    /* altura máxima visível antes de aparecer o scroll */
-    overflow-y: auto;     /* ativa rolagem vertical */
+    display: block;
+    /* faz tbody se comportar como bloco separado */
+    max-height: 420px;
+    /* altura máxima visível antes de aparecer o scroll */
+    overflow-y: auto;
+    /* ativa rolagem vertical */
 }
 
 .card_rodovias thead,
 .card_rodovias tbody tr {
-    display: table;       /* mantém o layout de tabela correto */
-    width: 100%;          /* mantém colunas alinhadas */
-    table-layout: fixed;  /* evita que colunas se desalinhem */
+    display: table;
+    /* mantém o layout de tabela correto */
+    width: 100%;
+    /* mantém colunas alinhadas */
+    table-layout: fixed;
+    /* evita que colunas se desalinhem */
 }
 
 .card_rodovias .rodovia {
@@ -234,8 +240,24 @@ thead {
 }
 
 .card_rodovia button:hover {
-  cursor: pointer;
-  transform: scale(1.1);
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.div_logo {
+    width: 40%;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 0;
+    margin-right: 3%;
+    color: white;
+}
+
+.div_logo img {
+    width: 80%;
 }
 
 .loading-div {
@@ -301,9 +323,9 @@ thead {
 
 .card_rodovia2 {
     width: 41%;
-    height: 75%;
+    height: 69%;
     position: absolute;
-    margin-top: 10%;
+    margin-top: 12%;
     margin-left: 5%;
     display: flex;
     flex-direction: column;
@@ -317,6 +339,7 @@ thead {
 .card_rodovia2 h2 {
     font-family: "Poppins", sans-serif;
     margin-top: 5%;
+    font-size: 200%;
 }
 
 .card_rodovia2 .info {
@@ -327,7 +350,7 @@ thead {
     justify-content: center;
     align-items: flex-start;
     gap: 5%;
-    font-size: 110%;
+    font-size: 150%;
     font-weight: 600;
 }
 
@@ -337,12 +360,21 @@ thead {
     position: absolute;
     right: 0;
     margin-top: 10%;
-    margin-right: 22%;
-    width: 30%;
+    margin-right: 2%;
+    width: 50%;
     gap: 1%;
     color: #010358;
     font-family: "Poppins", sans-serif;
-    font-weight: 600;
+    font-weight: 500;
+}
+
+.filtro {
+    background-color: #010358;
+    border-radius: 20px;
+    color: white;
+    width: 8%;
+    display: flex;
+    justify-content: center;
 }
 
 .filter input {
@@ -353,6 +385,17 @@ thead {
 }
 
 .filter input:hover {
+    cursor: pointer;
+}
+
+.filter select {
+    background-color: transparent;
+    border-color: #010358;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.filter select:hover {
     cursor: pointer;
 }
 
@@ -403,7 +446,7 @@ thead {
     right: 0;
     width: 48%;
     height: 50%;
-    margin-top: 22%;
+    margin-top: 21%;
     margin-right: 4%;
     border-radius: 15px;
     box-shadow: 5px 5px 10px 0px #00000068;
@@ -493,7 +536,7 @@ thead {
     font-family: "Poppins", sans-serif;
     font-size: 140%;
     font-weight: 700;
-    margin-top: 4%;
+    margin-top: 3%;
 }
 
 .card_text2 {
@@ -501,7 +544,17 @@ thead {
     font-family: "Poppins", sans-serif;
     font-size: 130%;
     font-weight: 600;
-    margin-top: 4%;
+    margin-top: 3%;
+}
+
+.card_legenda {
+    color: #6c6b6b;
+    font-size: 80%;
+}
+
+.card_legenda2 {
+    color: rgba(255, 255, 255, 0.619);
+    font-size: 70%;
 }
 
 .up {
@@ -517,6 +570,7 @@ thead {
     text-decoration: none;
     border-radius: 30px;
 }
+
 .up::after {
     content: "↑";
     font-size: 32px;
@@ -526,7 +580,7 @@ thead {
 }
 
 .up:hover::after {
-    margin-top:-8px;
+    margin-top: -8px;
 }
 
 .grafico_barra {

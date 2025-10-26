@@ -8,7 +8,7 @@
     <title>Página rodovia | Dashboard</title>
 
     <link rel="stylesheet" href="../css/dashboard/rodovia.css" />
-    <link rel="icon" href="../imagens/logo_alternativa_branca.png" />
+    <link rel="icon" href="../assets/icon/volante_MoveOn.png" />
 </head>
 
 <body>
@@ -54,7 +54,16 @@
         </div>
 
         <span class="filter">
-            <p>Filtro por data: </p>
+            <p class="filtro">Filtro</p>
+            <p>Selecione o ano:</p>
+            <select name="filtro_ano" id="filtro_ano">
+                <option value="2025">2025</option>
+                <option value="2025">2024</option>
+                <option value="2025">2023</option>
+                <option value="2025">2022</option>
+                <option value="2025">2021</option>
+            </select>
+            <p> selecione um intervalo: </p>
             <input type="date">
             <p>até</p>
             <input type="date">
@@ -79,6 +88,7 @@
 
         <div class="card_frequencia">
             <p class="card_text">Tipos de acidentes mais frequentes</p>
+            <p class="card_legenda">Filtro aplicado de: 01/06/24 até 01/06/25</p>
             <div class="grafico_barra">
                 <canvas id="myChart1" class="bar"></canvas>
             </div>
@@ -86,6 +96,7 @@
 
         <div class="card_clima">
             <p class="card_text2">Condição climática</p>
+            <p class="card_legenda2">Filtro aplicado de: 01/06/24 até 01/06/25</p>
             <div class="grafico_rosca">
                 <canvas id="myChart2" class="rosca"></canvas>
             </div>
@@ -93,6 +104,7 @@
 
         <div class="card_veiculos">
             <p class="card_text2">Veículos</p>
+            <p class="card_legenda2">Filtro aplicado de: 01/06/24 até 01/06/25</p>
             <div class="grafico_pizza">
                 <canvas id="myChart3" class="pizza"></canvas>
             </div>
@@ -100,6 +112,7 @@
 
         <div class="card_vitimas">
             <p class="card_text">Vítimas por gravidade</p>
+            <p class="card_legenda">Filtro aplicado de: 01/06/24 até 01/06/25</p>
             <div class="grafico_barra">
                 <canvas id="myChart4" class="bar"></canvas>
             </div>
@@ -107,6 +120,7 @@
 
         <div class="card_periodos">
             <p class="card_text">Períodos dos acidentes</p>
+            <p class="card_legenda">Filtro aplicado de: 01/06/24 até 01/06/25</p>
             <div class="grafico_pizza">
                 <canvas id="myChart5" class="pizza"></canvas>
             </div>
@@ -114,6 +128,7 @@
 
         <div class="card_marcokm">
             <p class="card_text">Marco KM com mais acidentes</p>
+            <p class="card_legenda">Filtro aplicado de: 01/06/24 até 01/06/25</p>
             <div class="grafico_barra">
                 <canvas id="myChart6" class="bar"></canvas>
             </div>

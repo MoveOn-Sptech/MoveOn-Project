@@ -8,7 +8,7 @@
     <title>Visão Geral | Rodovias</title>
 
     <link rel="stylesheet" href="../css/dashboard/rodovia.css" />
-    <link rel="icon" href="../imagens/logo_alternativa_branca.png" />
+    <link rel="icon" href="../assets/icon/volante_MoveOn.png" />
 </head>
 
 <body>
@@ -73,23 +73,23 @@
 
                     <tbody>
 
-                        <tr class="rodovia">
+                        <tr onclick="showCard()" class="rodovia">
                             <td>SP348</td>
                             <td>50</td>
                         </tr>
-                        <tr class="rodovia">
+                        <tr onclick="showCard()" class="rodovia">
                             <td>SP348</td>
                             <td>50</td>
                         </tr>
-                        <tr class="rodovia">
+                        <tr onclick="showCard()" class="rodovia">
                             <td>SP348</td>
                             <td>50</td>
                         </tr>
-                        <tr class="rodovia">
+                        <tr onclick="showCard()" class="rodovia">
                             <td>SP348</td>
                             <td>50</td>
                         </tr>
-                        <tr class="rodovia">
+                        <tr onclick="showCard()" class="rodovia">
                             <td>SP348</td>
                             <td>50</td>
                         </tr>
@@ -102,7 +102,7 @@
 
         </div>
 
-        <div class="card_rodovia">
+        <div id="card_rodovia" class="card_rodovia" style="display: none;">
 
             <h2>Rodovia com mais acidentes</h2>
 
@@ -124,6 +124,10 @@
 
         </div>
 
+        <div class="div_logo" id="div_logo">
+            <img src="../assets/icon/logo_azul_alternativa.png" alt="">
+        </div>
+
     </section>
 
 </body>
@@ -143,6 +147,11 @@
         setTimeout(() => {
             window.location = "pagina-rodovia.html";
         }, 1500);
+    }
+
+    function showCard() {
+        document.getElementById("card_rodovia").style.display = "flex";
+        document.getElementById("div_logo").style.display = "none";
     }
 
 </script>
