@@ -45,7 +45,14 @@
                 <p>Aplicar um filtro:</p>
                 <select name="escolherFiltro" id="escolherFiltro">
                     <option value="#">Escolher filtro</option>
-                    <option value="decrescente">Decrescente</option>
+                    <option value="50+">Rodovias com 50+ acidentes</option>
+                    <option value="100+">Rodovias com 100+ acidentes</option>
+                    <option value="500+">Rodovias com 500+ acidentes</option>
+                    <option value="1000+">Rodovias com 1000+ acidentes</option>
+                    <option value="norte">Rodovias na região norte</option>
+                    <option value="sul">Rodovias na região sul</option>
+                    <option value="leste">Rodovias na região leste</option>
+                    <option value="oeste">Rodovias na região oeste</option>
                 </select>
             </div>
 
@@ -123,7 +130,16 @@
         <div class="div_container_graficos">
 
             <span class="filter">
-                <p>Filtro por data: </p>
+                <p class="filtro">Filtro</p>
+                <p>Selecione o ano:</p>
+                <select name="filtro_ano" id="filtro_ano">
+                    <option value="2025">2025</option>
+                    <option value="2025">2024</option>
+                    <option value="2025">2023</option>
+                    <option value="2025">2022</option>
+                    <option value="2025">2021</option>
+                </select>
+                <p> selecione um intervalo: </p>
                 <input type="date">
                 <p>até</p>
                 <input type="date">

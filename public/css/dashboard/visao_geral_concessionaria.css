@@ -109,7 +109,7 @@ nav .user_icon img:hover {
 
 .div_pesquisar_concessionarias {
     margin: 0 auto;
-    width: 50%;
+    width: 70%;
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -117,7 +117,7 @@ nav .user_icon img:hover {
 
 .div_pesquisar_concessionarias p {
     color: white;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .div_pesquisar_concessionarias input {
@@ -130,17 +130,16 @@ nav .user_icon img:hover {
 
 .div_filtrar {
     margin: 0 auto;
-    width: 50%;
+    width: 75%;
     display: flex;
     flex-direction: row;
-    gap: 10px;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .div_filtrar p {
     color: white;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .div_filtrar select {
@@ -232,15 +231,26 @@ thead {
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
 
+
+
 .filter {
     display: flex;
-    height: 5%;
     align-items: center;
-    width: 80%;
+    width: 100%;
     gap: 1%;
+    height: 5%;
     color: #010358;
     font-family: "Poppins", sans-serif;
-    font-weight: 600;
+    font-weight: 500;
+}
+
+.filtro {
+    background-color: #010358;
+    border-radius: 20px;
+    color: white;
+    width: 8%;
+    display: flex;
+    justify-content: center;
 }
 
 .filter input {
@@ -251,5 +261,16 @@ thead {
 }
 
 .filter input:hover {
+    cursor: pointer;
+}
+
+.filter select {
+    background-color: transparent;
+    border-color: #010358;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.filter select:hover {
     cursor: pointer;
 }
