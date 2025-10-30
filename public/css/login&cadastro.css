@@ -4,17 +4,17 @@ body {
     margin: 0;
     padding: 0;
     width: 100%;
-    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: "Inter", sans-serif;
     font-weight: 600;
     color: #010358;
+    overflow-y: hidden;
 }
 
 html {
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
 .container_cadastro {
@@ -40,12 +40,12 @@ html {
     justify-content: center;
     align-items: center;
     width: 60vw;
-    height: 100vh; 
+    height: 100vh;
 }
 
 .logo img {
-   width: 40vw; 
-   padding-bottom: 30vh;
+    width: 40vw;
+    padding-bottom: 30vh;
 }
 
 .bemvindo {
@@ -55,7 +55,7 @@ html {
     justify-content: center;
     align-items: center;
     width: 60vw;
-    height: 100vh; 
+    height: 100vh;
     color: white;
     font-family: "Poppins", sans-serif;
     font-size: 3.5vw;
@@ -93,18 +93,19 @@ html {
 }
 
 .card button:hover {
-  cursor: pointer;
-  transform: scale(1.1);
+    cursor: pointer;
+    transform: scale(1.1);
 }
 
 .formulario {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center; 
+    align-items: center;
 }
 
-.formulario input, select {
+.formulario input,
+select {
     width: 12vw;
     margin-left: 1.5vw;
     background-color: transparent;
@@ -129,4 +130,142 @@ html {
 .campo .see_password {
     position: absolute;
     margin-right: 2vw;
+}
+
+/* --- Media Query para telas menores que 992px (tablets e telas menores) --- */
+@media (max-width: 992px) {
+    .container_login, .container_cadastro {
+        /* Remove o background-image para melhor visualização em alguns casos */
+        background-image: none;
+        background-color: #010358;
+        /* Fundo que combina com a logo/bem-vindo */
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        /* Alinha o conteúdo ao topo */
+        align-items: center;
+        height: auto;
+        /* Permite que a altura se ajuste ao conteúdo */
+        min-height: 100vh;
+        /* Garante que cubra a altura da viewport */
+        padding: 20px 0;
+        /* Adiciona algum padding vertical */
+    }
+
+    .logo {
+        position: static;
+        /* Remove o posicionamento absoluto */
+        width: 100%;
+        height: auto;
+        justify-content: center;
+        align-items: center;
+        padding-top: 5vh;
+        /* Espaçamento do topo */
+    }
+
+    .logo img {
+        width: 50vw;
+        /* Reduz o tamanho da logo */
+        max-width: 300px;
+        padding-bottom: 2vh;
+    }
+
+    .bemvindo {
+        position: static;
+        /* Remove o posicionamento absoluto */
+        width: 100%;
+        height: auto;
+        font-size: 5vw;
+        /* Aumenta um pouco para telas de tablet */
+        text-align: center;
+        margin-bottom: 2vh;
+    }
+
+    .card {
+        position: static;
+        /* Remove o posicionamento absoluto */
+        width: 90%;
+        /* Aumenta a largura do card */
+        max-width: 450px;
+        /* Limita a largura máxima */
+        height: auto;
+        border-radius: 15px;
+        /* Ajusta o raio da borda */
+        padding: 30px 0;
+        /* Adiciona padding interno */
+        margin-bottom: 5vh;
+    }
+
+    .card h1 {
+        font-size: 8vw;
+        /* Ajusta o tamanho da fonte */
+    }
+
+    .card button {
+        width: 60%;
+        /* Aumenta a largura do botão */
+        max-width: 250px;
+        height: 6vh;
+        font-size: 4vw;
+        margin-top: 3vh;
+    }
+
+    .formulario input,
+    select {
+        width: 50vw;
+        /* Aumenta a largura do input */
+        max-width: 250px;
+        margin-left: 1.5vw;
+        font-size: 16px;
+        /* Define um tamanho de fonte legível */
+    }
+
+    .campo img {
+        width: 5vw;
+        /* Ajusta o tamanho dos ícones */
+        max-width: 24px;
+    }
+
+    .campo .see_password {
+        margin-right: 4vw;
+        /* Ajusta a posição do ícone de 'ver senha' */
+    }
+
+    .campo p {
+        font-size: 4vw;
+    }
+
+    .temConta {
+        font-size: 3.5vw;
+        text-align: center;
+        margin-top: 2vh;
+    }
+}
+
+/* --- Media Query para telas muito pequenas (smartphones) --- */
+@media (max-width: 576px) {
+    .logo img {
+        width: 50vw;
+    }
+
+    .bemvindo {
+        font-size: 7vw;
+    }
+
+    .card h1 {
+        font-size: 10vw;
+    }
+
+    .formulario input,
+    select {
+        width: 65vw;
+    }
+
+    .card button {
+        font-size: 5vw;
+        width: 70%;
+    }
+
+
+
 }
