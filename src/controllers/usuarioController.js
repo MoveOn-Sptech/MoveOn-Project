@@ -69,6 +69,11 @@ function cadastrar(req, res) {
                 usuarioModel.cadastrar(nome, email, senha, cargo)
                     .then(
                         function (resultado) {
+                           
+                            // salve salve aqui eh ponto de registro do log
+                           const logMsg = `Usuário cadastrado. ID: ${resultado.insertId || 'ID indisponível'}, Nome: ${nome}, Email: ${email}`;
+                           usuarioModel.registrarLog(logMsg, 'INFO');
+                            // ----------------------------------------------------------------
                             res.json(resultado);
                         }
                     ).catch(
