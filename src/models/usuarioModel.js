@@ -29,7 +29,7 @@ function buscarPorEmail(email) {
 
 function registrarLog(descricao, tipo = 'INFO') {
     
-    var instrucaoSql = `INSERT INTO log (tipo, descricao, dataCriacao) VALUES ('${tipo}', '${descricao}', NOW(6));`;
+    var instrucaoSql = `INSERT INTO logs (tipo, descricao, dataCriacao) VALUES ('${tipo}', '${descricao}', NOW(6));`;
     console.log("Executando a instrução SQL de LOG: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
     

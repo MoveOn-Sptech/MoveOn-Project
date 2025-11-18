@@ -65,57 +65,13 @@
                     </tr>
                 </thead>
 
-                <tbody>
+                <tbody id="tbody">
 
-                    <tr class="negativo tr_concessionaria" onclick="direcionarPaginaConcessionaria()">
+                    <!-- <tr class="negativo tr_concessionaria" onclick="direcionarPaginaConcessionaria(${data.idConcessionaria[i]})">
                         <td>COLINAS</td>
                         <td>+10%</td>
                     </tr>
-
-                    <tr class="negativo tr_concessionaria" onclick="direcionarPaginaConcessionaria()">
-                        <td>VIAOESTE</td>
-                        <td>+8,8%</td>
-                    </tr>
-                    <tr class="negativo tr_concessionaria" onclick="direcionarPaginaConcessionaria()">
-                        <td>COLINAS</td>
-                        <td>+10%</td>
-                    </tr>
-
-                    <tr class="negativo tr_concessionaria" onclick="direcionarPaginaConcessionaria()">
-                        <td>VIAOESTE</td>
-                        <td>+8,8%</td>
-                    </tr>
-                    <tr class="negativo tr_concessionaria" onclick="direcionarPaginaConcessionaria()">
-                        <td>COLINAS</td>
-                        <td>+10%</td>
-                    </tr>
-
-                    <tr class="negativo tr_concessionaria" onclick="direcionarPaginaConcessionaria()">
-                        <td>VIAOESTE</td>
-                        <td>+8,8%</td>
-                    </tr>
-                    <tr class="negativo tr_concessionaria" onclick="direcionarPaginaConcessionaria()">
-                        <td>COLINAS</td>
-                        <td>+10%</td>
-                    </tr>
-
-                    <tr class="negativo tr_concessionaria" onclick="direcionarPaginaConcessionaria()">
-                        <td>VIAOESTE</td>
-                        <td>+8,8%</td>
-                    </tr>
-                    <tr class="negativo tr_concessionaria" onclick="direcionarPaginaConcessionaria()">
-                        <td>COLINAS</td>
-                        <td>+10%</td>
-                    </tr>
-
-                    <tr class="negativo tr_concessionaria" onclick="direcionarPaginaConcessionaria()">
-                        <td>VIAOESTE</td>
-                        <td>+8,8%</td>
-                    </tr>
-                    <tr class="positivo tr_concessionaria" onclick="direcionarPaginaConcessionaria()">
-                        <td>VIAOESTE</td>
-                        <td>-8,8%</td>
-                    </tr>
+-->
 
                 </tbody>
 
@@ -175,128 +131,370 @@
 
 <script>
 
-    function direcionarPaginaConcessionaria() {
+    function direcionarPaginaConcessionaria(idConcessionaria) {
 
-        window.location.href = "./pagina-concessionaria.html";
+        window.location.href = "./pagina-concessionaria.html?idConcessionaria="+idConcessionaria;
+
 
     }
 
-    const ctx = document.getElementById('myChart');
+</script>
 
-    new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ["Município 1", "Município 1", "Município 1", "Município 1", "Município 1",
-                "Município 1", "Município 1", "Município 1", "Município 1", "Município 1",],
-            datasets: [{
-                data: [12, 19, 3, 5, 2, 3, 6, 4, 3, 6],
-                borderWidth: 1,
-                backgroundColor: ['#010358']
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            layout: { padding: 10 },
-            plugins: {
-                legend: {
-                    display: false
-                },
-                title: {
-                    display: true,
-                    text: 'Municípios com mais acidentes',
-                    font: {
-                        size: 20,
-                        weight: 'bold'
-                    },
-                    color: '#010358'
-                }
+<script>
+
+    function pegarConcessionarias() {
+
+        fetch("/visaoGeralConcessionaria/concessionarias", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
             },
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
+            body: JSON.stringify({}),
+        })
+            .then((response) => {
+                if (response.ok) {
 
-    const ctx2 = document.getElementById('myChart2');
+                    response.json().then((data) => {
+                        console.log(data)
 
-    new Chart(ctx2, {
-        type: 'bar',
-        data: {
-            labels: ["Município 1", "Município 1", "Município 1", "Município 1", "Município 1",
-                "Município 1", "Município 1", "Município 1", "Município 1", "Município 1",],
-            datasets: [{
-                data: [12, 19, 3, 5, 2, 3, 6, 4, 3, 6],
-                borderWidth: 1,
-                backgroundColor: ['#010358']
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            layout: { padding: 10 },
-            plugins: {
-                legend: {
-                    display: false
-                },
-                title: {
-                    display: true,
-                    text: 'Acidentes por regional DER',
-                    font: {
-                        size: 20,
-                        weight: 'bold'
-                    },
-                    color: '#010358'
+                        var tbody = document.getElementById("tbody");
+
+                        for (let i = 0; i < data.nomeConcessionaria.length; i++) {
+
+                            if (data.porcentagemDeAumento[i] > 0) {
+                                tbody.innerHTML += `
+                            
+<tr class="negativo tr_concessionaria" onclick="direcionarPaginaConcessionaria(${data.idConcessionaria[i]})">
+                        <td>${data.nomeConcessionaria[i]}</td>
+                        <td>+${data.porcentagemDeAumento[i]}%</td>
+                    </tr>
+
+                            `;
+                            } else {
+                                tbody.innerHTML += `
+                            
+        <tr class="positivo tr_concessionaria" onclick="direcionarPaginaConcessionaria(${data.idConcessionaria[i]})">
+                        <td>${data.nomeConcessionaria[i]}</td>
+                        <td>${data.porcentagemDeAumento[i]}%</td>
+                    </tr>
+
+                            `;
+                            }
+
+                        }
+
+
+                    })
+                } else {
+                    return response.json().then((data) => {
+                        throw new Error(data.message || "Erro ao autenticar.");
+                    });
                 }
+            })
+            .catch((error) => {
+
+            });
+    }
+
+    function pegarMunicipios() {
+
+        var vetorMunicipio = [];
+        var vetorAcidentes = [];
+
+        fetch("/visaoGeralConcessionaria/municipios", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
             },
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
+            body: JSON.stringify({}),
+        })
+            .then((response) => {
+                if (response.ok) {
 
-    const ctx3 = document.getElementById('myChart3');
+                    response.json().then((data) => {
+                        console.log(data)
 
-    new Chart(ctx3, {
-        type: 'bar',
-        data: {
-            labels: ["Município 1", "Município 1", "Município 1", "Município 1", "Município 1",
-                "Município 1", "Município 1", "Município 1", "Município 1", "Município 1",],
-            datasets: [{
-                data: [12, 19, 3, 5, 2, 3, 6, 4, 3, 6],
-                borderWidth: 1,
-                backgroundColor: ['#010358']
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            layout: { padding: 10 },
-            plugins: {
-                legend: {
-                    display: false
-                },
-                title: {
-                    display: true,
-                    text: 'Acidentes por regional ADM',
-                    font: {
-                        size: 20,
-                        weight: 'bold'
-                    },
-                    color: '#010358'
+                        vetorMunicipio = data.nomeMunicipios;
+
+                        // for (let index = 0; index < vetorMunicipio.length; index++) {
+                        //     const element = vetorMunicipio[index];
+                        //     if(element.length > 12){
+                        //         vetorMunicipio[index] = element.slice(0,7).concat("...") 
+                        //     }
+                        // }
+
+                        vetorAcidentes = data.acidentesMunicipio;
+
+                        const ctx = document.getElementById('myChart');
+
+                        new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: vetorMunicipio,
+                                datasets: [{
+                                    data: vetorAcidentes,
+                                    borderWidth: 1,
+                                    backgroundColor: ['#010358'],
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                layout: { padding: 10 },
+                                plugins: {
+                                    legend: {
+                                        display: false
+                                    },
+                                    labels: {
+                                        font: {
+                                            size: 10,
+                                            weight: 'bold'
+                                        },
+                                    }
+                                    ,
+                                    title: {
+                                        display: true,
+                                        text: 'Municípios com mais acidentes',
+                                        font: {
+                                            size: 20,
+                                            weight: 'bold'
+                                        },
+                                        color: '#010358'
+                                    }
+                                },
+                                scales: {
+                                    x: { // Eixo X
+                                        ticks: {
+                                            font: {
+                                                size: 10 // Define o tamanho da fonte em pixels
+                                            }
+                                        }
+                                    },
+                                    y: { // Eixo Y
+                                        ticks: {
+                                            beginAtZero: true,
+                                            font: {
+                                                size: 12
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        });
+
+                    })
+                } else {
+                    return response.json().then((data) => {
+                        throw new Error(data.message || "Erro ao autenticar.");
+                    });
                 }
+            })
+            .catch((error) => {
+
+            });
+    }
+
+    function pegarRegionalDer() {
+
+        var vetorRegionalDer = [];
+        var vetorAcidentes = [];
+
+        fetch("/visaoGeralConcessionaria/regionalDer", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
             },
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
+            body: JSON.stringify({}),
+        })
+            .then((response) => {
+                if (response.ok) {
 
+                    response.json().then((data) => {
+                        console.log(data)
+
+                        vetorRegionalDer = data.nomeRegionalDer;
+
+                        // for (let index = 0; index < vetorMunicipio.length; index++) {
+                        //     const element = vetorMunicipio[index];
+                        //     if(element.length > 12){
+                        //         vetorMunicipio[index] = element.slice(0,7).concat("...") 
+                        //     }
+                        // }
+
+                        vetorAcidentes = data.acidentesRegionalDer;
+
+                        const ctx2 = document.getElementById('myChart2');
+
+                        new Chart(ctx2, {
+                            type: 'bar',
+                            data: {
+                                labels: vetorRegionalDer,
+                                datasets: [{
+                                    data: vetorAcidentes,
+                                    borderWidth: 1,
+                                    backgroundColor: ['#010358'],
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                layout: { padding: 10 },
+                                plugins: {
+                                    legend: {
+                                        display: false
+                                    },
+                                    labels: {
+                                        font: {
+                                            size: 10,
+                                            weight: 'bold'
+                                        },
+                                    }
+                                    ,
+                                    title: {
+                                        display: true,
+                                        text: 'Regional DER com mais acidentes',
+                                        font: {
+                                            size: 20,
+                                            weight: 'bold'
+                                        },
+                                        color: '#010358'
+                                    }
+                                },
+                                scales: {
+                                    x: { // Eixo X
+                                        ticks: {
+                                            font: {
+                                                size: 10 // Define o tamanho da fonte em pixels
+                                            }
+                                        }
+                                    },
+                                    y: { // Eixo Y
+                                        ticks: {
+                                            beginAtZero: true,
+                                            font: {
+                                                size: 12
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        });
+
+                    })
+                } else {
+                    return response.json().then((data) => {
+                        throw new Error(data.message || "Erro ao autenticar.");
+                    });
+                }
+            })
+            .catch((error) => {
+
+            });
+    }
+
+    function pegarRegionalAdm() {
+
+        var vetorRegionalAdm = [];
+        var vetorAcidentes = [];
+
+        fetch("/visaoGeralConcessionaria/regionalAdm", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({}),
+        })
+            .then((response) => {
+                if (response.ok) {
+
+                    response.json().then((data) => {
+                        console.log(data)
+
+                        vetorRegionalAdm = data.nomeRegionalAdm;
+
+                        // for (let index = 0; index < vetorMunicipio.length; index++) {
+                        //     const element = vetorMunicipio[index];
+                        //     if(element.length > 12){
+                        //         vetorMunicipio[index] = element.slice(0,7).concat("...") 
+                        //     }
+                        // }
+
+                        vetorAcidentes = data.acidentesRegionalAdm;
+
+                        const ctx3 = document.getElementById('myChart3');
+
+                        new Chart(ctx3, {
+                            type: 'bar',
+                            data: {
+                                labels: vetorRegionalAdm,
+                                datasets: [{
+                                    data: vetorAcidentes,
+                                    borderWidth: 1,
+                                    backgroundColor: ['#010358'],
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                layout: { padding: 10 },
+                                plugins: {
+                                    legend: {
+                                        display: false
+                                    },
+                                    labels: {
+                                        font: {
+                                            size: 10,
+                                            weight: 'bold'
+                                        },
+                                    }
+                                    ,
+                                    title: {
+                                        display: true,
+                                        text: 'Regional ADM com mais acidentes',
+                                        font: {
+                                            size: 20,
+                                            weight: 'bold'
+                                        },
+                                        color: '#010358'
+                                    }
+                                },
+                                scales: {
+                                    x: { // Eixo X
+                                        ticks: {
+                                            font: {
+                                                size: 10 // Define o tamanho da fonte em pixels
+                                            }
+                                        }
+                                    },
+                                    y: { // Eixo Y
+                                        ticks: {
+                                            beginAtZero: true,
+                                            font: {
+                                                size: 12
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        });
+
+                    })
+                } else {
+                    return response.json().then((data) => {
+                        throw new Error(data.message || "Erro ao autenticar.");
+                    });
+                }
+            })
+            .catch((error) => {
+
+            });
+    }
+
+
+
+    pegarMunicipios();
+    pegarRegionalDer();
+    pegarRegionalAdm();
+    pegarConcessionarias();
 
 </script>
