@@ -1,380 +1,410 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard: Concessionária</title>
-    <link rel="stylesheet" href="../css/dashboard/concessionaria.css">
+    <link rel="stylesheet" href="../css/dashboard/concessionaria.css" />
     <link rel="icon" href="../imagens/logo_alternativa_branca.png" />
-</head>
+  </head>
 
-<body>
-
+  <body>
     <nav>
-
-        <span class="logo_nav">
-            <a href="./visao-geral-concessionaria.html"><img src="../assets/logo_branca.png" alt=""></a>
-        </span>
-        <span class="user_name">
-            <p>Monitoramento Estratégico - ARTESP</p>
-        </span>
-        <span class="page_link">
-            <p><u>Dashboard</u></p>
-        </span>
-        <span class="user_icon">
-            <img src="../assets/icon/user-dash.png" alt="">
-        </span>
-
+      <span class="logo_nav">
+        <a href="./visao-geral-concessionaria.html"
+          ><img src="../assets/logo_branca.png" alt=""
+        /></a>
+      </span>
+      <span class="user_name">
+        <p>Monitoramento Estratégico - ARTESP</p>
+      </span>
+      <span class="page_link">
+        <p><u>Dashboard</u></p>
+      </span>
+      <span class="user_icon">
+        <img src="../assets/icon/user-dash.png" alt="" />
+      </span>
     </nav>
 
     <h1 class="titulo_dashboard">Concessionária</h1>
 
     <section class="section_principal">
+      <div class="div_container_concessionarias">
+        <h2>Rodovias com mais acidentes</h2>
 
-        <div class="div_container_concessionarias">
-
-            <h2>Rodovias com mais acidentes</h2>
-
-            <div class="div_pesquisar_concessionarias">
-                <p>Pesquisar rodovia:</p>
-                <input type="text" placeholder="Digite o nome da rodovia">
-            </div>
-
-            <div class="div_filtrar">
-                <p>Aplicar um filtro:</p>
-                <select name="escolherFiltro" id="escolherFiltro">
-                    <option value="#">Escolher filtro</option>
-                    <option value="50+">Rodovias com 50+ acidentes</option>
-                    <option value="100+">Rodovias com 100+ acidentes</option>
-                    <option value="500+">Rodovias com 500+ acidentes</option>
-                    <option value="1000+">Rodovias com 1000+ acidentes</option>
-                    <option value="norte">Rodovias na região norte</option>
-                    <option value="sul">Rodovias na região sul</option>
-                    <option value="leste">Rodovias na região leste</option>
-                    <option value="oeste">Rodovias na região oeste</option>
-                </select>
-            </div>
-
-            <table class="tabela_concessionarias">
-
-                <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Quantidade</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-
-                    <tr class="tr_rodovia" onclick="direcionarPaginaRodovia()">
-                        <td>COLINAS</td>
-                        <td>10</td>
-                    </tr>
-
-                    <tr class="negativo tr_rodovia" onclick="direcionarPaginaRodovia()">
-                        <td>VIAOESTE</td>
-                        <td>8</td>
-                    </tr>
-                    <tr class="tr_rodovia" onclick="direcionarPaginaRodovia()">
-                        <td>COLINAS</td>
-                        <td>10</td>
-                    </tr>
-
-                    <tr class="negativo tr_rodovia" onclick="direcionarPaginaRodovia()">
-                        <td>VIAOESTE</td>
-                        <td>8</td>
-                    </tr>
-                    <tr class="tr_rodovia" onclick="direcionarPaginaRodovia()">
-                        <td>COLINAS</td>
-                        <td>10</td>
-                    </tr>
-
-                    <tr class="negativo tr_rodovia" onclick="direcionarPaginaRodovia()">
-                        <td>VIAOESTE</td>
-                        <td>8</td>
-                    </tr>
-                    <tr class="tr_rodovia" onclick="direcionarPaginaRodovia()">
-                        <td>COLINAS</td>
-                        <td>10</td>
-                    </tr>
-
-                    <tr class="negativo tr_rodovia" onclick="direcionarPaginaRodovia()">
-                        <td>VIAOESTE</td>
-                        <td>8</td>
-                    </tr>
-                    <tr class="tr_rodovia" onclick="direcionarPaginaRodovia()">
-                        <td>COLINAS</td>
-                        <td>10</td>
-                    </tr>
-
-                    <tr class="negativo tr_rodovia" onclick="direcionarPaginaRodovia()">
-                        <td>VIAOESTE</td>
-                        <td>8</td>
-                    </tr>
-                    <tr class="negativo tr_rodovia" onclick="direcionarPaginaRodovia()">
-                        <td>VIAOESTE</td>
-                        <td>8</td>
-                    </tr>
-
-                </tbody>
-
-            </table>
-
-            <div class="div_btn">
-                <button class="btn_gerarRelatorio">Gerar relatório</button>
-            </div>
-
+        <div class="div_pesquisar_concessionarias">
+          <p>Pesquisar rodovia:</p>
+          <input type="text" placeholder="Digite o nome da rodovia" />
         </div>
 
-        <div class="div_container_graficos">
-
-            <span class="filter">
-                <p class="filtro">Filtro</p>
-                <p>Selecione o ano:</p>
-                <select name="filtro_ano" id="filtro_ano">
-                    <option value="2025">2025</option>
-                    <option value="2025">2024</option>
-                    <option value="2025">2023</option>
-                    <option value="2025">2022</option>
-                    <option value="2025">2021</option>
-                </select>
-                <p> selecione um intervalo: </p>
-                <input type="date">
-                <p>até</p>
-                <input type="date">
-            </span>
-
-            <div class="div_graficos">
-
-                <div class="div_grafico">
-
-                    <canvas id="myChart" class="grafico"></canvas>
-
-                </div>
-
-                <div class="graficos_pizza">
-
-                    <div>
-                        <canvas id="myChart2" class="grafico"></canvas>
-                    </div>
-
-                    <div>
-                        <canvas id="myChart3" class="grafico"></canvas>
-                    </div>
-
-                </div>
-
-                <div class="div_grafico">
-
-                    <canvas id="myChart4" class="grafico"></canvas>
-                </div>
-
-
-            </div>
-
+        <div class="div_filtrar">
+          <p>Aplicar um filtro:</p>
+          <select name="escolherFiltro" id="escolherFiltro">
+            <option value="#">Escolher filtro</option>
+            <option value="50+">Rodovias com 50+ acidentes</option>
+            <option value="100+">Rodovias com 100+ acidentes</option>
+            <option value="500+">Rodovias com 500+ acidentes</option>
+            <option value="1000+">Rodovias com 1000+ acidentes</option>
+            <option value="norte">Rodovias na região norte</option>
+            <option value="sul">Rodovias na região sul</option>
+            <option value="leste">Rodovias na região leste</option>
+            <option value="oeste">Rodovias na região oeste</option>
+          </select>
         </div>
 
+        <table class="tabela_concessionarias">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Quantidade</th>
+            </tr>
+          </thead>
+
+          <tbody id="rodovias-tbody">
+            <tr class="tr_rodovia" onclick="direcionarPaginaRodovia()">
+              <td>COLINAS</td>
+              <td>10</td>
+            </tr>
+
+            <tr class="negativo tr_rodovia" onclick="direcionarPaginaRodovia()">
+              <td>VIAOESTE</td>
+              <td>8</td>
+            </tr>
+            <tr class="tr_rodovia" onclick="direcionarPaginaRodovia()">
+              <td>COLINAS</td>
+              <td>10</td>
+            </tr>
+
+            <tr class="negativo tr_rodovia" onclick="direcionarPaginaRodovia()">
+              <td>VIAOESTE</td>
+              <td>8</td>
+            </tr>
+            <tr class="tr_rodovia" onclick="direcionarPaginaRodovia()">
+              <td>COLINAS</td>
+              <td>10</td>
+            </tr>
+
+            <tr class="negativo tr_rodovia" onclick="direcionarPaginaRodovia()">
+              <td>VIAOESTE</td>
+              <td>8</td>
+            </tr>
+            <tr class="tr_rodovia" onclick="direcionarPaginaRodovia()">
+              <td>COLINAS</td>
+              <td>10</td>
+            </tr>
+
+            <tr class="negativo tr_rodovia" onclick="direcionarPaginaRodovia()">
+              <td>VIAOESTE</td>
+              <td>8</td>
+            </tr>
+            <tr class="tr_rodovia" onclick="direcionarPaginaRodovia()">
+              <td>COLINAS</td>
+              <td>10</td>
+            </tr>
+
+            <tr class="negativo tr_rodovia" onclick="direcionarPaginaRodovia()">
+              <td>VIAOESTE</td>
+              <td>8</td>
+            </tr>
+            <tr class="negativo tr_rodovia" onclick="direcionarPaginaRodovia()">
+              <td>VIAOESTE</td>
+              <td>8</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="div_btn">
+          <button class="btn_gerarRelatorio">Gerar relatório</button>
+        </div>
+      </div>
+
+      <div class="div_container_graficos">
+        <span class="filter">
+          <p class="filtro">Filtro</p>
+          <p>Selecione o ano:</p>
+          <select name="filtro_ano" id="filtro_ano">
+            <option value="2025">2025</option>
+            <option value="2025">2024</option>
+            <option value="2025">2023</option>
+            <option value="2025">2022</option>
+            <option value="2025">2021</option>
+          </select>
+          <p>selecione um intervalo:</p>
+          <input type="date" />
+          <p>até</p>
+          <input type="date" />
+        </span>
+
+        <div class="div_graficos">
+          <div class="div_grafico">
+            <canvas id="myChart" class="grafico"></canvas>
+          </div>
+
+          <div class="graficos_pizza">
+            <div>
+              <canvas id="myChart2" class="grafico"></canvas>
+            </div>
+
+            <div>
+              <canvas id="myChart3" class="grafico"></canvas>
+            </div>
+          </div>
+
+          <div class="div_grafico">
+            <canvas id="myChart4" class="grafico"></canvas>
+          </div>
+        </div>
+      </div>
     </section>
-
-</body>
-
+  </body>
 </html>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
+  function direcionarPaginaRodovia() {
+    window.location.href = "./pagina-rodovia.html";
+  }
 
-    function direcionarPaginaRodovia() {
+  const urlParams = new URLSearchParams(window.location.search);
 
-        window.location.href = "./pagina-rodovia.html";
+  const fkConcessionaria = urlParams.get("idConcessionaria");
 
-    }
+  if (fkConcessionaria == undefined || fkConcessionaria == null) {
+    window.location.href = "./pagina-concessionaria.html?idConcessionaria=1";
+  }
 
-    const ctx = document.getElementById('myChart');
+  fetch(
+    "/concessionaria/rodoviaComMaisAcidente?fkConcessionaria=" +
+      fkConcessionaria
+  ).then((response) => {
+    response.json().then((data) => {
+      const rodovias = document.getElementById("rodovias-tbody");
+      let text = "";
 
-    new Chart(ctx, {
-        type: 'bar',
+      data.forEach((rodovia) => {
+        text += `
+                            <tr class="tr_rodovia" onclick="direcionarPaginaRodovia()">
+                                <td>${rodovia.nomeRodovia}</td>
+                                <td>${rodovia.quantidade}</td>
+                            </tr>
+                        `;
+      });
+
+      rodovias.innerHTML = text;
+
+      const ctx = document.getElementById("myChart");
+      const labels = data.map((rodovia) => rodovia.nomeRodovia);
+      const quantidade = data.map((rodovia) => rodovia.quantidade);
+      new Chart(ctx, {
+        type: "bar",
         data: {
-            labels: ["Município 1", "Município 1", "Município 1", "Município 1", "Município 1",
-                "Município 1", "Município 1", "Município 1", "Município 1", "Município 1",],
-            datasets: [{
-                data: [12, 19, 3, 5, 2, 3, 6, 4, 3, 6],
-                borderWidth: 1,
-                backgroundColor: ['#010358']
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            layout: { padding: 10 },
-            plugins: {
-                legend: {
-                    display: false
-                },
-                title: {
-                    display: true,
-                    text: 'Rodovias com mais acidentes',
-                    font: {
-                        size: 20,
-                        weight: 'bold'
-                    },
-                    color: '#010358'
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-
-    const ctx2 = document.getElementById('myChart2');
-
-    const meuGraficoPizza = new Chart(ctx2, {
-        type: 'pie',
-        data: {
-            labels: ['Fatal', 'Leve', 'Moderada'],
-            datasets: [{
-                data: [10, 20, 30],
-                backgroundColor: ['#6ce5e8', '#41b8d5', '#2d8bba'],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false, // permite que o gráfico se ajuste à div
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Gravidade das vítimas',
-                    position: 'top', // título acima do gráfico
-                    font: {
-                        size: 20,
-                        weight: 'bold'
-                    },
-                    color: 'white'
-                },
-                legend: {
-                    display: true,
-                    position: 'bottom', // legenda abaixo do gráfico
-                    labels: {
-                        color: 'white',
-                        usePointStyle: true, // bolinhas em vez de retângulos, ajuda a economizar espaço
-                        padding: 20,         // espaço entre legendas
-                        boxWidth: 20          // largura da caixa da legenda
-                    },
-                    // Força a legenda a ser horizontal
-                    align: 'center',
-                    fullSize: false
-                }
-            }
-        }
-    });
-
-    const ctx3 = document.getElementById('myChart3');
-
-    const meuGraficoPizza3 = new Chart(ctx3, {
-        type: 'pie',
-        data: {
-            labels: ['Simples', 'Dupla'],
-            datasets: [{
-                data: [10, 20],
-                backgroundColor: ['#6ce5e8', '#41b8d5'],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Tipos de pista',
-                    position: 'top',
-                    font: {
-                        size: 20,
-                        weight: 'bold'
-                    },
-                    color: 'white'
-
-                },
-                legend: {
-                    display: true,
-                    position: 'bottom',
-                    labels: {
-                        color: 'white',
-                        usePointStyle: true, // bolinhas em vez de retângulos, ajuda a economizar espaço
-                        padding: 20,         // espaço entre legendas
-                        boxWidth: 20          // largura da caixa da legenda
-                    },
-                    // Força a legenda a ser horizontal
-                    align: 'center',
-                    fullSize: false
-                }
-            }
-        }
-    });
-
-
-    const meses = [
-        'Mês 1 (Jan)',
-        'Mês 2 (Fev)',
-        'Mês 3 (Mar)',
-        'Mês 4 (Abr)',
-        'Mês 5 (Mai)'
-    ];
-
-    // 2. DADOS: Duas séries, uma para cada ano
-    const dadosAcidentes = {
-        labels: meses,
-        datasets: [
+          labels: labels.slice(0, 10),
+          datasets: [
             {
-                label: 'Ano Passado (2024)', // Linha 1: Período de 5 meses do ano passado
-                data: [10, 15, 12, 18, 20], // Valores de acidentes para os 5 meses
-                borderColor: 'rgb(54, 162, 235)', // Cor Azul
-                backgroundColor: 'rgba(54, 162, 235, 0.5)',
-                tension: 0.3,
-                fill: false,
+              data: quantidade.slice(0, 10),
+              borderWidth: 1,
+              backgroundColor: ["#010358"],
             },
-            {
-                label: 'Ano Atual (2025)', // Linha 2: Período de 5 meses do ano atual
-                data: [13, 17, 14, 21, 25], // Valores de acidentes para os mesmos 5 meses
-                borderColor: 'rgb(255, 99, 132)', // Cor Vermelha
-                backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                tension: 0.3,
-                fill: false
-            }
-        ]
-    };
-
-    // 3. CONFIGURAÇÃO DO GRÁFICO
-    const configuracao = {
-        type: 'line',
-        data: dadosAcidentes,
+          ],
+        },
         options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            layout: { padding: 10 },
-            plugins: {
-                legend: {
-                    position: 'top', // Legenda no topo
-                },
-                title: {
-                    display: true,
-                    text: 'Acidentes de 05/2024 a 10/2025',
-                    font: {
-                        size: 20,
-                        weight: 'bold'
-                    },
-                    color: '#010358'
-                }
+          responsive: true,
+          maintainAspectRatio: false,
+          layout: { padding: 10 },
+          plugins: {
+            legend: {
+              display: false,
             },
-        }
-    };
+            title: {
+              display: true,
+              text: "Rodovias com mais acidentes",
+              font: {
+                size: 20,
+                weight: "bold",
+              },
+              color: "#010358",
+            },
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
+    });
+  });
 
-    const ctx4 = document.getElementById('myChart4');
-    new Chart(ctx4, configuracao);
+  fetch(
+    "/concessionaria/gravidadeDasVitimas?fkConcessionaria=" + fkConcessionaria
+  ).then((response) => {
+    response.json().then((data) => {
+      console.log(data);
+      const ctx2 = document.getElementById("myChart2");
 
+      const { quantidadeFatal, quantidadeGrave, quantidadeLeve } = data[0];
+
+      const meuGraficoPizza = new Chart(ctx2, {
+        type: "pie",
+        data: {
+          labels: ["Fatal", "Grave", "Leve"],
+          datasets: [
+            {
+              data: [quantidadeFatal, quantidadeGrave, quantidadeLeve],
+              backgroundColor: ["#6ce5e8", "#41b8d5", "#2d8bba"],
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false, // permite que o gráfico se ajuste à div
+          plugins: {
+            title: {
+              display: true,
+              text: "Gravidade das vítimas",
+              position: "top", // título acima do gráfico
+              font: {
+                size: 20,
+                weight: "bold",
+              },
+              color: "white",
+            },
+            legend: {
+              display: true,
+              position: "bottom", // legenda abaixo do gráfico
+              labels: {
+                color: "white",
+                usePointStyle: true, // bolinhas em vez de retângulos, ajuda a economizar espaço
+                padding: 20, // espaço entre legendas
+                boxWidth: 20, // largura da caixa da legenda
+              },
+              // Força a legenda a ser horizontal
+              align: "center",
+              fullSize: false,
+            },
+          },
+        },
+      });
+    });
+  });
+
+  fetch(
+    "/concessionaria/tipoDePista?fkConcessionaria=" + fkConcessionaria
+  ).then((response) => {
+    response.json().then((data) => {
+      const quantidade = [];
+      const tipoPista = [];
+
+      data.forEach((tipo) => {
+        quantidade.push(tipo.quantidade);
+        tipoPista.push(tipo.tipoPista);
+      });
+
+      const ctx3 = document.getElementById("myChart3");
+
+      const meuGraficoPizza3 = new Chart(ctx3, {
+        type: "pie",
+        data: {
+          labels: tipoPista,
+          datasets: [
+            {
+              data: quantidade,
+              backgroundColor: ["#6ce5e8", "#41b8d5", "#41b5b5", "#2d8bba"],
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            title: {
+              display: true,
+              text: "Tipos de pista",
+              position: "top",
+              font: {
+                size: 20,
+                weight: "bold",
+              },
+              color: "white",
+            },
+            legend: {
+              display: true,
+              position: "bottom",
+              labels: {
+                color: "white",
+                usePointStyle: true, // bolinhas em vez de retângulos, ajuda a economizar espaço
+                padding: 20, // espaço entre legendas
+                boxWidth: 20, // largura da caixa da legenda
+              },
+              // Força a legenda a ser horizontal
+              align: "center",
+              fullSize: false,
+            },
+          },
+        },
+      });
+    });
+  });
+
+  const meses = [
+    "Mês 1 (Jan)",
+    "Mês 2 (Fev)",
+    "Mês 3 (Mar)",
+    "Mês 4 (Abr)",
+    "Mês 5 (Mai)",
+  ];
+
+  // 2. DADOS: Duas séries, uma para cada ano
+  const dadosAcidentes = {
+    labels: meses,
+    datasets: [
+      {
+        label: "Ano Passado (2024)", // Linha 1: Período de 5 meses do ano passado
+        data: [10, 15, 12, 18, 20], // Valores de acidentes para os 5 meses
+        borderColor: "rgb(54, 162, 235)", // Cor Azul
+        backgroundColor: "rgba(54, 162, 235, 0.5)",
+        tension: 0.3,
+        fill: false,
+      },
+      {
+        label: "Ano Atual (2025)", // Linha 2: Período de 5 meses do ano atual
+        data: [13, 17, 14, 21, 25], // Valores de acidentes para os mesmos 5 meses
+        borderColor: "rgb(255, 99, 132)", // Cor Vermelha
+        backgroundColor: "rgba(255, 99, 132, 0.5)",
+        tension: 0.3,
+        fill: false,
+      },
+    ],
+  };
+
+  // 3. CONFIGURAÇÃO DO GRÁFICO
+  const configuracao = {
+    type: "line",
+    data: dadosAcidentes,
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      layout: { padding: 10 },
+      plugins: {
+        legend: {
+          position: "top", // Legenda no topo
+        },
+        title: {
+          display: true,
+          text: "Acidentes de 05/2024 a 10/2025",
+          font: {
+            size: 20,
+            weight: "bold",
+          },
+          color: "#010358",
+        },
+      },
+    },
+  };
+
+  const ctx4 = document.getElementById("myChart4");
+  new Chart(ctx4, configuracao);
 </script>

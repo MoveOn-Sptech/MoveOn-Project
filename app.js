@@ -28,6 +28,8 @@ app.use(cors());
 app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
 app.use("/visaoGeralConcessionaria", visaoGeralConcessionariaRouter);
+app.use("/concessionaria", require("./src/routes/concessionaria"));
+
 
 app.listen(PORTA_APP, function () {
     console.log(`
