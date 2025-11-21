@@ -14,6 +14,20 @@ function obterRodoviasComMaisAcidente(fkConcessionaria) {
     return database.executar(instrucaoSql);
 }
 
+function obterRodoviasComMaisAcidenteComIntervalo(fkConcessionaria, dataInicio, dataFim) {
+    var instrucaoSql = `
+        SELECT 
+            r.nomeRodovia,
+            SUM(a.vitLeve + a.vitGrave + a.vitFatal) AS quantidade
+        FROM Rodovia r
+        JOIN Acidente a ON a.fkRodovia = r.idRodovia
+        WHERE r.fkConcessionaria = ${fkConcessionaria} AND a.dtHoraAcidente BETWEEN '${dataInicio}' AND '${dataFim}'
+        GROUP BY r.nomeRodovia
+        ORDER BY quantidade DESC;
+    `;
+    return database.executar(instrucaoSql);
+}
+
 function obterGravidadeDasVitimas(fkConcessionaria) {
     console.log("FK CONCESSIONARIA MODEL: " + fkConcessionaria)
     var instrucaoSql = `
@@ -26,6 +40,25 @@ function obterGravidadeDasVitimas(fkConcessionaria) {
         WHERE r.fkConcessionaria = ${fkConcessionaria};
     `;
     return database.executar(instrucaoSql);
+}
+
+
+function obterAcidentePorMes(fkConcessionaria, dataInicio, dataFim) {
+    console.log("FK CONCESSIONARIA MODEL: " + fkConcessionaria)
+
+    var instrucaoSql = `
+    select 
+        count(Acidente.idAcidente) as quantidade,
+        month(Acidente.dtHoraAcidente) as mes
+    from Acidente 
+    where 
+        Acidente.fkRodovia in (select Rodovia.idRodovia from Rodovia where Rodovia.fkConcessionaria = ${fkConcessionaria})
+        and 
+        Acidente.dtHoraAcidente between '${dataInicio}' and '${dataFim}'
+    group by month(Acidente.dtHoraAcidente);`;
+
+    return database.executar(instrucaoSql);
+
 }
 
 function obterTipoDePista(fkConcessionaria) {
@@ -43,6 +76,8 @@ function obterTipoDePista(fkConcessionaria) {
 
 module.exports = {
     obterRodoviasComMaisAcidente,
+    obterRodoviasComMaisAcidenteComIntervalo,
     obterGravidadeDasVitimas,
-    obterTipoDePista
+    obterTipoDePista,
+    obterAcidentePorMes
 };

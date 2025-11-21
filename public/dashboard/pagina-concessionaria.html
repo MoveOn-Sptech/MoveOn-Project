@@ -31,25 +31,32 @@
     <div class="div_container_concessionarias">
       <h2>Rodovias com mais acidentes</h2>
 
-      <div class="div_pesquisar_concessionarias">
-        <p>Pesquisar rodovia:</p>
-        <input type="text" placeholder="Digite o nome da rodovia" />
-      </div>
+        <div class="div_pesquisar_concessionarias">
+          <p>Pesquisar rodovia:</p>
+          <input
+            type="text"
+            placeholder="Digite o nome da rodovia"
+            id="input_nome"
+            onkeydown="onChangeSelectedFilter()"
+            onkeyup="onChangeSelectedFilter()"
+          />
+        </div>
 
-      <div class="div_filtrar">
-        <p>Aplicar um filtro:</p>
-        <select name="escolherFiltro" id="escolherFiltro">
-          <option value="#">Escolher filtro</option>
-          <option value="50+">Rodovias com 50+ acidentes</option>
-          <option value="100+">Rodovias com 100+ acidentes</option>
-          <option value="500+">Rodovias com 500+ acidentes</option>
-          <option value="1000+">Rodovias com 1000+ acidentes</option>
-          <option value="norte">Rodovias na região norte</option>
-          <option value="sul">Rodovias na região sul</option>
-          <option value="leste">Rodovias na região leste</option>
-          <option value="oeste">Rodovias na região oeste</option>
-        </select>
-      </div>
+        <div class="div_filtrar">
+          <p>Aplicar um filtro:</p>
+          <select
+            name="escolherFiltro"
+            id="escolherFiltro"
+            onchange="onChangeSelectedFilter()"
+          >
+            <option value="-1" onclick="allRodovias()">Todos</option>
+
+            <!-- <option value="norte">Rodovias na região norte</option> -->
+            <!-- <option value="sul">Rodovias na região sul</option> -->
+            <!-- <option value="leste">Rodovias na região leste</option> -->
+            <!-- <option value="oeste">Rodovias na região oeste</option> -->
+          </select>
+        </div>
 
       <table class="tabela_concessionarias">
         <thead>
@@ -59,80 +66,38 @@
           </tr>
         </thead>
 
-        <tbody id="rodovias-tbody">
-          <tr class="tr_rodovia" onclick="direcionarPaginaRodovia()">
-            <td>COLINAS</td>
-            <td>10</td>
-          </tr>
-
-          <tr class="negativo tr_rodovia" onclick="direcionarPaginaRodovia()">
-            <td>VIAOESTE</td>
-            <td>8</td>
-          </tr>
-          <tr class="tr_rodovia" onclick="direcionarPaginaRodovia()">
-            <td>COLINAS</td>
-            <td>10</td>
-          </tr>
-
-          <tr class="negativo tr_rodovia" onclick="direcionarPaginaRodovia()">
-            <td>VIAOESTE</td>
-            <td>8</td>
-          </tr>
-          <tr class="tr_rodovia" onclick="direcionarPaginaRodovia()">
-            <td>COLINAS</td>
-            <td>10</td>
-          </tr>
-
-          <tr class="negativo tr_rodovia" onclick="direcionarPaginaRodovia()">
-            <td>VIAOESTE</td>
-            <td>8</td>
-          </tr>
-          <tr class="tr_rodovia" onclick="direcionarPaginaRodovia()">
-            <td>COLINAS</td>
-            <td>10</td>
-          </tr>
-
-          <tr class="negativo tr_rodovia" onclick="direcionarPaginaRodovia()">
-            <td>VIAOESTE</td>
-            <td>8</td>
-          </tr>
-          <tr class="tr_rodovia" onclick="direcionarPaginaRodovia()">
-            <td>COLINAS</td>
-            <td>10</td>
-          </tr>
-
-          <tr class="negativo tr_rodovia" onclick="direcionarPaginaRodovia()">
-            <td>VIAOESTE</td>
-            <td>8</td>
-          </tr>
-          <tr class="negativo tr_rodovia" onclick="direcionarPaginaRodovia()">
-            <td>VIAOESTE</td>
-            <td>8</td>
-          </tr>
-        </tbody>
-      </table>
+          <tbody id="rodovias-tbody"></tbody>
+        </table>
 
       <div class="div_btn">
         <button class="btn_gerarRelatorio">Gerar relatório</button>
       </div>
     </div>
 
-    <div class="div_container_graficos">
-      <span class="filter">
-        <p class="filtro">Filtro</p>
-        <p>Selecione o ano:</p>
-        <select name="filtro_ano" id="filtro_ano">
-          <option value="2025">2025</option>
-          <option value="2025">2024</option>
-          <option value="2025">2023</option>
-          <option value="2025">2022</option>
-          <option value="2025">2021</option>
-        </select>
-        <p>selecione um intervalo:</p>
-        <input type="date" />
-        <p>até</p>
-        <input type="date" />
-      </span>
+      <div class="div_container_graficos">
+        <span class="filter">
+          <p class="filtro">Filtro</p>
+          <p>Selecione o ano:</p>
+          <select name="select_filtro_ano" id="select_filtro_ano">
+            <option value="2025">2025</option>
+            <option value="2024">2024</option>
+            <option value="2023">2023</option>
+            <option value="2022">2022</option>
+            <option value="2021">2021</option>
+          </select>
+          <p>selecione um intervalo:</p>
+          <input
+            type="date"
+            id="input_data_inicio"
+            onchange="onChangeFilterDate()"
+          />
+          <p>até</p>
+          <input
+            type="date"
+            id="input_data_fim"
+            onchange="onChangeFilterDate()"
+          />
+        </span>
 
       <div class="div_graficos">
         <div class="div_grafico">
@@ -162,6 +127,42 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
+  function onChangeFilterDate() {
+    const dataInicio = document.getElementById("input_data_inicio").value;
+    const dataFim = document.getElementById("input_data_fim").value;
+
+    if (dataInicio == "" || dataFim == "") {
+      return;
+    }
+
+    window.location.href = `./pagina-concessionaria.html?idConcessionaria=${fkConcessionaria}&dataInicio=${dataInicio}&dataFim=${dataFim}`;
+  }
+
+  function onChangeSelectedFilter() {
+    const selectedFilter = document.getElementById("escolherFiltro").value;
+
+    console.log(selectedFilter);
+
+    const rodoviasFiltradas = todasRodovia.filter((rodovia) => {
+      if (input_nome.value != "") {
+        return (
+          rodovia.nomeRodovia
+            .toLowerCase()
+            .includes(input_nome.value.toLowerCase()) &&
+          rodovia.quantidade >= parseInt(selectedFilter)
+        );
+      }
+
+      return rodovia.quantidade >= parseInt(selectedFilter);
+    });
+
+    renderRodovias(rodoviasFiltradas);
+  }
+
+  function allRodovias() {
+    renderRodovias(todasRodovia);
+  }
+
   function direcionarPaginaRodovia() {
     window.location.href = "./pagina-rodovia.html";
   }
@@ -170,32 +171,95 @@
 
   const fkConcessionaria = urlParams.get("idConcessionaria");
 
-  if (fkConcessionaria == undefined || fkConcessionaria == null) {
-    window.location.href = "./pagina-concessionaria.html?idConcessionaria=1";
+  const dataInicio = urlParams.get("dataInicio");
+  const dataFim = urlParams.get("dataFim");
+
+  if (
+    fkConcessionaria == undefined ||
+    fkConcessionaria == null ||
+    dataInicio == null ||
+    dataInicio == undefined ||
+    dataFim == null ||
+    dataFim == undefined
+  ) {
+    window.location.href =
+      "./pagina-concessionaria.html?idConcessionaria=1&dataInicio=2024-01-01&dataFim=2024-12-31";
+  }
+
+  input_data_inicio.value = dataInicio;
+  input_data_fim.value = dataFim;
+
+  select_filtro_ano.value = dataInicio.split("-")[0];
+
+  const todasRodovia = [];
+
+  function renderRodovias(rodovias) {
+    const rodoviasBody = document.getElementById("rodovias-tbody");
+    let text = "";
+
+    const filterBody = document.getElementById("escolherFiltro");
+
+    if (rodovias.length === todasRodovia.length) {
+    }
+
+    rodovias.forEach((rodovia) => {
+      text += `
+          <tr class="tr_rodovia" onclick="direcionarPaginaRodovia()">
+              <td>${rodovia.nomeRodovia}</td>
+              <td>${rodovia.quantidade}</td>
+          </tr>
+      `;
+    });
+
+    rodoviasBody.innerHTML = text;
   }
 
   fetch(
-    "/concessionaria/rodoviaComMaisAcidente?fkConcessionaria=" +
-    fkConcessionaria
+    `/concessionaria/rodoviaComMaisAcidente?fkConcessionaria=${fkConcessionaria}&dataInicio=${dataInicio}&dataFim=${dataFim}`
   ).then((response) => {
     response.json().then((data) => {
-      const rodovias = document.getElementById("rodovias-tbody");
-      let text = "";
+      todasRodovia.push(...data);
 
-      data.forEach((rodovia) => {
-        text += `
-                            <tr class="tr_rodovia" onclick="direcionarPaginaRodovia()">
-                                <td>${rodovia.nomeRodovia}</td>
-                                <td>${rodovia.quantidade}</td>
-                            </tr>
-                        `;
-      });
-
-      rodovias.innerHTML = text;
+      renderRodovias(data);
 
       const ctx = document.getElementById("myChart");
       const labels = data.map((rodovia) => rodovia.nomeRodovia);
       const quantidade = data.map((rodovia) => rodovia.quantidade);
+
+      const maiorQuantidade = Math.max(...quantidade);
+
+      if (maiorQuantidade > 50) {
+        escolherFiltro.innerHTML += `
+       <option value="50" onclick="onChangeSelectedFilter()">
+              Rodovias com 50+ acidentes
+            </option>
+        `;
+      }
+
+      if (maiorQuantidade > 100) {
+        escolherFiltro.innerHTML += `
+       <option value="100" onclick="onChangeSelectedFilter()">
+              Rodovias com 100+ acidentes
+            </option>
+        `;
+      }
+
+      if (maiorQuantidade > 500) {
+        escolherFiltro.innerHTML += `
+       <option value="500" onclick="onChangeSelectedFilter()">
+              Rodovias com 500+ acidentes
+            </option>
+        `;
+      }
+
+      if (maiorQuantidade > 1000) {
+        escolherFiltro.innerHTML += `
+       <option value="1000" onclick="onChangeSelectedFilter()">
+              Rodovias com 1000+ acidentes
+            </option>
+        `;
+      }
+
       new Chart(ctx, {
         type: "bar",
         data: {
@@ -237,10 +301,123 @@
   });
 
   fetch(
+    `/concessionaria/acidentePorMes?fkConcessionaria=${fkConcessionaria}&dataInicio=${dataInicio}&dataFim=${dataFim}`
+  ).then((response) => {
+    response.json().then((anoAtual) => {
+      let dataInicioAnoAnterior = new Date(dataInicio);
+      dataInicioAnoAnterior.setFullYear(
+        dataInicioAnoAnterior.getFullYear() - 1
+      );
+      dataInicioAnoAnterior = dataInicioAnoAnterior.toISOString().split("T")[0];
+
+      let dataFimAnoAnterior = new Date(dataFim);
+      dataFimAnoAnterior.setFullYear(dataFimAnoAnterior.getFullYear() - 1);
+      dataFimAnoAnterior = dataFimAnoAnterior.toISOString().split("T")[0];
+
+      fetch(
+        `/concessionaria/acidentePorMes?fkConcessionaria=${fkConcessionaria}&dataInicio=${dataInicioAnoAnterior}&dataFim=${dataFimAnoAnterior}`
+      ).then((response) => {
+        response.json().then((anoAAnterior) => {
+          renderizarAcidentesDoAnoAnterior(anoAtual, anoAAnterior);
+        });
+      });
+    });
+  });
+
+  function renderizarAcidentesDoAnoAnterior(atual, anoAnterior) {
+    const urlParams = new URLSearchParams(window.location.search);
+
+    const dataInicio = new Date(urlParams.get("dataInicio"));
+    dataInicio.setDate(dataInicio.getDate() + 1);
+
+    const dataFim = new Date(urlParams.get("dataFim"));
+    dataFim.setDate(dataFim.getDate() + 1);
+
+    const meses = [];
+    const mesInicio = dataInicio.getMonth();
+    const mesFim = dataFim.getMonth();
+
+    const mesesNoAno = [
+      "Janeiro",
+      "Fevereiro",
+      "Março",
+      "Abril",
+      "Maio",
+      "Junho",
+      "Julho",
+      "Agosto",
+      "Setembro",
+      "Outubro",
+      "Novembro",
+      "Dezembro",
+    ];
+
+    for (let i = mesInicio; i <= mesFim; i++) {
+      meses.push(mesesNoAno[i]);
+    }
+
+    console.log(atual, anoAnterior);
+    // 2. DADOS: Duas séries, uma para cada ano
+    const dadosAcidentes = {
+      labels: meses,
+      datasets: [
+        {
+          label: `Ano passado (${dataInicio.getFullYear() - 1})`, // Linha 1: Período de 5 meses do ano passado
+          data: anoAnterior.map((item) => item.quantidade), // Valores de acidentes para os 5 meses
+          borderColor: "rgb(54, 162, 235)", // Cor Azul
+          backgroundColor: "rgba(54, 162, 235, 0.5)",
+          tension: 0.3,
+          fill: false,
+        },
+        {
+          label: `Ano Atual (${dataInicio.getFullYear()})`, // Linha 2: Período de 5 meses do ano atual
+          data: atual.map((item) => item.quantidade), // Valores de acidentes para os mesmos 5 meses
+          borderColor: "rgb(255, 99, 132)", // Cor Vermelha
+          backgroundColor: "rgba(255, 99, 132, 0.5)",
+          tension: 0.3,
+          fill: false,
+        },
+      ],
+    };
+
+    console.log(dataInicio, dataFim);
+    // 3. CONFIGURAÇÃO DO GRÁFICO
+    const configuracao = {
+      type: "line",
+      data: dadosAcidentes,
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        layout: { padding: 10 },
+        plugins: {
+          legend: {
+            position: "top", // Legenda no topo
+          },
+          title: {
+            display: true,
+            text: `Acidentes de ${
+              dataInicio.getMonth() + 1
+            }/${dataInicio.getFullYear()} a ${
+              dataFim.getMonth() + 1
+            }/${dataFim.getFullYear()}`,
+            font: {
+              size: 20,
+              weight: "bold",
+            },
+            color: "#010358",
+          },
+        },
+      },
+    };
+
+    const ctx4 = document.getElementById("myChart4");
+    new Chart(ctx4, configuracao);
+  }
+
+  fetch(
     "/concessionaria/gravidadeDasVitimas?fkConcessionaria=" + fkConcessionaria
   ).then((response) => {
     response.json().then((data) => {
-      console.log(data);
       const ctx2 = document.getElementById("myChart2");
 
       const { quantidadeFatal, quantidadeGrave, quantidadeLeve } = data[0];
@@ -302,6 +479,20 @@
         tipoPista.push(tipo.tipoPista);
       });
 
+      const MIN = 2;
+
+      if (tipoPista.length > MIN) {
+        let somaOutros = 0;
+        for (let i = MIN; i < quantidade.length; i++) {
+          somaOutros += quantidade[i];
+        }
+        quantidade.splice(MIN, quantidade.length - MIN);
+        quantidade.push(somaOutros);
+
+        tipoPista.splice(MIN, tipoPista.length - MIN);
+        tipoPista.push("Outros");
+      }
+
       const ctx3 = document.getElementById("myChart3");
 
       const meuGraficoPizza3 = new Chart(ctx3, {
@@ -348,63 +539,4 @@
       });
     });
   });
-
-  const meses = [
-    "Mês 1 (Jan)",
-    "Mês 2 (Fev)",
-    "Mês 3 (Mar)",
-    "Mês 4 (Abr)",
-    "Mês 5 (Mai)",
-  ];
-
-  // 2. DADOS: Duas séries, uma para cada ano
-  const dadosAcidentes = {
-    labels: meses,
-    datasets: [
-      {
-        label: "Ano Passado (2024)", // Linha 1: Período de 5 meses do ano passado
-        data: [10, 15, 12, 18, 20], // Valores de acidentes para os 5 meses
-        borderColor: "rgb(54, 162, 235)", // Cor Azul
-        backgroundColor: "rgba(54, 162, 235, 0.5)",
-        tension: 0.3,
-        fill: false,
-      },
-      {
-        label: "Ano Atual (2025)", // Linha 2: Período de 5 meses do ano atual
-        data: [13, 17, 14, 21, 25], // Valores de acidentes para os mesmos 5 meses
-        borderColor: "rgb(255, 99, 132)", // Cor Vermelha
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
-        tension: 0.3,
-        fill: false,
-      },
-    ],
-  };
-
-  // 3. CONFIGURAÇÃO DO GRÁFICO
-  const configuracao = {
-    type: "line",
-    data: dadosAcidentes,
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      layout: { padding: 10 },
-      plugins: {
-        legend: {
-          position: "top", // Legenda no topo
-        },
-        title: {
-          display: true,
-          text: "Acidentes de 05/2024 a 10/2025",
-          font: {
-            size: 20,
-            weight: "bold",
-          },
-          color: "#010358",
-        },
-      },
-    },
-  };
-
-  const ctx4 = document.getElementById("myChart4");
-  new Chart(ctx4, configuracao);
 </script>
