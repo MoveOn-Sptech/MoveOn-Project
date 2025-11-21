@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Perfil Operacional</title>
+
+    <link rel="stylesheet" href="css/perfil.css" />
+    <link rel="icon" href="assets/icon/volante_MoveOn.png" />
+</head>
+
+<body>
+
+    <nav>
+
+        <span class="logo_nav">
+            <a href="perfil.html"><img src="../assets/logo_branca.png" alt=""></a>
+        </span>
+        <span class="user_icon">
+            <a href="perfil.html"><img src="assets/icon/user-dash.png" alt=""></a>
+        </span>
+
+    </nav>
+
+    <section class="geral_main">
+
+        <div class="nome_usuario">
+            <h1>Mariana Albuquerque</h1>
+            <h3>Perfil Estratégico</h3>
+        </div>
+
+        <div class="card_rodovias">
+            <h1>Informações pessoais</h1>
+
+            <p class="info"><b>Cargo: </b>Diretora de Planejamento</p>
+            <p class="info"><b>Email: </b>albuquerquemari@artesp.com.br</p>
+
+            <p class="acessar">Acessar:</p>
+
+            <div class="links_acesso">
+                <a class="link" href="dashboard/visao-geral-rodovia.html"><button>Rodovias</button></a>
+                <a class="link" href="dashboard/visao-geral-concessionaria.html"><button>Concessionárias</button></a>
+            </div>
+        </div>
+
+        <div class="action_buttons_container">
+            <button class="action_btn" onclick="abrirModal('modal_editar_info')">Editar Informações</button>
+            <button class="action_btn" onclick="abrirModal('modal_lista_usuarios')">Ver usuários</button>
+            <button class="action_btn" onclick="abrirModal('modal_pesquisa_rodovia')">Editar rodovia</button>
+        </div>
+
+    </section>
+
+    <section id="modal_editar_info" class="tela_modal">
+        <div class="card_modal modal_large">
+
+            <img onclick="fecharModal('modal_editar_info')" class="x" src="assets/icon/X.png" alt="">
+
+            <h1>Editar informações</h1>
+
+            <div class="form_grid grid_2_col">
+                <div class="input_group">
+                    <label>Nome atual</label>
+                    <input type="text" value="Mariana Albuquerque">
+                </div>
+                <div class="input_group">
+                    <label>Novo nome</label>
+                    <input type="text">
+                </div>
+
+                <div class="input_group">
+                    <label>Cargo atual</label>
+                    <input type="text" value="Diretora de planejamento">
+                </div>
+                <div class="input_group">
+                    <label>Novo cargo</label>
+                    <input type="text">
+                </div>
+
+                <div class="input_group">
+                    <label>Email atual</label>
+                    <input type="text" value="albuquerquemari@artesp.com.br">
+                </div>
+                <div class="input_group">
+                    <label>Novo email</label>
+                    <input type="text">
+                </div>
+            </div>
+
+            <div class="modal_buttons">
+                <button class="btn_save" onclick="fecharModal('modal_editar_info')">Salvar</button>
+                <button class="btn_cancel" onclick="fecharModal('modal_editar_info')">Cancelar</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="modal_lista_usuarios" class="tela_modal">
+        <div class="card_modal modal_large">
+            <div class="modal_header_controls">
+                <img onclick="fecharModal('modal_lista_usuarios')" class="x" src="assets/icon/X.png" alt="">
+            </div>
+
+            <h1>Lista de usuários</h1>
+
+            <div class="list_header">
+                <span class="col_nome">Nome</span>
+                <span class="col_cargo">Cargo</span>
+            </div>
+
+            <div class="user_list">
+                <div class="user_item">
+                    <div class="user_info">
+                        <div class="user_name">Fernando Oliveira</div>
+                        <div class="separator"></div>
+                        <div class="user_role">Técnico de monitoramento</div>
+                    </div>
+                    <div class="user_actions">
+                        <img onclick="abrirEditarUsuario('Fernando Oliveira')" class="icon_action"
+                            src="assets/icon/lapis.png" alt="Editar">
+                        <img onclick="abrirConfirmarDelecao()" class="icon_action" src="assets/icon/lixeira.png"
+                            alt="Excluir">
+                    </div>
+                </div>
+
+                <div class="user_item">
+                    <div class="user_info">
+                        <div class="user_name">Gabriel Martins</div>
+                        <div class="separator"></div>
+                        <div class="user_role">Técnico de monitoramento</div>
+                    </div>
+                    <div class="user_actions">
+                        <img onclick="abrirEditarUsuario('Gabriel Martins')" class="icon_action"
+                            src="assets/icon/lapis.png" alt="Editar">
+                        <img onclick="abrirConfirmarDelecao()" class="icon_action" src="assets/icon/lixeira.png"
+                            alt="Excluir">
+                    </div>
+                </div>
+
+                <div class="user_item">
+                    <div class="user_info">
+                        <div class="user_name">Patrícia Fernandes</div>
+                        <div class="separator"></div>
+                        <div class="user_role">Técnico de monitoramento</div>
+                    </div>
+                    <div class="user_actions">
+                        <img onclick="abrirEditarUsuario('Patrícia Fernandes')" class="icon_action"
+                            src="assets/icon/lapis.png" alt="Editar">
+                        <img onclick="abrirConfirmarDelecao()" class="icon_action" src="assets/icon/lixeira.png"
+                            alt="Excluir">
+                    </div>
+                </div>
+
+                <div class="user_item">
+                    <div class="user_info">
+                        <div class="user_name">Luiza Bittencourt</div>
+                        <div class="separator"></div>
+                        <div class="user_role">Técnico de monitoramento</div>
+                    </div>
+                    <div class="user_actions">
+                        <img onclick="abrirEditarUsuario('Luiza Bittencourt')" class="icon_action"
+                            src="assets/icon/lapis.png" alt="Editar">
+                        <img onclick="abrirConfirmarDelecao()" class="icon_action" src="assets/icon/lixeira.png"
+                            alt="Excluir">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="modal_editar_usuario_unico" class="tela_modal" style="z-index: 1100;">
+        <div class="card_modal modal_large">
+            <div class="close_icon" onclick="fecharModal('modal_editar_usuario_unico')"><i
+                    class="fa-solid fa-xmark"></i></div>
+
+            <h1>Editar usuário</h1>
+
+            <div class="form_grid grid_2_col">
+                <div class="input_group">
+                    <label>Nome</label>
+                    <input type="text" id="input_nome_user_edit" readonly
+                        style="background-color: rgba(255,255,255,0.8); color: #010358; font-weight: bold;">
+                </div>
+                <div class="input_group">
+                    <label>Cargo</label>
+                    <input type="text" value="Técnico de monitoramento" readonly
+                        style="background-color: rgba(255,255,255,0.8); color: #010358;">
+                </div>
+
+                <div class="input_group">
+                    <label>Alterar cargo</label>
+                    <input type="text">
+                </div>
+                <div class="input_group">
+                    <label>Alterar email</label>
+                    <input type="text">
+                </div>
+            </div>
+
+            <div class="modal_buttons">
+                <button class="btn_save" onclick="fecharModal('modal_editar_usuario_unico')">Salvar</button>
+                <button class="btn_cancel" onclick="fecharModal('modal_editar_usuario_unico')">Cancelar</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="modal_confirmar_delecao" class="tela_modal" style="z-index: 1200;">
+        <div class="card_modal modal_small">
+            <h2>Deseja remover o usuário?</h2>
+            <div class="modal_buttons" style="margin-top: 20px;">
+                <button class="btn_save" onclick="fecharModal('modal_confirmar_delecao')">Confirmar</button>
+                <button class="btn_cancel" onclick="fecharModal('modal_confirmar_delecao')">Cancelar</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="modal_pesquisa_rodovia" class="tela_modal">
+        <div class="card_modal modal_medium">
+            <div class="close_icon" onclick="fecharModal('modal_pesquisa_rodovia')"><i class="fa-solid fa-xmark"></i>
+            </div>
+
+            <h1>Editar rodovia</h1>
+
+            <div class="form_grid grid_1_col">
+                <div class="input_group">
+                    <label style="text-align: center;">Pesquisar rodovia</label>
+                    <input type="text" placeholder="Ex: Anhanguera" id="input_busca_rodovia">
+                </div>
+            </div>
+
+            <div class="modal_buttons">
+                <button class="btn_save" onclick="avancarParaDadosRodovia()">Pesquisar</button>
+                <button class="btn_cancel" onclick="fecharModal('modal_pesquisa_rodovia')">Cancelar</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="modal_dados_rodovia" class="tela_modal">
+        <div class="card_modal modal_large">
+            <div class="close_icon" onclick="fecharModal('modal_dados_rodovia')"><i class="fa-solid fa-xmark"></i></div>
+
+            <h1>Nome da rodovia</h1>
+
+            <div class="form_grid grid_2_col">
+                <div class="input_group">
+                    <label>Denominação</label>
+                    <input type="text" value="ANHANGUERA">
+                </div>
+                <div class="input_group">
+                    <label>Concessionária</label>
+                    <input type="text" value="ANHANGUERA">
+                </div>
+
+                <div class="input_group">
+                    <label>Regional ADM</label>
+                    <input type="text" value="Regional">
+                </div>
+                <div class="input_group">
+                    <label>Regional DER</label>
+                    <input type="text" value="Campinas">
+                </div>
+            </div>
+
+            <div class="modal_buttons">
+                <button class="btn_save" onclick="fecharModal('modal_dados_rodovia')">Confirmar</button>
+                <button class="btn_cancel" onclick="fecharModal('modal_dados_rodovia')">Cancelar</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="modal_confirmar_delecao" class="tela_modal">
+    <div class="card_modal modal_small centered_content">
+        <h2 class="modal_title">Deseja remover o usuário?</h2>
+        
+        <div class="modal_buttons">
+            <button class="btn_modal btn_primary" onclick="alert('Usuário removido!')">Confirmar</button>
+            
+            <button class="btn_modal btn_secondary" onclick="fecharModal('modal_confirmar_delecao')">Cancelar</button>
+        </div>
+    </div>
+    
+</section>
+
+    <script>
+        function abrirModal(id) {
+            const modal = document.getElementById(id);
+            modal.style.display = "flex";
+            modal.classList.remove("fechando");
+        }
+
+        function fecharModal(id) {
+            const modal = document.getElementById(id);
+            modal.classList.add("fechando");
+            setTimeout(() => {
+                modal.style.display = "none";
+                modal.classList.remove("fechando");
+            }, 300);
+        }
+
+        function abrirEditarUsuario(nome) {
+            document.getElementById('input_nome_user_edit').value = nome;
+            abrirModal('modal_editar_usuario_unico');
+        }
+
+        function abrirConfirmarDelecao() {
+            abrirModal('modal_confirmar_delecao');
+        }
+
+        function avancarParaDadosRodovia() {
+            fecharModal('modal_pesquisa_rodovia');
+
+            setTimeout(() => {
+                abrirModal('modal_dados_rodovia');
+            }, 300);
+        }
+
+        window.onclick = function (event) {
+            if (event.target.classList.contains('tela_modal')) {
+                fecharModal(event.target.id);
+            }
+        }
+    </script>
+</body>
+
+</html>

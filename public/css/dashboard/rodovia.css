@@ -54,16 +54,9 @@ nav .user_name {
     font-size: 150%;
 }
 
-nav .page_link {
-    width: 10%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 120%;
-}
-
 nav .user_icon {
+    position: absolute;
+    right: 0;
     width: 10%;
     height: 100%;
     display: flex;
