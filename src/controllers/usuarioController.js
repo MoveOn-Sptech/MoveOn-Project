@@ -20,14 +20,16 @@ function autenticar(req, res) {
                         res.status(403).json({ message: "Email e/ou senha inválido(s)" });
                     } else {
                         var cargo = resultadoAutenticar[0].cargo
+                        var emailBd = resultadoAutenticar[0].email
+                        var nomeBd = resultadoAutenticar[0].nome
                         res.status(200).json(
                             {
+                                emailUsuario: emailBd,
+                                nomeUsuario: nomeBd,
                                 cargoUsuario: cargo
                             }
                         );
                     }
-
-
 
                 }
             ).catch(
@@ -39,6 +41,49 @@ function autenticar(req, res) {
             );
     }
 
+}
+
+function listarUsuarios(req, res) {
+
+    var cargos = [];
+    var emails = [];
+    var nomes = [];
+
+    usuarioModel.listarUsuarios()
+        .then(
+            function (resultadoAutenticar) {
+                console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
+                console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`);
+
+                if (resultadoAutenticar.length == 0) {
+                    res.status(403).json({ message: "Email e/ou senha inválido(s)" });
+                } else {
+                   
+                    for (let i = 0; i < resultadoAutenticar.length; i++) {
+                        
+                        cargos[i] = resultadoAutenticar[i].cargo;
+                        emails[i] = resultadoAutenticar[i].email;
+                        nomes[i] = resultadoAutenticar[i].nome;
+
+                    }
+                    
+                    res.status(200).json(
+                        {
+                            cargo: cargos,
+                            nome: nomes,
+                            email: emails
+                        }
+                    );
+                }
+
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
 }
 
 function cadastrar(req, res) {
@@ -69,10 +114,10 @@ function cadastrar(req, res) {
                 usuarioModel.cadastrar(nome, email, senha, cargo)
                     .then(
                         function (resultado) {
-                           
+
                             // salve salve aqui eh ponto de registro do log
-                           const logMsg = `Usuário cadastrado. ID: ${resultado.insertId || 'ID indisponível'}, Nome: ${nome}, Email: ${email}`;
-                           usuarioModel.registrarLog(logMsg, 'INFO');
+                            const logMsg = `Usuário cadastrado. ID: ${resultado.insertId || 'ID indisponível'}, Nome: ${nome}, Email: ${email}`;
+                            usuarioModel.registrarLog(logMsg, 'INFO');
                             // ----------------------------------------------------------------
                             res.json(resultado);
                         }
@@ -97,5 +142,6 @@ function cadastrar(req, res) {
 
 module.exports = {
     autenticar,
-    cadastrar
+    cadastrar,
+    listarUsuarios
 }

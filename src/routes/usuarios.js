@@ -12,4 +12,8 @@ router.post("/autenticar", function (req, res) {
     usuarioController.autenticar(req, res);
 });
 
+router.post("/listarUsuarios", function (req, res) {
+    usuarioController.listarUsuarios(req, res);
+});
+
 module.exports = router;

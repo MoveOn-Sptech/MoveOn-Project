@@ -109,6 +109,13 @@
               if (data.cargoUsuario == "Operacional") {
                 window.location.href = "/dashboard/visao-geral-rodovia.html";
               }
+
+              console.log(data);
+
+              sessionStorage.setItem('nomeUsuario', data.nomeUsuario);
+              sessionStorage.setItem('emailUsuario', data.emailUsuario);
+              sessionStorage.setItem('cargoUsuario', data.cargoUsuario);
+
             })
 
           } else {

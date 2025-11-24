@@ -1,122 +1,225 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard: Visão geral concessionárias</title>
-    <link
-      rel="stylesheet"
-      href="../css/dashboard/visao_geral_concessionaria.css"
-    />
-    <link rel="icon" href="../imagens/logo_alternativa_branca.png" />
-  </head>
 
-  <body>
-    <nav>
-      <span class="logo_nav">
-        <a href="./visao-geral-concessionaria.html"
-          ><img src="../assets/logo_branca.png" alt=""
-        /></a>
-      </span>
-      <span class="user_name">
-        <p>Monitoramento estratégico - ARTESP</p>
-      </span>
-      <span class="page_link">
-        <p><u>Dashboard</u></p>
-      </span>
-      <span class="user_icon">
-        <img href="../perfil.html" src="../assets/icon/user-dash.png" alt="" />
-      </span>
-    </nav>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard: Visão geral concessionárias</title>
+  <link rel="stylesheet" href="../css/dashboard/visao_geral_concessionaria.css" />
+  <link rel="icon" href="../imagens/logo_alternativa_branca.png" />
+</head>
 
-    <h1 class="titulo_dashboard">Visão geral</h1>
+<body>
+  <nav>
+    <span class="logo_nav">
+      <a href="./visao-geral-concessionaria.html"><img src="../assets/logo_branca.png" alt="" /></a>
+    </span>
+    <span class="user_name">
+      <p>Monitoramento estratégico - ARTESP</p>
+    </span>
+    <span class="page_link">
+      <p><u>Dashboard</u></p>
+    </span>
+    <span class="user_icon">
+      <img href="../perfil.html" src="../assets/icon/user-dash.png" alt="" />
+    </span>
+  </nav>
 
-    <section class="section_principal">
-      <div class="div_container_concessionarias">
-        <h2>Concessionárias com mais acidentes</h2>
+  <h1 class="titulo_dashboard">Visão geral</h1>
 
-        <div class="div_pesquisar_concessionarias">
-          <p>Pesquisar concessionária:</p>
-          <input type="text" placeholder="Digite o nome da concessionária" />
-        </div>
+  <section class="section_principal">
+    <div class="div_container_concessionarias">
+      <h2>Concessionárias com mais acidentes</h2>
 
-        <div class="div_filtrar">
-          <p>Aplicar um filtro:</p>
-          <select name="escolherFiltro" id="escolherFiltro">
-            <option value="#">Escolher filtro</option>
-            <option value="50+">Concessionárias com 50+ acidentes</option>
-            <option value="100+">Concessionárias com 100+ acidentes</option>
-            <option value="500+">Concessionárias com 500+ acidentes</option>
-            <option value="1000+">Concessionárias com 1000+ acidentes</option>
-            <option value="norte">Concessionárias na região norte</option>
-            <option value="sul">Concessionárias na região sul</option>
-            <option value="leste">Concessionárias na região leste</option>
-            <option value="oeste">Concessionárias na região oeste</option>
-          </select>
-        </div>
+      <div class="div_pesquisar_concessionarias">
+        <p>Pesquisar concessionária:</p>
+        <input type="text" placeholder="Digite o nome da concessionária" id="input_nomeConcessionaria"
+          onkeydown="filtrarConcessionarias()" onkeyup="filtrarConcessionarias()" />
+      </div>
 
-        <table class="tabela_concessionarias">
-          <thead>
-            <tr>
-              <th>Nome</th>
-              <th>Aumento</th>
-            </tr>
-          </thead>
+      <div class="div_filtrar">
+        <p>Aplicar um filtro:</p>
+        <select name="escolherFiltro" id="escolherFiltro" onchange="filtrarConcessionarias()">
+          <option value="-9999999">Todas</option>
+          <option value="20">Porcentagem maior que 20%</option>
+          <option value="40">Porcentagem maior que 40%</option>
+          <option value="60">Porcentagem maior que 60%</option>
+          <option value="80">Porcentagem maior que 80%</option>
+        </select>
+      </div>
 
-          <tbody id="tbody">
-            <!-- <tr class="negativo tr_concessionaria" onclick="direcionarPaginaConcessionaria(${data.idConcessionaria[i]})">
+      <table class="tabela_concessionarias">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Aumento</th>
+          </tr>
+        </thead>
+
+        <tbody id="tbody">
+          <!-- <tr class="negativo tr_concessionaria" onclick="direcionarPaginaConcessionaria(${data.idConcessionaria[i]})">
                         <td>COLINAS</td>
                         <td>+10%</td>
                     </tr>
 -->
-          </tbody>
-        </table>
-      </div>
+        </tbody>
+      </table>
+    </div>
 
-      <div class="div_container_graficos">
-        <span class="filter">
-          <p class="filtro">Filtro</p>
-          <p>Selecione o ano:</p>
-          <select name="filtro_ano" id="filtro_ano">
-            <option value="2025">2025</option>
-            <option value="2025">2024</option>
-            <option value="2025">2023</option>
-            <option value="2025">2022</option>
-            <option value="2025">2021</option>
-          </select>
-          <p>selecione um intervalo:</p>
-          <input type="date" />
-          <p>até</p>
-          <input type="date" />
-        </span>
+    <div class="div_container_graficos">
+      <span class="filter">
+        <p class="filtro">Filtro</p>
+        <p>Selecione o ano:</p>
+        <select name="filtro_ano" id="filtro_ano">
+          <option value="2025">2025</option>
+          <option value="2025">2024</option>
+          <option value="2025">2023</option>
+          <option value="2025">2022</option>
+          <option value="2025">2021</option>
+        </select>
+        <p>selecione um intervalo:</p>
+        <input type="date" id="input_data_inicio" onchange="onChangeFilterDate()" />
+        <p>até</p>
+        <input type="date" id="input_data_fim" onchange="onChangeFilterDate()" />
+      </span>
 
-        <div class="div_graficos">
-          <div class="div_grafico">
-            <canvas id="myChart" class="grafico"></canvas>
-          </div>
+      <div class="div_graficos">
+        <div class="div_grafico">
+          <canvas id="myChart" class="grafico"></canvas>
+        </div>
 
-          <div class="div_grafico">
-            <canvas id="myChart2" class="grafico"></canvas>
-          </div>
+        <div class="div_grafico">
+          <canvas id="myChart2" class="grafico"></canvas>
+        </div>
 
-          <div class="div_grafico">
-            <canvas id="myChart3" class="grafico"></canvas>
-          </div>
+        <div class="div_grafico">
+          <canvas id="myChart3" class="grafico"></canvas>
         </div>
       </div>
-    </section>
-  </body>
+    </div>
+  </section>
+</body>
+
 </html>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
+
+  const urlParams = new URLSearchParams(window.location.search);
+
+  const dataInicio = urlParams.get("dataInicio");
+  const dataFim = urlParams.get("dataFim");
+
+  console.log(dataInicio, dataFim);
+
+  if (
+    dataInicio == null ||
+    dataInicio == undefined ||
+    dataFim == null ||
+    dataFim == undefined
+  ) {
+    window.location.href =
+      "./visao-geral-concessionaria.html?dataInicio=2024-01-01&dataFim=2024-12-31";
+  }
+
+  function onChangeFilterDate() {
+    const dataInicio = document.getElementById("input_data_inicio").value;
+    const dataFim = document.getElementById("input_data_fim").value;
+
+    if (dataInicio == "" || dataFim == "") {
+      return;
+    }
+
+    window.location.href = `./visao-geral-concessionaria.html?dataInicio=${dataInicio}&dataFim=${dataFim}`;
+  }
+
+  input_data_inicio.value = dataInicio;
+  input_data_fim.value = dataFim;
+
   function direcionarPaginaConcessionaria(idConcessionaria) {
     window.location.href = `./pagina-concessionaria.html?idConcessionaria=${idConcessionaria}&dataInicio=2024-01-01&dataFim=2024-12-31`;
   }
-</script>
 
-<script>
+  let nomeConcessionaria = [];
+  let porcentagemDeAumento = [];
+  let idConcessionaria = [];
+
+
+  function filtrarConcessionarias() {
+
+    const nomeFiltro = document.getElementById("input_nomeConcessionaria").value;
+    const porcentagemFiltro = document.getElementById("escolherFiltro").value;
+
+    if (nomeFiltro == "" && porcentagemFiltro == "") {
+      return;
+    }
+
+    const nomeConcessionariaFiltrado = [];
+    const porcentagemDeAumentoFiltrado = [];
+    const idConcessionariaFiltrado = [];
+
+    for (let i = 0; i < nomeConcessionaria.length; i++) {
+
+      const nomeAtual = nomeConcessionaria[i];
+
+      if (nomeFiltro != "" && porcentagemFiltro != "") {
+        if (nomeAtual.toLowerCase().includes(nomeFiltro.toLowerCase()) && porcentagemDeAumento[i] > parseFloat(porcentagemFiltro)) {
+          nomeConcessionariaFiltrado.push(nomeAtual);
+          porcentagemDeAumentoFiltrado.push(porcentagemDeAumento[i]);
+          idConcessionariaFiltrado.push(idConcessionaria[i]);
+        }
+      } else if (nomeFiltro != "") {
+        if (nomeAtual.toLowerCase().includes(nomeFiltro.toLowerCase())) {
+          nomeConcessionariaFiltrado.push(nomeAtual);
+          porcentagemDeAumentoFiltrado.push(porcentagemDeAumento[i]);
+          idConcessionariaFiltrado.push(idConcessionaria[i]);
+        }
+      } else if (porcentagemFiltro != "") {
+        if (porcentagemDeAumento[i] > parseFloat(porcentagemFiltro)) {
+          nomeConcessionariaFiltrado.push(nomeAtual);
+          porcentagemDeAumentoFiltrado.push(porcentagemDeAumento[i]);
+          idConcessionariaFiltrado.push(idConcessionaria[i]);
+        }
+      }
+
+    }
+
+    renderConcessionarias(nomeConcessionariaFiltrado, porcentagemDeAumentoFiltrado, idConcessionariaFiltrado);
+
+  }
+
+  function renderConcessionarias(nomeConcessionaria, porcentagemDeAumento, idConcessionaria) {
+    var tbody = document.getElementById("tbody");
+    tbody.innerHTML = "";
+
+    for (let i = 0; i < nomeConcessionaria.length; i++) {
+      if (porcentagemDeAumento[i] > 0) {
+        tbody.innerHTML += `
+
+          <tr class="negativo tr_concessionaria" onclick="direcionarPaginaConcessionaria(${idConcessionaria[i]})">
+            <td>${nomeConcessionaria[i]}</td>
+            <td>+${porcentagemDeAumento[i]}%</td>
+          </tr>
+
+          `
+
+          ;
+      } else {
+        tbody.innerHTML += `
+
+          <tr class="positivo tr_concessionaria" onclick="direcionarPaginaConcessionaria(${idConcessionaria[i]})">
+            <td>${nomeConcessionaria[i]}</td>
+            <td>${porcentagemDeAumento[i]}%</td>
+          </tr>
+
+          `
+
+          ;
+      }
+    }
+  }
+
   function pegarConcessionarias() {
     fetch("/visaoGeralConcessionaria/concessionarias", {
       method: "POST",
@@ -130,29 +233,11 @@
           response.json().then((data) => {
             console.log(data);
 
-            var tbody = document.getElementById("tbody");
+            renderConcessionarias(data.nomeConcessionaria, data.porcentagemDeAumento, data.idConcessionaria);
+            nomeConcessionaria = data.nomeConcessionaria;
+            porcentagemDeAumento = data.porcentagemDeAumento;
+            idConcessionaria = data.idConcessionaria;
 
-            for (let i = 0; i < data.nomeConcessionaria.length; i++) {
-              if (data.porcentagemDeAumento[i] > 0) {
-                tbody.innerHTML += `
-                            
-<tr class="negativo tr_concessionaria" onclick="direcionarPaginaConcessionaria(${data.idConcessionaria[i]})">
-                        <td>${data.nomeConcessionaria[i]}</td>
-                        <td>+${data.porcentagemDeAumento[i]}%</td>
-                    </tr>
-
-                            `;
-              } else {
-                tbody.innerHTML += `
-                            
-        <tr class="positivo tr_concessionaria" onclick="direcionarPaginaConcessionaria(${data.idConcessionaria[i]})">
-                        <td>${data.nomeConcessionaria[i]}</td>
-                        <td>${data.porcentagemDeAumento[i]}%</td>
-                    </tr>
-
-                            `;
-              }
-            }
           });
         } else {
           return response.json().then((data) => {
@@ -160,14 +245,14 @@
           });
         }
       })
-      .catch((error) => {});
+      .catch((error) => { });
   }
 
-  function pegarMunicipios() {
+  function pegarMunicipios(dataInicio, dataFim) {
     var vetorMunicipio = [];
     var vetorAcidentes = [];
 
-    fetch("/visaoGeralConcessionaria/municipios", {
+    fetch(`/visaoGeralConcessionaria/municipios?dataInicio=${dataInicio}&dataFim=${dataFim}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -256,14 +341,14 @@
           });
         }
       })
-      .catch((error) => {});
+      .catch((error) => { });
   }
 
-  function pegarRegionalDer() {
+  function pegarRegionalDer(dataInicio, dataFim) {
     var vetorRegionalDer = [];
     var vetorAcidentes = [];
 
-    fetch("/visaoGeralConcessionaria/regionalDer", {
+    fetch(`/visaoGeralConcessionaria/regionalDer?dataInicio=${dataInicio}&dataFim=${dataFim}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -352,14 +437,14 @@
           });
         }
       })
-      .catch((error) => {});
+      .catch((error) => { });
   }
 
-  function pegarRegionalAdm() {
+  function pegarRegionalAdm(dataInicio, dataFim) {
     var vetorRegionalAdm = [];
     var vetorAcidentes = [];
 
-    fetch("/visaoGeralConcessionaria/regionalAdm", {
+    fetch(`/visaoGeralConcessionaria/regionalAdm?dataInicio=${dataInicio}&dataFim=${dataFim}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -448,11 +533,12 @@
           });
         }
       })
-      .catch((error) => {});
+      .catch((error) => { });
   }
 
-  pegarMunicipios();
-  pegarRegionalDer();
-  pegarRegionalAdm();
+  pegarMunicipios(dataInicio, dataFim);
+  pegarRegionalDer(dataInicio, dataFim);
+  pegarRegionalAdm(dataInicio, dataFim);
   pegarConcessionarias();
+
 </script>

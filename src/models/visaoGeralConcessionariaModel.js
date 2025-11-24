@@ -62,7 +62,7 @@ ORDER BY
     return database.executar(instrucaoSql);
 }
 
-function municipios() {
+function municipios(dataInicio, dataFim) {
     var instrucaoSql = `
     SELECT
     R.municipioRodovia,
@@ -72,8 +72,8 @@ FROM
 INNER JOIN
     Rodovia AS R ON A.fkRodovia = R.idRodovia
 WHERE
-    A.dtHoraAcidente >= '2024-12-01 00:00:00'
-    AND A.dtHoraAcidente <= '2025-01-01 23:59:59'
+    A.dtHoraAcidente >= '${dataInicio} 00:00:00'
+    AND A.dtHoraAcidente <= '${dataFim} 23:59:59'
 GROUP BY
     R.municipioRodovia
 ORDER BY
@@ -84,7 +84,7 @@ LIMIT 10;
     return database.executar(instrucaoSql);
 }
 
-function regionalDer() {
+function regionalDer(dataInicio, dataFim) {
     var instrucaoSql = `
     SELECT
     R.regionalDer AS regionalDer,
@@ -94,8 +94,8 @@ FROM
 JOIN
     Rodovia AS R ON A.fkRodovia = R.idRodovia
 WHERE
-    A.dtHoraAcidente >= '2024-12-01 00:00:00'
-    AND A.dtHoraAcidente <= '2025-01-01 23:59:59'
+    A.dtHoraAcidente >= '${dataInicio} 00:00:00'
+    AND A.dtHoraAcidente <= '${dataFim} 23:59:59'
 GROUP BY
     regionalDer
 ORDER BY
@@ -106,7 +106,7 @@ LIMIT 10;
     return database.executar(instrucaoSql);
 }
 
-function regionalAdm() {
+function regionalAdm(dataInicio, dataFim) {
     var instrucaoSql = `
     SELECT
     R.regionalAdmSp,
@@ -116,8 +116,8 @@ FROM
 JOIN
     Acidente AS A ON R.idRodovia = A.fkRodovia
 WHERE
-    A.dtHoraAcidente >= '2024-12-01 00:00:00'
-    AND A.dtHoraAcidente <= '2025-01-01 23:59:59'
+    A.dtHoraAcidente >= '${dataInicio} 00:00:00'
+    AND A.dtHoraAcidente <= '${dataFim} 23:59:59'
 GROUP BY
     R.regionalAdmSp
 ORDER BY

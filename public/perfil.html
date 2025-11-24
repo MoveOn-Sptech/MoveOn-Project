@@ -27,15 +27,15 @@
     <section class="geral_main">
 
         <div class="nome_usuario">
-            <h1>Mariana Albuquerque</h1>
+            <h1></h1>
             <h3>Perfil Estratégico</h3>
         </div>
 
         <div class="card_rodovias">
             <h1>Informações pessoais</h1>
 
-            <p class="info"><b>Cargo: </b>Diretora de Planejamento</p>
-            <p class="info"><b>Email: </b>albuquerquemari@artesp.com.br</p>
+            <p class="info" id="info_cargo"><b>Cargo: </b></p>
+            <p class="info" id="info_email"><b>Email: </b></p>
 
             <p class="acessar">Acessar:</p>
 
@@ -110,7 +110,7 @@
             </div>
 
             <div class="user_list">
-                <div class="user_item">
+                <!-- <div class="user_item">
                     <div class="user_info">
                         <div class="user_name">Fernando Oliveira</div>
                         <div class="separator"></div>
@@ -164,7 +164,7 @@
                         <img onclick="abrirConfirmarDelecao()" class="icon_action" src="assets/icon/lixeira.png"
                             alt="Excluir">
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
@@ -270,19 +270,42 @@
     </section>
 
     <section id="modal_confirmar_delecao" class="tela_modal">
-    <div class="card_modal modal_small centered_content">
-        <h2 class="modal_title">Deseja remover o usuário?</h2>
-        
-        <div class="modal_buttons">
-            <button class="btn_modal btn_primary" onclick="alert('Usuário removido!')">Confirmar</button>
-            
-            <button class="btn_modal btn_secondary" onclick="fecharModal('modal_confirmar_delecao')">Cancelar</button>
+        <div class="card_modal modal_small centered_content">
+            <h2 class="modal_title">Deseja remover o usuário?</h2>
+
+            <div class="modal_buttons">
+                <button class="btn_modal btn_primary" onclick="alert('Usuário removido!')">Confirmar</button>
+
+                <button class="btn_modal btn_secondary"
+                    onclick="fecharModal('modal_confirmar_delecao')">Cancelar</button>
+            </div>
         </div>
-    </div>
-    
-</section>
+
+    </section>
 
     <script>
+
+        var nomes = document.querySelector(".nome_usuario");
+        var info_cargo = document.querySelector("#info_cargo");
+        var infoEmail = document.querySelector("#info_email");
+
+        var nome = sessionStorage.getItem("nomeUsuario");
+        var cargo = sessionStorage.getItem("cargoUsuario");
+        var emailBd = sessionStorage.getItem("emailUsuario");
+
+        nomes.innerHTML = `
+        <h1>${nome}</h1>
+        <h3>Perfil ${cargo}</h3>
+        `;
+
+        infoEmail.innerHTML = `
+        <p class="info" id="info_email"><b>Email: ${emailBd}</b></p>
+        `;
+
+        info_cargo.innerHTML = `
+        <p class="info" id="info_cargo"><b>Cargo: ${cargo}</b></p>
+        `;
+
         function abrirModal(id) {
             const modal = document.getElementById(id);
             modal.style.display = "flex";
@@ -320,6 +343,64 @@
                 fecharModal(event.target.id);
             }
         }
+
+        function pegarUsuarios() {
+
+            var lista = document.querySelector(".user_list");
+
+            fetch("/usuarios/listarUsuarios", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                }),
+            })
+                .then((response) => {
+                    if (response.ok) {
+
+                        response.json().then(data => {
+
+                            console.log(data);
+
+                            for (let i = 0; i < data.nome.length; i++) {
+                                
+                                lista.innerHTML += `
+                                
+                                <div class="user_item">
+                    <div class="user_info">
+                        <div class="user_name">${data.nome[i]}</div>
+                        <div class="separator"></div>
+                        <div class="user_role">${data.cargo[i]}</div>
+                    </div>
+                    <div class="user_actions">
+                        <img onclick="abrirEditarUsuario('${data.nome[i]}')" class="icon_action"
+                            src="assets/icon/lapis.png" alt="Editar">
+                        <img onclick="abrirConfirmarDelecao()" class="icon_action" src="assets/icon/lixeira.png"
+                            alt="Excluir">
+                    </div>
+                </div>
+
+                                `;
+
+                            }
+
+                        })
+
+                    } else {
+                        return response.json().then((data) => {
+                            throw new Error(data.message || "Erro ao autenticar.");
+                        });
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+                    
+                });
+        }
+
+        pegarUsuarios();
+
     </script>
 </body>
 

@@ -1,6 +1,6 @@
 var visaoGeralConcessionariaModel = require("../models/visaoGeralConcessionariaModel");
 
-function concessionarias(req, res) {
+function concessionarias(req,res) {
 
     var vetorNome = [];
     var vetorPorcentagem = [];
@@ -15,7 +15,7 @@ function concessionarias(req, res) {
                 if (resultadoAutenticar.length == 0) {
                     res.status(403).json({ message: "Erro na consulta" });
                 } else {
-                    
+
                     for (let i = 0; i < resultadoAutenticar.length; i++) {
                         vetorId[i] = resultadoAutenticar[i].idConcessionaria;
                         vetorNome[i] = resultadoAutenticar[i].nomeConcessionaria;
@@ -45,7 +45,12 @@ function municipios(req, res) {
     var municipio = ["", "", "", "", "", "", "", "", "", ""];
     var qtdAcidentes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-    visaoGeralConcessionariaModel.municipios()
+    const dataInicio = req.query.dataInicio;
+    const dataFim = req.query.dataFim;
+
+    console.log(dataInicio, dataFim);
+
+    visaoGeralConcessionariaModel.municipios(dataInicio, dataFim)
         .then(
             function (resultadoAutenticar) {
                 console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
@@ -82,7 +87,12 @@ function regionalDer(req, res) {
     var regionalDer = ["", "", "", "", "", "", "", "", "", ""];
     var qtdAcidentes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-    visaoGeralConcessionariaModel.regionalDer()
+    const dataInicio = req.query.dataInicio;
+    const dataFim = req.query.dataFim;
+
+    console.log(dataInicio, dataFim);
+
+    visaoGeralConcessionariaModel.regionalDer(dataInicio, dataFim)
         .then(
             function (resultadoAutenticar) {
                 console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
@@ -119,7 +129,12 @@ function regionalAdm(req, res) {
     var regionalAdm = ["", "", "", "", "", "", "", "", "", ""];
     var qtdAcidentes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-    visaoGeralConcessionariaModel.regionalAdm()
+    const dataInicio = req.query.dataInicio;
+    const dataFim = req.query.dataFim;
+
+    console.log(dataInicio, dataFim);
+
+    visaoGeralConcessionariaModel.regionalAdm(dataInicio, dataFim)
         .then(
             function (resultadoAutenticar) {
                 console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
