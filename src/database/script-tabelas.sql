@@ -15,3 +15,5 @@ CREATE TABLE usuario (
 	cargo VARCHAR(50) CHECK (cargo IN ('Estratégico', 'Operacional')),
     dataCadastro DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+
+

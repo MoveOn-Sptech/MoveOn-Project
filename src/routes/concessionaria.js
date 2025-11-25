@@ -14,6 +14,9 @@ router.get("/acidentePorMes", function (req, res) {
 })
 
 
+router.get("/gerar-relatorio", function (req, res) {
+    concessionariaController.gerarRelatorio(req, res);
+});
 
 router.get("/gravidadeDasVitimas", function (req, res) {
     concessionariaController.gravidadeDasVitimas(req, res);
