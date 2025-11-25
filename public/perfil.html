@@ -9,6 +9,8 @@
 
     <link rel="stylesheet" href="css/perfil.css" />
     <link rel="icon" href="assets/icon/volante_MoveOn.png" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body>
@@ -70,14 +72,14 @@
                     <input type="text">
                 </div>
 
-                <div class="input_group">
+                <!-- <div class="input_group">
                     <label>Cargo atual</label>
                     <input type="text" value="Diretora de planejamento">
                 </div>
                 <div class="input_group">
                     <label>Novo cargo</label>
                     <input type="text">
-                </div>
+                </div> -->
 
                 <div class="input_group">
                     <label>Email atual</label>
@@ -90,7 +92,7 @@
             </div>
 
             <div class="modal_buttons">
-                <button class="btn_save" onclick="fecharModal('modal_editar_info')">Salvar</button>
+                <button class="btn_save btn_salvarInfos" onclick="fecharModal('modal_editar_info')">Salvar</button>
                 <button class="btn_cancel" onclick="fecharModal('modal_editar_info')">Cancelar</button>
             </div>
         </div>
@@ -118,48 +120,6 @@
                     </div>
                     <div class="user_actions">
                         <img onclick="abrirEditarUsuario('Fernando Oliveira')" class="icon_action"
-                            src="assets/icon/lapis.png" alt="Editar">
-                        <img onclick="abrirConfirmarDelecao()" class="icon_action" src="assets/icon/lixeira.png"
-                            alt="Excluir">
-                    </div>
-                </div>
-
-                <div class="user_item">
-                    <div class="user_info">
-                        <div class="user_name">Gabriel Martins</div>
-                        <div class="separator"></div>
-                        <div class="user_role">Técnico de monitoramento</div>
-                    </div>
-                    <div class="user_actions">
-                        <img onclick="abrirEditarUsuario('Gabriel Martins')" class="icon_action"
-                            src="assets/icon/lapis.png" alt="Editar">
-                        <img onclick="abrirConfirmarDelecao()" class="icon_action" src="assets/icon/lixeira.png"
-                            alt="Excluir">
-                    </div>
-                </div>
-
-                <div class="user_item">
-                    <div class="user_info">
-                        <div class="user_name">Patrícia Fernandes</div>
-                        <div class="separator"></div>
-                        <div class="user_role">Técnico de monitoramento</div>
-                    </div>
-                    <div class="user_actions">
-                        <img onclick="abrirEditarUsuario('Patrícia Fernandes')" class="icon_action"
-                            src="assets/icon/lapis.png" alt="Editar">
-                        <img onclick="abrirConfirmarDelecao()" class="icon_action" src="assets/icon/lixeira.png"
-                            alt="Excluir">
-                    </div>
-                </div>
-
-                <div class="user_item">
-                    <div class="user_info">
-                        <div class="user_name">Luiza Bittencourt</div>
-                        <div class="separator"></div>
-                        <div class="user_role">Técnico de monitoramento</div>
-                    </div>
-                    <div class="user_actions">
-                        <img onclick="abrirEditarUsuario('Luiza Bittencourt')" class="icon_action"
                             src="assets/icon/lapis.png" alt="Editar">
                         <img onclick="abrirConfirmarDelecao()" class="icon_action" src="assets/icon/lixeira.png"
                             alt="Excluir">
@@ -199,7 +159,7 @@
             </div>
 
             <div class="modal_buttons">
-                <button class="btn_save" onclick="fecharModal('modal_editar_usuario_unico')">Salvar</button>
+                <button class="btn_save" onclick="editarInfosUnicas()">Salvar</button>
                 <button class="btn_cancel" onclick="fecharModal('modal_editar_usuario_unico')">Cancelar</button>
             </div>
         </div>
@@ -209,7 +169,7 @@
         <div class="card_modal modal_small">
             <h2>Deseja remover o usuário?</h2>
             <div class="modal_buttons" style="margin-top: 20px;">
-                <button class="btn_save" onclick="fecharModal('modal_confirmar_delecao')">Confirmar</button>
+                <button class="btn_save" onclick="deletarUsuario()">Confirmar</button>
                 <button class="btn_cancel" onclick="fecharModal('modal_confirmar_delecao')">Cancelar</button>
             </div>
         </div>
@@ -326,9 +286,69 @@
             abrirModal('modal_editar_usuario_unico');
         }
 
-        function abrirConfirmarDelecao() {
+        var idUsuario;
+        function abrirConfirmarDelecao(elementoClicado) {
             abrirModal('modal_confirmar_delecao');
+
+            const cardUsuario = elementoClicado.closest('.user_item');
+
+            // Pega o valor do atributo 'value'
+            idUsuario = cardUsuario.getAttribute('value');
+
+            console.log(idUsuario);
+
+
         }
+
+        function deletarUsuario() {
+
+            fetch("/usuarios/deletar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    idUsuarioVar: idUsuario
+                }),
+            })
+                .then((response) => {
+                    if (response.ok) {
+
+                        response.json().then((data) => {
+
+                            console.log(data);
+
+                            fecharModal();
+
+                            Swal.fire({
+                                icon: "success",
+                                title: "Sucesso",
+                                text: "Usuário deletado!",
+                            })
+
+                        })
+
+                    } else {
+                        return response.json().then((data) => {
+                            //throw new Error(data.message || "Erro ao deletar.");
+
+                            Swal.fire({
+                                icon: "error",
+                                title: "Erro",
+                                text:
+                                    "Usuário inválido!"
+                            });
+
+                        });
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+
+                });
+        }
+
+
 
         function avancarParaDadosRodovia() {
             fecharModal('modal_pesquisa_rodovia');
@@ -364,10 +384,10 @@
                             console.log(data);
 
                             for (let i = 0; i < data.nome.length; i++) {
-                                
+
                                 lista.innerHTML += `
                                 
-                                <div class="user_item">
+                                <div class="user_item" value="${data.id[i]}">
                     <div class="user_info">
                         <div class="user_name">${data.nome[i]}</div>
                         <div class="separator"></div>
@@ -376,7 +396,7 @@
                     <div class="user_actions">
                         <img onclick="abrirEditarUsuario('${data.nome[i]}')" class="icon_action"
                             src="assets/icon/lapis.png" alt="Editar">
-                        <img onclick="abrirConfirmarDelecao()" class="icon_action" src="assets/icon/lixeira.png"
+                        <img onclick="abrirConfirmarDelecao(this)" class="icon_action" src="assets/icon/lixeira.png"
                             alt="Excluir">
                     </div>
                 </div>
@@ -395,11 +415,115 @@
                 })
                 .catch((error) => {
                     console.log(error);
-                    
+
                 });
         }
 
         pegarUsuarios();
+
+        // <div class="card_modal modal_large">
+
+        //     <img onclick="fecharModal('modal_editar_info')" class="x" src="assets/icon/X.png" alt="">
+
+        //         <h1>Editar informações</h1>
+
+        //         <div class="form_grid grid_2_col">
+        //             <div class="input_group">
+        //                 <label>Nome atual</label>
+        //                 <input type="text" value="Mariana Albuquerque">
+        //             </div>
+        //             <div class="input_group">
+        //                 <label>Novo nome</label>
+        //                 <input type="text">
+        //             </div>
+
+        //         <!-- <div class="input_group">
+        //                 <label>Cargo atual</label>
+        //                 <input type="text" value="Diretora de planejamento">
+        //             </div>
+        //             <div class="input_group">
+        //                 <label>Novo cargo</label>
+        //                 <input type="text">
+        //             </div> -->
+
+        //             <div class="input_group">
+        //                 <label>Email atual</label>
+        //                 <input type="text" value="albuquerquemari@artesp.com.br">
+        //             </div>
+        //             <div class="input_group">
+        //                 <label>Novo email</label>
+        //                 <input type="text">
+        //             </div>
+        //         </div>
+
+        //         <div class="modal_buttons">
+        //             <button class="btn_save btn_salvarInfos" onclick="fecharModal('modal_editar_info')">Salvar</button>
+        //             <button class="btn_cancel" onclick="fecharModal('modal_editar_info')">Cancelar</button>
+        //         </div>
+        // </div>
+
+
+        function editarInfosUnicas() {
+
+            var valorNome = document.querySelector(".novoNomeUsuario").value;
+            var valorEmail = document.querySelector(".novoEmailUsuario").value;
+
+            var idUsuario = sessionStorage.getItem("idUsuario")
+
+            const body = { idUsuarioVar: idUsuario }
+
+            if (nomeInput.value.trim() !== "") {
+                body.nome = nomeInput.value.trim();
+            }
+
+            if (emailInput.value.trim() !== "") {
+                body.email = emailInput.value.trim();
+            }
+
+            fetch("/usuarios/editar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    body
+                }),
+            })
+                .then((response) => {
+                    if (response.ok) {
+
+                        response.json().then((data) => {
+
+                            console.log(data);
+
+                            fecharModal('modal_editar_usuario_unico')
+                            Swal.fire({
+                                icon: "success",
+                                title: "Sucesso",
+                                text: "Usuário editado!",
+                            })
+
+                        })
+
+                    } else {
+                        return response.json().then((data) => {
+
+                            Swal.fire({
+                                icon: "error",
+                                title: "Erro",
+                                text:
+                                    "Usuário inválido!"
+                            });
+
+                        });
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+
+                });
+
+        }
 
     </script>
 </body>

@@ -9,6 +9,43 @@ function autenticar(email, senha) {
     return database.executar(instrucaoSql);
 }
 
+function editar(id, email, nome) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", email, senha)
+    let campos = [];
+
+    if (email) {
+        campos.push(`email = '${email}'`);
+    }
+
+    if (nome) {
+        campos.push(`nome = '${nome}'`);
+    }
+
+    // Se nenhum campo foi enviado, não faz nada
+    if (campos.length === 0) {
+        console.log("Nenhum dado para atualizar.");
+        return;
+    }
+
+    // Montar o SQL dinamicamente
+    const instrucaoSql = `
+        UPDATE usuario 
+        SET ${campos.join(", ")}
+        WHERE id = ${id};
+    `;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function deletar(id) {
+    var instrucaoSql = `
+        DELETE FROM usuario WHERE id = ${id};
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 function listarUsuarios() {
     var instrucaoSql = `
         SELECT id, nome, email, cargo FROM usuario;
@@ -36,11 +73,11 @@ function buscarPorEmail(email) {
 }
 
 function registrarLog(descricao, tipo = 'INFO') {
-    
+
     var instrucaoSql = `INSERT INTO logs (tipo, descricao, dataCriacao) VALUES ('${tipo}', '${descricao}', NOW(6));`;
     console.log("Executando a instrução SQL de LOG: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
-    
+
 }
 
 module.exports = {
@@ -48,5 +85,7 @@ module.exports = {
     cadastrar,
     buscarPorEmail,
     registrarLog,
-    listarUsuarios
+    listarUsuarios,
+    deletar,
+    editar
 };

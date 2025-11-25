@@ -22,15 +22,100 @@ function autenticar(req, res) {
                         var cargo = resultadoAutenticar[0].cargo
                         var emailBd = resultadoAutenticar[0].email
                         var nomeBd = resultadoAutenticar[0].nome
+                        var id = resultadoAutenticar[0].id;
                         res.status(200).json(
                             {
                                 emailUsuario: emailBd,
                                 nomeUsuario: nomeBd,
-                                cargoUsuario: cargo
+                                cargoUsuario: cargo,
+                                idUsuario: id
                             }
                         );
                     }
 
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+
+}
+
+function editar(req, res) {
+    var nomeUsuario = req.body.nome;
+    var emailUsuario = req.body.email;
+    var id = req.body.idUsuarioVar;
+
+    if (email == undefined) {
+        res.status(400).send("Seu email está undefined!");
+    } else if (senha == undefined) {
+        res.status(400).send("Sua senha está indefinida!");
+    } else if (id == undefined) {
+        res.status(400).send("Seu id está indefinida!");
+    } else {
+
+        usuarioModel.editar(id, emailUsuario, nomeUsuario)
+            .then(
+                function (resultadoAutenticar) {
+                    console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
+                    console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`);
+
+                    if (resultadoAutenticar.length == 0) {
+                        res.status(403).json({ message: "Email e/ou senha inválido(s)" });
+                    } else {
+
+                        res.status(200).json(
+
+                        );
+                    }
+
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("\nHouve um erro ao editar! Erro: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+
+}
+
+function deletarUsuario(req, res) {
+    var id = req.body.idUsuarioVar;
+
+    if (id == undefined) {
+        res.status(400).send("Seu id está undefined!");
+    } else {
+
+        usuarioModel.deletar(id)
+            .then(
+                function (resultadoAutenticar) {
+                    console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
+                    console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`);
+
+                    if (resultadoAutenticar.affectedRows == 1) {
+                        var mensagem = "sucesso";
+
+                        res.status(200).json(
+                            {
+                                mensagemRetorno: mensagem
+                            }
+                        );
+
+                    } else {
+                        var mensagem = "fracasso";
+
+                        res.status(400).json(
+                            {
+                                mensagemRetorno: mensagem
+                            }
+                        );
+                    }
                 }
             ).catch(
                 function (erro) {
@@ -48,6 +133,7 @@ function listarUsuarios(req, res) {
     var cargos = [];
     var emails = [];
     var nomes = [];
+    var ids = [];
 
     usuarioModel.listarUsuarios()
         .then(
@@ -58,20 +144,22 @@ function listarUsuarios(req, res) {
                 if (resultadoAutenticar.length == 0) {
                     res.status(403).json({ message: "Email e/ou senha inválido(s)" });
                 } else {
-                   
+
                     for (let i = 0; i < resultadoAutenticar.length; i++) {
-                        
+
                         cargos[i] = resultadoAutenticar[i].cargo;
                         emails[i] = resultadoAutenticar[i].email;
                         nomes[i] = resultadoAutenticar[i].nome;
+                        ids[i] = resultadoAutenticar[i].id;
 
                     }
-                    
+
                     res.status(200).json(
                         {
                             cargo: cargos,
                             nome: nomes,
-                            email: emails
+                            email: emails,
+                            id: ids
                         }
                     );
                 }
@@ -143,5 +231,7 @@ function cadastrar(req, res) {
 module.exports = {
     autenticar,
     cadastrar,
-    listarUsuarios
+    listarUsuarios,
+    deletarUsuario,
+    editar
 }
