@@ -1,4 +1,7 @@
 var rodoviaModel = require("../models/rodoviaModel");
+var notificacaoModel = require("../models/notificacaoModel");
+var usuarioModel = require("../models/usuarioModel");
+
 
 var slack = require("./utils/slack");
 
@@ -120,8 +123,8 @@ async function gerarRelatorio(req, res) {
 
     const variacaoPercentual = (((totalAcidentes - totalAcidentes) / totalAcidentes) * 100).toFixed(2);
 
-    const teamplate = `*
-Relatório de Acidentes - MoveOn - Concessionária ${concessionaria}*
+    const titulo = `Relatório de Acidentes - MoveOn - Concessionária ${concessionaria}`;
+    const teamplate = `*${titulo}*
 _Data: ${dataInicio} Até ${dataFim} (${diferencaMeses} meses)_
 _Responsável: ${responsavel}_
 
@@ -165,6 +168,13 @@ _Enviado por MoveOn_
     const email = req.query.email;
     console.log(`Enviando relatório para o email: ${email}`);
     slack.sendDirectMessage(email, teamplate);
+    notificacaoModel.registrar(
+        titulo,
+        teamplate,
+        req.query.fkUsuario,
+        fkConcessionaria
+    );
+    usuarioModel.registrarLog(`Relatório gerado pela concessionária ${concessionaria} pelo usuário ${responsavel}`);
 
     res.status(200).json({ message: "Relatório gerado com sucesso!" });
 }

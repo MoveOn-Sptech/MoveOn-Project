@@ -6,6 +6,8 @@
     <title>Dashboard: Concessionária</title>
     <link rel="stylesheet" href="../css/dashboard/concessionaria.css" />
     <link rel="icon" href="../imagens/logo_alternativa_branca.png" />
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
 
   <body>
@@ -147,10 +149,18 @@
         input_data_inicio.value
       }&dataFim=${input_data_fim.value}&concessionaria=${
         span_nome_concessionaria.innerText
-      }&responsavel=${sessionStorage.getItem("nomeUsuario")}`
+      }&responsavel=${sessionStorage.getItem(
+        "nomeUsuario"
+      )}&fkUsuario=${sessionStorage.getItem("idUsuario")}`
     ).then((response) => {
       response.json().then((data) => {
         console.log(data);
+
+        Swal.fire({
+          icon: "success",
+          title: "Relatório gerado com sucesso!",
+          text: "Verifique seu email no slack.",
+        });
       });
     });
   }
