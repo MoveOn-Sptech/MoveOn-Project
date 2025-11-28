@@ -88,56 +88,53 @@ function acidentePorMes(req, res) {
 }
 
 async function gerarRelatorio(req, res) {
-    const dataInicio = req.query.dataInicio;
-    const dataFim = req.query.dataFim;
+    const { dataInicio, dataFim, responsavel, concessionaria } = req.query;
+
+    const dataInicioObj = new Date(dataInicio);
+    const dataFimObj = new Date(dataFim);
+
+    const diferencaMeses = (dataFimObj.getFullYear() - dataInicioObj.getFullYear()) * 12 + (dataFimObj.getMonth() - dataInicioObj.getMonth());
 
     const fkConcessionaria = req.query.fkConcessionaria;
-    const nomeConcessionaria = "Concessionária Exemplo"
-    const dataAtual = new Intl.DateTimeFormat('pt-BR').format(new Date());
-    const responsavel = "Jhon doe"
 
 
 
-
-    const rodoviasComMaisAcidentes = [
-        { nome: "Rodovia A", quantidade: 15 },
-        { nome: "Rodovia B", quantidade: 10 },
-        { nome: "Rodovia C", quantidade: 8 }
-    ];
+    const rodoviasComMaisAcidentes = await rodoviaModel.obterRodoviasComMaisAcidenteComIntervalo(fkConcessionaria, dataInicio, dataFim);
+    const totalAcidentes = rodoviasComMaisAcidentes.reduce((acc, curr) => acc + parseInt(curr.quantidade), 0);
 
 
-    const gravidadePorVitima = await rodoviaModel.obterGravidadeDasVitimas(fkConcessionaria)
-    console.log(gravidadeDasVitimas)
+    const gravidadePorVitima = (await rodoviaModel.obterGravidadeDasVitimas(fkConcessionaria))[0]
+    const totalGravidadePorVitima = parseInt(gravidadePorVitima.quantidadeLeve) + parseInt(gravidadePorVitima.quantidadeGrave) + parseInt(gravidadePorVitima.quantidadeFatal);
+
+
+
 
     const tipoPista = await rodoviaModel.obterTipoDePista(fkConcessionaria)
     const totalTipoPista = tipoPista.reduce((acc, curr) => acc + curr.quantidade, 0);
 
 
 
-    const dataPassadoInicio = "01/01/2023";
-    const dataPassadoFim = "31/12/2023";
+    const dataPassadoInicio = dataInicioObj.getDate() + "/" + (dataInicioObj.getMonth() + 1) + "/" + (dataInicioObj.getFullYear() - 1);
+    const dataPassadoFim = dataFimObj.getDate() + "/" + (dataFimObj.getMonth() + 1) + "/" + (dataFimObj.getFullYear() - 1);
 
-    const dataAnoAtual = 25;
-    const dataAnoPassado = 30;
 
-    const variacaoPercentual = (((dataAnoAtual - dataAnoPassado) / dataAnoPassado) * 100).toFixed(2);
-
+    const variacaoPercentual = (((totalAcidentes - totalAcidentes) / totalAcidentes) * 100).toFixed(2);
 
     const teamplate = `*
-Relatório de Acidentes - MoveOn - Concessionária ${nomeConcessionaria}*
-_Data: ${dataAtual}_
+Relatório de Acidentes - MoveOn - Concessionária ${concessionaria}*
+_Data: ${dataInicio} Até ${dataFim} (${diferencaMeses} meses)_
 _Responsável: ${responsavel}_
 
 ---
 
 *📊 Rodovias com mais acidentes*
-${rodoviasComMaisAcidentes.map(rodovia => `- ${rodovia.nome}: ${rodovia.quantidade} acidentes`).join('\n')}
+${rodoviasComMaisAcidentes.slice(0, 4).map(rodovia => `- ${rodovia.nomeRodovia}: ${rodovia.quantidade} acidentes (${(rodovia.quantidade / totalAcidentes * 100).toFixed(2)}%) `).join('\n')}
 ---
 
 *⚠️ Gravidade por vítima (Gráfico Pizza)*
-Leve: ${gravidadeDasVitimas["quantidadeLeve"]}
-Grave: ${gravidadeDasVitimas["quantidadeGrave"]}
-Fatal: ${gravidadeDasVitimas["quantidadeFatal"]}
+Leve: ${gravidadePorVitima["quantidadeLeve"]} (${(gravidadePorVitima["quantidadeLeve"] / totalGravidadePorVitima * 100).toFixed(2)}%)
+Grave: ${gravidadePorVitima["quantidadeGrave"]} (${(gravidadePorVitima["quantidadeGrave"] / totalGravidadePorVitima * 100).toFixed(2)}%)
+Fatal: ${gravidadePorVitima["quantidadeFatal"]} (${(gravidadePorVitima["quantidadeFatal"] / totalGravidadePorVitima * 100).toFixed(2)}%)
 
 ---
 
@@ -146,8 +143,8 @@ ${tipoPista.map(pista => `- ${pista.tipoPista}: ${pista.quantidade} acidentes ($
 ---
 
 *📈 Comparativo de acidentes (Ano atual vs Ano passado)*
-- Ano Atual: Inicio: ${dataInicio} - Fim: ${dataFim} - Total: ${dataAnoAtual}
-- Ano Passado: Inicio: ${dataPassadoInicio} - Fim: ${dataPassadoFim} - Total: ${dataAnoPassado}
+- Ano Atual: Inicio: ${dataInicio} - Fim: ${dataFim} - Total: ${totalAcidentes}
+- Ano Passado: Inicio: ${dataPassadoInicio} - Fim: ${dataPassadoFim} - Total: ${totalAcidentes}
 - Variação: ${variacaoPercentual}%
 
 ---

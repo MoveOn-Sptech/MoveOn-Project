@@ -26,7 +26,9 @@
       </span>
     </nav>
 
-    <h1 class="titulo_dashboard">Concessionária</h1>
+    <h1 class="titulo_dashboard">
+      Concessionária: <span id="span_nome_concessionaria"></span>
+    </h1>
 
     <section class="section_principal">
       <div class="div_container_concessionarias">
@@ -139,8 +141,13 @@
     console.log("email " + email);
 
     console.log(fkConcessionaria);
+    console.log(input_data_inicio.value, input_data_fim.value);
     fetch(
-      `/concessionaria/gerar-relatorio?fkConcessionaria=${fkConcessionaria}&email=${email}`
+      `/concessionaria/gerar-relatorio?fkConcessionaria=${fkConcessionaria}&email=${email}&dataInicio=${
+        input_data_inicio.value
+      }&dataFim=${input_data_fim.value}&concessionaria=${
+        span_nome_concessionaria.innerText
+      }&responsavel=${sessionStorage.getItem("nomeUsuario")}`
     ).then((response) => {
       response.json().then((data) => {
         console.log(data);
@@ -156,6 +163,7 @@
       return;
     }
 
+    console.log(dataInicio, dataFim);
     window.location.href = `./pagina-concessionaria.html?idConcessionaria=${fkConcessionaria}&dataInicio=${dataInicio}&dataFim=${dataFim}`;
   }
 
@@ -192,6 +200,10 @@
 
   const fkConcessionaria = urlParams.get("idConcessionaria");
 
+  const nomeConcessionariaSpan = urlParams.get("nomeConcessionaria");
+
+  span_nome_concessionaria.innerText = nomeConcessionariaSpan;
+
   const dataInicio = urlParams.get("dataInicio");
   const dataFim = urlParams.get("dataFim");
 
@@ -201,7 +213,9 @@
     dataInicio == null ||
     dataInicio == undefined ||
     dataFim == null ||
-    dataFim == undefined
+    dataFim == undefined ||
+    nomeConcessionariaSpan == null ||
+    nomeConcessionariaSpan == undefined
   ) {
     window.location.href =
       "./pagina-concessionaria.html?idConcessionaria=1&dataInicio=2024-01-01&dataFim=2024-12-31";
