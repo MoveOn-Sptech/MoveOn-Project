@@ -10,7 +10,7 @@ function autenticar(email, senha) {
 }
 
 function editar(id, email, nome) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", email, senha)
+   // console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", email, senha)
     let campos = [];
 
     if (email) {
@@ -31,6 +31,35 @@ function editar(id, email, nome) {
     const instrucaoSql = `
         UPDATE usuario 
         SET ${campos.join(", ")}
+        WHERE id = ${id};
+    `;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function editarUsuarioUnico(id, email, cargo) {
+   // console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", email, senha)
+    var camposUsuario = [];
+
+    if (email) {
+        camposUsuario.push(`email = '${email}'`);
+    }
+
+    if (cargo) {
+        camposUsuario.push(`cargo = '${cargo}'`);
+    }
+
+    // Se nenhum campo foi enviado, não faz nada
+    if (camposUsuario.length === 0) {
+        console.log("Nenhum dado para atualizar.");
+        return;
+    }
+
+    // Montar o SQL dinamicamente
+    const instrucaoSql = `
+        UPDATE usuario 
+        SET ${camposUsuario.join(", ")}
         WHERE id = ${id};
     `;
 
@@ -87,5 +116,6 @@ module.exports = {
     registrarLog,
     listarUsuarios,
     deletar,
-    editar
+    editar,
+    editarUsuarioUnico
 };

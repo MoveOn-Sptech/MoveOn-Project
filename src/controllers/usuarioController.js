@@ -50,39 +50,79 @@ function editar(req, res) {
     var emailUsuario = req.body.email;
     var id = req.body.idUsuarioVar;
 
-    if (email == undefined) {
-        res.status(400).send("Seu email está undefined!");
-    } else if (senha == undefined) {
-        res.status(400).send("Sua senha está indefinida!");
-    } else if (id == undefined) {
-        res.status(400).send("Seu id está indefinida!");
-    } else {
+    usuarioModel.editar(id, emailUsuario, nomeUsuario)
+        .then(
+            function (resultadoAutenticar) {
+                console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
+                console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`);
 
-        usuarioModel.editar(id, emailUsuario, nomeUsuario)
-            .then(
-                function (resultadoAutenticar) {
-                    console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
-                    console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`);
+                if (resultadoAutenticar.affectedRows == 1) {
+                    var mensagem = "sucesso";
 
-                    if (resultadoAutenticar.length == 0) {
-                        res.status(403).json({ message: "Email e/ou senha inválido(s)" });
-                    } else {
+                    res.status(200).json(
+                        {
+                            mensagemRetorno: mensagem
+                        }
+                    );
 
-                        res.status(200).json(
+                } else {
+                    var mensagem = "fracasso";
 
-                        );
-                    }
-
+                    res.status(400).json(
+                        {
+                            mensagemRetorno: mensagem
+                        }
+                    );
                 }
-            ).catch(
-                function (erro) {
-                    console.log(erro);
-                    console.log("\nHouve um erro ao editar! Erro: ", erro.sqlMessage);
-                    res.status(500).json(erro.sqlMessage);
-                }
-            );
-    }
 
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log("\nHouve um erro ao editar! Erro: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+
+function editarUsuarioUnico(req, res) {
+    var cargoUsuario = req.body.cargo;
+    var emailUsuario = req.body.email;
+    var id = req.body.idUsuarioVar;
+
+    usuarioModel.editarUsuarioUnico(id, emailUsuario, cargoUsuario)
+        .then(
+            function (resultadoAutenticar) {
+                console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
+                console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`);
+
+                if (resultadoAutenticar.affectedRows == 1) {
+                    var mensagem = "sucesso";
+
+                    res.status(200).json(
+                        {
+                            mensagemRetorno: mensagem
+                        }
+                    );
+
+                } else {
+                    var mensagem = "fracasso";
+
+                    res.status(400).json(
+                        {
+                            mensagemRetorno: mensagem
+                        }
+                    );
+                }
+
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log("\nHouve um erro ao editar! Erro: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
 }
 
 function deletarUsuario(req, res) {
@@ -233,5 +273,6 @@ module.exports = {
     cadastrar,
     listarUsuarios,
     deletarUsuario,
-    editar
+    editar,
+    editarUsuarioUnico
 }

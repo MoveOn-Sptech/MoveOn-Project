@@ -65,11 +65,11 @@
             <div class="form_grid grid_2_col">
                 <div class="input_group">
                     <label>Nome atual</label>
-                    <input type="text" value="Mariana Albuquerque">
+                    <input type="text" class="nomeAntigo" value="">
                 </div>
                 <div class="input_group">
                     <label>Novo nome</label>
-                    <input type="text">
+                    <input type="text" class="novoNomeUsuario">
                 </div>
 
                 <!-- <div class="input_group">
@@ -83,16 +83,16 @@
 
                 <div class="input_group">
                     <label>Email atual</label>
-                    <input type="text" value="albuquerquemari@artesp.com.br">
+                    <input type="text" class="emailAntigo" value="">
                 </div>
                 <div class="input_group">
                     <label>Novo email</label>
-                    <input type="text">
+                    <input type="text" class="novoEmailUsuario">
                 </div>
             </div>
 
             <div class="modal_buttons">
-                <button class="btn_save btn_salvarInfos" onclick="fecharModal('modal_editar_info')">Salvar</button>
+                <button class="btn_save btn_salvarInfos" onclick="editarInfosUnicas()">Salvar</button>
                 <button class="btn_cancel" onclick="fecharModal('modal_editar_info')">Cancelar</button>
             </div>
         </div>
@@ -140,26 +140,26 @@
                 <div class="input_group">
                     <label>Nome</label>
                     <input type="text" id="input_nome_user_edit" readonly
-                        style="background-color: rgba(255,255,255,0.8); color: #010358; font-weight: bold;">
+                        style="background-color: rgba(255,255,255,0.8); color: #010358; font-weight: bold;" value="">
                 </div>
                 <div class="input_group">
                     <label>Cargo</label>
-                    <input type="text" value="Técnico de monitoramento" readonly
+                    <input type="text" id="input_cargo_user_edit" value="" readonly
                         style="background-color: rgba(255,255,255,0.8); color: #010358;">
                 </div>
 
                 <div class="input_group">
                     <label>Alterar cargo</label>
-                    <input type="text">
+                    <input type="text" class="novoCargoUsuarioUnico">
                 </div>
                 <div class="input_group">
                     <label>Alterar email</label>
-                    <input type="text">
+                    <input type="text" class="novoEmailUsuarioUnico">
                 </div>
             </div>
 
             <div class="modal_buttons">
-                <button class="btn_save" onclick="editarInfosUnicas()">Salvar</button>
+                <button class="btn_save" onclick="editarUsuarioUnico()">Salvar</button>
                 <button class="btn_cancel" onclick="fecharModal('modal_editar_usuario_unico')">Cancelar</button>
             </div>
         </div>
@@ -253,6 +253,93 @@
         var cargo = sessionStorage.getItem("cargoUsuario");
         var emailBd = sessionStorage.getItem("emailUsuario");
 
+        var nomeAntigo = document.querySelector(".nomeAntigo");
+        var emailAntigo = document.querySelector(".emailAntigo");
+
+        nomeAntigo.value = sessionStorage.getItem("nomeUsuario");
+        emailAntigo.value = sessionStorage.getItem("emailUsuario");
+
+        var listaNomes = [];
+        var listaCargos = [];
+        var listaEmails = [];
+        var listaIds = [];
+
+        // função para chamar todos os usuários para a lista de usuários para deletar ou editar
+        function pegarUsuarios() {
+
+            var lista = document.querySelector(".user_list");
+
+            fetch("/usuarios/listarUsuarios", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                }),
+            })
+                .then((response) => {
+                    if (response.ok) {
+
+                        response.json().then(data => {
+
+                            console.log(data);
+
+                            for (let i = 0; i < data.nome.length; i++) {
+
+                                listaNomes.push(data.nome[i]);
+                                listaCargos.push(data.cargo[i]);
+                                listaEmails.push(data.email[i]);
+                                listaIds.push(data.id[i]);
+
+                                if (listaIds[i] != parseInt(sessionStorage.getItem("idUsuario"))) {
+
+                                    lista.innerHTML += `
+                                
+                                <div class="user_item" value="${data.id[i]}">
+                    <div class="user_info">
+                        <div class="user_name">${data.nome[i]}</div>
+                        <div class="separator"></div>
+                        <div class="user_role">${data.cargo[i]}</div>
+                    </div>
+                    <div class="user_actions">
+                        <img onclick="abrirEditarUsuario(this)" class="icon_action"
+                            src="assets/icon/lapis.png" alt="Editar">
+                        <img onclick="abrirConfirmarDelecao(this)" class="icon_action" src="assets/icon/lixeira.png"
+                            alt="Excluir">
+                    </div>
+                </div>
+
+                                `;
+
+                                } else {
+                                    listaNomes.splice(i);
+                                    listaCargos.splice(i);
+                                    listaEmails.splice(i);
+                                    listaIds.splice(i);
+                                }
+
+                            }
+
+                            sessionStorage.setItem("listaNomes", listaNomes)
+                            sessionStorage.setItem("listaCargos", listaCargos)
+                            sessionStorage.setItem("listaEmails", listaEmails)
+                            sessionStorage.setItem("listaIds", listaIds)
+
+                        })
+
+                    } else {
+                        return response.json().then((data) => {
+                            throw new Error(data.message || "Erro ao autenticar.");
+                        });
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+
+                });
+        }
+        pegarUsuarios();
+
         nomes.innerHTML = `
         <h1>${nome}</h1>
         <h3>Perfil ${cargo}</h3>
@@ -281,22 +368,103 @@
             }, 300);
         }
 
-        function abrirEditarUsuario(nome) {
-            document.getElementById('input_nome_user_edit').value = nome;
+        var idUsuario;
+        var posicao;
+
+        function abrirEditarUsuario(elementoClicado) {
+
             abrirModal('modal_editar_usuario_unico');
+
+            const cardUsuario = elementoClicado.closest('.user_item');
+
+            idUsuario = cardUsuario.getAttribute('value');
+
+            var input_nome_user_edit = document.getElementById("input_nome_user_edit");
+
+            console.log(idUsuario);
+            idUsuario = parseInt(idUsuario);
+            posicao = listaIds.indexOf(idUsuario);
+
+            console.log(posicao);
+
+            input_nome_user_edit.value = listaNomes[posicao];
+            var input_cargo_user_edit = document.getElementById("input_cargo_user_edit");
+            input_cargo_user_edit.value = listaCargos[posicao];
+
         }
 
-        var idUsuario;
+        // Função para um usuário editar outros usuários
+        function editarUsuarioUnico() {
+
+            var valorCargo = document.querySelector(".novoCargoUsuarioUnico").value;
+            var valorEmail = document.querySelector(".novoEmailUsuarioUnico").value;
+
+            var bodyUnico = { idUsuarioVar: idUsuario }
+
+            if (valorCargo.trim() != "" || !valorCargo === null) {
+                bodyUnico.cargo = valorCargo.trim();
+            }
+
+            if (valorEmail.trim() != "" || !valorEmail === null) {
+                bodyUnico.email = valorEmail.trim();
+            }
+
+            fetch("/usuarios/editarUsuarioUnico", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    ...bodyUnico
+                }),
+            })
+                .then((response) => {
+                    if (response.ok) {
+
+                        response.json().then((data) => {
+
+                            console.log(data);
+
+                            fecharModal('modal_editar_usuario_unico')
+                            
+                            Swal.fire({
+                                icon: "success",
+                                title: "Sucesso",
+                                text: "Usuário editado!",
+                            })
+
+                            pegarUsuarios();
+
+                        })
+
+                    } else {
+                        return response.json().then((data) => {
+                            //throw new Error(data.message || "Erro ao deletar.");
+
+                            Swal.fire({
+                                icon: "error",
+                                title: "Erro",
+                                text:
+                                    "Usuário inválido!"
+                            });
+
+                        });
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+
+                });
+        }
+
         function abrirConfirmarDelecao(elementoClicado) {
             abrirModal('modal_confirmar_delecao');
 
             const cardUsuario = elementoClicado.closest('.user_item');
 
-            // Pega o valor do atributo 'value'
             idUsuario = cardUsuario.getAttribute('value');
 
             console.log(idUsuario);
-
 
         }
 
@@ -318,7 +486,7 @@
 
                             console.log(data);
 
-                            fecharModal();
+                            fecharModal("modal_confirmar_delecao");
 
                             Swal.fire({
                                 icon: "success",
@@ -348,15 +516,18 @@
                 });
         }
 
-
-
         function avancarParaDadosRodovia() {
+
             fecharModal('modal_pesquisa_rodovia');
 
             setTimeout(() => {
                 abrirModal('modal_dados_rodovia');
             }, 300);
+
+
+
         }
+
 
         window.onclick = function (event) {
             if (event.target.classList.contains('tela_modal')) {
@@ -364,105 +535,7 @@
             }
         }
 
-        function pegarUsuarios() {
-
-            var lista = document.querySelector(".user_list");
-
-            fetch("/usuarios/listarUsuarios", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                }),
-            })
-                .then((response) => {
-                    if (response.ok) {
-
-                        response.json().then(data => {
-
-                            console.log(data);
-
-                            for (let i = 0; i < data.nome.length; i++) {
-
-                                lista.innerHTML += `
-                                
-                                <div class="user_item" value="${data.id[i]}">
-                    <div class="user_info">
-                        <div class="user_name">${data.nome[i]}</div>
-                        <div class="separator"></div>
-                        <div class="user_role">${data.cargo[i]}</div>
-                    </div>
-                    <div class="user_actions">
-                        <img onclick="abrirEditarUsuario('${data.nome[i]}')" class="icon_action"
-                            src="assets/icon/lapis.png" alt="Editar">
-                        <img onclick="abrirConfirmarDelecao(this)" class="icon_action" src="assets/icon/lixeira.png"
-                            alt="Excluir">
-                    </div>
-                </div>
-
-                                `;
-
-                            }
-
-                        })
-
-                    } else {
-                        return response.json().then((data) => {
-                            throw new Error(data.message || "Erro ao autenticar.");
-                        });
-                    }
-                })
-                .catch((error) => {
-                    console.log(error);
-
-                });
-        }
-
-        pegarUsuarios();
-
-        // <div class="card_modal modal_large">
-
-        //     <img onclick="fecharModal('modal_editar_info')" class="x" src="assets/icon/X.png" alt="">
-
-        //         <h1>Editar informações</h1>
-
-        //         <div class="form_grid grid_2_col">
-        //             <div class="input_group">
-        //                 <label>Nome atual</label>
-        //                 <input type="text" value="Mariana Albuquerque">
-        //             </div>
-        //             <div class="input_group">
-        //                 <label>Novo nome</label>
-        //                 <input type="text">
-        //             </div>
-
-        //         <!-- <div class="input_group">
-        //                 <label>Cargo atual</label>
-        //                 <input type="text" value="Diretora de planejamento">
-        //             </div>
-        //             <div class="input_group">
-        //                 <label>Novo cargo</label>
-        //                 <input type="text">
-        //             </div> -->
-
-        //             <div class="input_group">
-        //                 <label>Email atual</label>
-        //                 <input type="text" value="albuquerquemari@artesp.com.br">
-        //             </div>
-        //             <div class="input_group">
-        //                 <label>Novo email</label>
-        //                 <input type="text">
-        //             </div>
-        //         </div>
-
-        //         <div class="modal_buttons">
-        //             <button class="btn_save btn_salvarInfos" onclick="fecharModal('modal_editar_info')">Salvar</button>
-        //             <button class="btn_cancel" onclick="fecharModal('modal_editar_info')">Cancelar</button>
-        //         </div>
-        // </div>
-
-
+        //Função do usuário mudar as próprias informações
         function editarInfosUnicas() {
 
             var valorNome = document.querySelector(".novoNomeUsuario").value;
@@ -472,12 +545,12 @@
 
             const body = { idUsuarioVar: idUsuario }
 
-            if (nomeInput.value.trim() !== "") {
-                body.nome = nomeInput.value.trim();
+            if (valorNome.trim() != "" || !valorNome === null) {
+                body.nome = valorNome.trim();
             }
 
-            if (emailInput.value.trim() !== "") {
-                body.email = emailInput.value.trim();
+            if (valorEmail.trim() != "" || !valorEmail === null) {
+                body.email = valorEmail.trim();
             }
 
             fetch("/usuarios/editar", {
@@ -486,17 +559,27 @@
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    body
+                    ...body
                 }),
             })
                 .then((response) => {
+
                     if (response.ok) {
 
                         response.json().then((data) => {
 
                             console.log(data);
 
-                            fecharModal('modal_editar_usuario_unico')
+                            if (valorNome.trim() != "" || !valorNome === null) {
+                                sessionStorage.setItem("nomeUsuario", valorNome)
+                            }
+
+                            if (valorEmail.trim() != "" || !valorEmail === null) {
+                                sessionStorage.setItem("emailUsuario", valorEmail)
+                            }
+
+                            fecharModal("modal_editar_info")
+
                             Swal.fire({
                                 icon: "success",
                                 title: "Sucesso",

@@ -24,4 +24,8 @@ router.post("/editar", function (req, res) {
     usuarioController.editar(req, res);
 });
 
+router.post("/editarUsuarioUnico", function (req, res) {
+    usuarioController.editarUsuarioUnico(req,res);
+});
+
 module.exports = router;
