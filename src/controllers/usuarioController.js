@@ -85,6 +85,48 @@ function editar(req, res) {
         );
 }
 
+function editarRodovia(req, res) {
+    var idRodovia = req.body.idRodovia;
+    var valorDenominacao = req.body.valorDenominacao;
+    var valorRegionalAdm = req.body.valorRegionalAdm;
+    var valorRegionalDer = req.body.valorRegionalDer;
+    var valorFkConcessionaria = req.body.fkConcessionaria;
+
+    usuarioModel.editarRodovia(idRodovia, valorDenominacao, valorRegionalAdm, valorRegionalDer, valorFkConcessionaria)
+        .then(
+            function (resultadoAutenticar) {
+                console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
+                console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`);
+
+                if (resultadoAutenticar.affectedRows == 1) {
+                    var mensagem = "sucesso";
+
+                    res.status(200).json(
+                        {
+                            mensagemRetorno: mensagem
+                        }
+                    );
+
+                } else {
+                    var mensagem = "fracasso";
+
+                    res.status(400).json(
+                        {
+                            mensagemRetorno: mensagem
+                        }
+                    );
+                }
+
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log("\nHouve um erro ao editar! Erro: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+
 function editarUsuarioUnico(req, res) {
     var cargoUsuario = req.body.cargo;
     var emailUsuario = req.body.email;
@@ -214,6 +256,61 @@ function listarUsuarios(req, res) {
         );
 }
 
+function listarRodovias(req, res) {
+
+    var listaIdRodovia = [];
+    var listaNomeRodovia = [];
+    var listaDenominacao = [];
+    var listaConcessionaria = [];
+    var listaRegionalAdm = [];
+    var listaRegionalDer = [];
+    var listaFkConcessionaria = [];
+
+    usuarioModel.listarRodovias()
+        .then(
+            function (resultadoAutenticar) {
+                console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
+                console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`);
+
+                if (resultadoAutenticar.length == 0) {
+                    res.status(403).json({ message: "Email e/ou senha inválido(s)" });
+                } else {
+
+                    for (let i = 0; i < resultadoAutenticar.length; i++) {
+
+                        listaIdRodovia[i] = resultadoAutenticar[i].idRodovia;
+                        listaNomeRodovia[i] = resultadoAutenticar[i].nomeRodovia;
+                        listaDenominacao[i] = resultadoAutenticar[i].denominacaoRodovia;
+                        listaConcessionaria[i] = resultadoAutenticar[i].nomeConcessionaria;
+                        listaRegionalAdm[i] = resultadoAutenticar[i].regionalAdmSp;
+                        listaRegionalDer[i] = resultadoAutenticar[i].regionalDer;
+                        listaFkConcessionaria[i] = resultadoAutenticar[i].fkConcessionaria;
+
+                    }
+
+                    res.status(200).json(
+                        {
+                            idsRodovia: listaIdRodovia,
+                            nomesRodovia: listaNomeRodovia,
+                            denominacoes: listaDenominacao,
+                            regionaisAdm: listaRegionalAdm,
+                            regionaisDer: listaRegionalDer,
+                            concessionarias: listaConcessionaria,
+                            fks: listaFkConcessionaria
+                        }
+                    );
+                }
+
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+
 function cadastrar(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
     var nome = req.body.nome;
@@ -274,5 +371,7 @@ module.exports = {
     listarUsuarios,
     deletarUsuario,
     editar,
-    editarUsuarioUnico
+    editarUsuarioUnico,
+    listarRodovias,
+    editarRodovia
 }

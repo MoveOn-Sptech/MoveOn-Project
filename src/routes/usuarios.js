@@ -20,12 +20,20 @@ router.post("/listarUsuarios", function (req, res) {
     usuarioController.listarUsuarios(req, res);
 });
 
+router.post("/listarRodovias", function (req, res) {
+    usuarioController.listarRodovias(req, res);
+});
+
 router.post("/editar", function (req, res) {
     usuarioController.editar(req, res);
 });
 
 router.post("/editarUsuarioUnico", function (req, res) {
     usuarioController.editarUsuarioUnico(req,res);
+});
+
+router.post("/editarRodovia", function (req, res) {
+    usuarioController.editarRodovia(req,res);
 });
 
 module.exports = router;

@@ -43,14 +43,17 @@
 
             <div class="links_acesso">
                 <a class="link" href="dashboard/visao-geral-rodovia.html"><button>Rodovias</button></a>
-                <a class="link" href="dashboard/visao-geral-concessionaria.html"><button>Concessionárias</button></a>
+                <a class="link" id="linkConcessionaria"
+                    href="dashboard/visao-geral-concessionaria.html"><button>Concessionárias</button></a>
             </div>
         </div>
 
         <div class="action_buttons_container">
             <button class="action_btn" onclick="abrirModal('modal_editar_info')">Editar Informações</button>
-            <button class="action_btn" onclick="abrirModal('modal_lista_usuarios')">Ver usuários</button>
-            <button class="action_btn" onclick="abrirModal('modal_pesquisa_rodovia')">Editar rodovia</button>
+            <button class="action_btn" id="verUsuarios" onclick="abrirModal('modal_lista_usuarios')">Ver
+                usuários</button>
+            <button class="action_btn" id="editarRodovia" onclick="abrirModal('modal_pesquisa_rodovia')">Editar
+                rodovia</button>
         </div>
 
     </section>
@@ -205,25 +208,26 @@
             <div class="form_grid grid_2_col">
                 <div class="input_group">
                     <label>Denominação</label>
-                    <input type="text" value="ANHANGUERA">
+                    <input type="text" value="ANHANGUERA" id="input_denominacao">
                 </div>
                 <div class="input_group">
                     <label>Concessionária</label>
-                    <input type="text" value="ANHANGUERA">
+                    <input type="text" value="ANHANGUERA" id="input_concessionaria">
                 </div>
 
                 <div class="input_group">
                     <label>Regional ADM</label>
-                    <input type="text" value="Regional">
+                    <input type="text" value="Regional" id="input_regionalAdm">
                 </div>
                 <div class="input_group">
                     <label>Regional DER</label>
-                    <input type="text" value="Campinas">
+                    <input type="text" value="Campinas" id="input_regionalDer">
                 </div>
             </div>
 
             <div class="modal_buttons">
-                <button class="btn_save" onclick="fecharModal('modal_dados_rodovia')">Confirmar</button>
+                <button class="btn_save"
+                    onclick="fecharModal('modal_dados_rodovia'), editarRodovia(idRodoviaPesquisada)">Confirmar</button>
                 <button class="btn_cancel" onclick="fecharModal('modal_dados_rodovia')">Cancelar</button>
             </div>
         </div>
@@ -252,6 +256,19 @@
         var nome = sessionStorage.getItem("nomeUsuario");
         var cargo = sessionStorage.getItem("cargoUsuario");
         var emailBd = sessionStorage.getItem("emailUsuario");
+
+        var btnVerUsuario = document.getElementById("verUsuarios")
+        var btnEditarRodovia = document.getElementById("editarRodovia")
+        var linkConcessionaria = document.getElementById("linkConcessionaria")
+        console.log(cargo);
+
+        if (cargo == "Operacional") {
+
+            btnEditarRodovia.style.display = "none";
+            btnVerUsuario.style.display = "none";
+            linkConcessionaria.style.display = 'none';
+
+        }
 
         var nomeAntigo = document.querySelector(".nomeAntigo");
         var emailAntigo = document.querySelector(".emailAntigo");
@@ -426,7 +443,7 @@
                             console.log(data);
 
                             fecharModal('modal_editar_usuario_unico')
-                            
+
                             Swal.fire({
                                 icon: "success",
                                 title: "Sucesso",
@@ -516,19 +533,6 @@
                 });
         }
 
-        function avancarParaDadosRodovia() {
-
-            fecharModal('modal_pesquisa_rodovia');
-
-            setTimeout(() => {
-                abrirModal('modal_dados_rodovia');
-            }, 300);
-
-
-
-        }
-
-
         window.onclick = function (event) {
             if (event.target.classList.contains('tela_modal')) {
                 fecharModal(event.target.id);
@@ -605,6 +609,181 @@
                     console.log(error);
 
                 });
+
+        }
+
+        var listaIdRodovia = [];
+        var listaNomeRodovia = [];
+        var listaDenominacao = [];
+        var listaConcessionaria = [];
+        var listaRegionalAdm = [];
+        var listaRegionalDer = [];
+        var listaFkConcessionaria = [];
+
+        function pegarRodovias() {
+
+            fetch("/usuarios/listarRodovias", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+
+                }),
+            })
+                .then((response) => {
+                    if (response.ok) {
+
+                        response.json().then(data => {
+
+                            console.log(data);
+
+                            for (let i = 0; i < data.idsRodovia.length; i++) {
+
+                                listaIdRodovia.push(data.idsRodovia[i])
+                                listaNomeRodovia.push(data.nomesRodovia[i])
+                                listaDenominacao.push(data.denominacoes[i])
+                                listaConcessionaria.push(data.concessionarias[i])
+                                listaRegionalAdm.push(data.regionaisAdm[i])
+                                listaRegionalDer.push(data.regionaisDer[i])
+                                listaFkConcessionaria.push(data.fks[i])
+                            }
+
+
+                            sessionStorage.setItem("listaIdRodovia", listaIdRodovia)
+                            sessionStorage.setItem("listaNomeRodovia", listaNomeRodovia)
+                            sessionStorage.setItem("listaDenominacao", listaDenominacao)
+                            sessionStorage.setItem("listaConcessionaria", listaConcessionaria)
+                            sessionStorage.setItem("listaRegionalAdm", listaRegionalAdm)
+                            sessionStorage.setItem("listaRegionalDer", listaRegionalDer)
+                            sessionStorage.setItem("listaFkConcessionaria", listaFkConcessionaria)
+
+                        })
+
+                    } else {
+                        return response.json().then((data) => {
+                            throw new Error(data.message || "Erro ao autenticar.");
+                        });
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+
+                });
+        }
+        pegarRodovias();
+
+        var rodoviaPesquisada = '';
+        var idRodoviaPesquisada;
+        function avancarParaDadosRodovia() {
+
+            fecharModal('modal_pesquisa_rodovia');
+
+            setTimeout(() => {
+                abrirModal('modal_dados_rodovia');
+            }, 300);
+
+            var input_busca_rodovia = document.getElementById("input_busca_rodovia").value;
+            rodoviaPesquisada = input_busca_rodovia;
+
+            console.log(rodoviaPesquisada);
+
+            var posicaoRodovia = listaNomeRodovia.indexOf(rodoviaPesquisada);
+            if (posicaoRodovia != -1) {
+
+                idRodoviaPesquisada = parseInt(listaIdRodovia[posicaoRodovia]);
+
+                var input_denominacao = document.getElementById("input_denominacao");
+                input_denominacao.value = listaDenominacao[posicaoRodovia];
+
+                var input_concessionaria = document.getElementById("input_concessionaria");
+                input_concessionaria.value = listaConcessionaria[posicaoRodovia];
+
+                var input_regionalAdm = document.getElementById("input_regionalAdm")
+                input_regionalAdm.value = listaRegionalAdm[posicaoRodovia];
+
+                var input_regionalDer = document.getElementById("input_regionalDer")
+                input_regionalDer.value = listaRegionalDer[posicaoRodovia]
+
+            }
+
+        }
+
+        function editarRodovia(idRodovia) {
+
+
+            var valorDenominacao = document.querySelector("#input_denominacao").value;
+            var valorRegionalAdm = document.querySelector("#input_regionalAdm").value;
+            var valorRegionalDer = document.querySelector("#input_regionalDer").value;
+
+            const bodyRodovia = { idRodovia: idRodovia }
+
+            if (valorDenominacao.trim() != "" || !valorDenominacao === null) {
+                bodyRodovia.valorDenominacao = valorDenominacao.trim();
+            }
+
+            if (valorRegionalAdm.trim() != "" || !valorRegionalAdm === null) {
+                bodyRodovia.valorRegionalAdm = valorRegionalAdm.trim();
+            }
+
+            if (valorRegionalDer.trim() != "" || !valorRegionalDer === null) {
+                bodyRodovia.valorRegionalDer = valorRegionalDer.trim();
+            }
+
+            var valorConcessionaria = document.querySelector("#input_concessionaria").value;
+            var posicaoConcessionaria = listaConcessionaria.indexOf(valorConcessionaria);
+
+            if (posicaoConcessionaria != -1) {
+
+                bodyRodovia.fkConcessionaria = listaFkConcessionaria[posicaoConcessionaria];
+
+            }
+
+            fetch("/usuarios/editarRodovia", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    ...bodyRodovia
+                }),
+            })
+                .then((response) => {
+
+                    if (response.ok) {
+
+                        response.json().then((data) => {
+
+                            console.log(data);
+
+                            fecharModal("modal_editar_info")
+
+                            Swal.fire({
+                                icon: "success",
+                                title: "Sucesso",
+                                text: "Rodovia editada!",
+                            })
+
+                        })
+
+                    } else {
+                        return response.json().then((data) => {
+
+                            Swal.fire({
+                                icon: "error",
+                                title: "Erro",
+                                text:
+                                    "Rodovia inválida!"
+                            });
+
+                        });
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+
+                });
+
 
         }
 

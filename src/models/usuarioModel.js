@@ -10,7 +10,7 @@ function autenticar(email, senha) {
 }
 
 function editar(id, email, nome) {
-   // console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", email, senha)
+    // console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", email, senha)
     let campos = [];
 
     if (email) {
@@ -39,7 +39,7 @@ function editar(id, email, nome) {
 }
 
 function editarUsuarioUnico(id, email, cargo) {
-   // console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", email, senha)
+    // console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", email, senha)
     var camposUsuario = [];
 
     if (email) {
@@ -67,6 +67,43 @@ function editarUsuarioUnico(id, email, cargo) {
     return database.executar(instrucaoSql);
 }
 
+function editarRodovia(id, valorDenominacao, valorRegionalAdm, valorRegionalDer, valorFkConcessionaria) {
+    // console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", email, senha)
+    var camposRodovia = [];
+
+    if (valorDenominacao) {
+        camposRodovia.push(`denominacaoRodovia = '${valorDenominacao}'`);
+    }
+
+    if (valorRegionalAdm) {
+        camposRodovia.push(`regionalAdmSp = '${valorRegionalAdm}'`);
+    }
+
+    if (valorRegionalDer) {
+        camposRodovia.push(`regionalDer = '${valorRegionalDer}'`);
+    }
+
+    if (valorFkConcessionaria) {
+        camposRodovia.push(`fkConcessionaria = '${valorFkConcessionaria}'`);
+    }
+
+    // Se nenhum campo foi enviado, não faz nada
+    if (camposRodovia.length === 0) {
+        console.log("Nenhum dado para atualizar.");
+        return;
+    }
+
+    // Montar o SQL dinamicamente
+    const instrucaoSql = `
+        UPDATE rodovia 
+        SET ${camposRodovia.join(", ")}
+        WHERE idRodovia = ${id};
+    `;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 function deletar(id) {
     var instrucaoSql = `
         DELETE FROM usuario WHERE id = ${id};
@@ -78,6 +115,17 @@ function deletar(id) {
 function listarUsuarios() {
     var instrucaoSql = `
         SELECT id, nome, email, cargo FROM usuario;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function listarRodovias() {
+    var instrucaoSql = `
+        SELECT r.idRodovia, r.nomeRodovia, r.denominacaoRodovia, r.regionalDer,
+        r.regionalAdmSp, r.fkConcessionaria, c.nomeConcessionaria
+        FROM rodovia as r JOIN concessionaria as c
+        ON r.fkConcessionaria = c.idConcessionaria;;
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -117,5 +165,7 @@ module.exports = {
     listarUsuarios,
     deletar,
     editar,
-    editarUsuarioUnico
+    editarUsuarioUnico,
+    listarRodovias,
+    editarRodovia
 };
