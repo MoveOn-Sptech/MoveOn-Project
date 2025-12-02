@@ -223,12 +223,11 @@
     dataInicio == null ||
     dataInicio == undefined ||
     dataFim == null ||
-    dataFim == undefined ||
-    nomeConcessionariaSpan == null ||
-    nomeConcessionariaSpan == undefined
+    dataFim == undefined
   ) {
     window.location.href =
-      "./pagina-concessionaria.html?idConcessionaria=1&dataInicio=2024-01-01&dataFim=2024-12-31";
+      "./pagina-concessionaria.html?idConcessionaria=1&dataInicio=2024-01-01&dataFim=2024-12-31&nomeConcessionaria=" +
+      nomeConcessionariaSpan;
   }
 
   input_data_inicio.value = dataInicio;
