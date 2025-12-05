@@ -1,19 +1,73 @@
--- Arquivo de apoio, caso você queira criar tabelas como as aqui criadas para a API funcionar.
--- Você precisa executar os comandos no banco de dados para criar as tabelas,
--- ter este arquivo aqui não significa que a tabela em seu BD estará como abaixo!
+CREATE DATABASE IF NOT EXISTS moveon;
+USE moveon;
 
-/*
-comandos para mysql server
-*/
-CREATE DATABASE moveon;
-
-CREATE TABLE usuario (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	nome VARCHAR(50),
-	email VARCHAR(50),
-	senha VARCHAR(512),
-	cargo VARCHAR(50) CHECK (cargo IN ('Estratégico', 'Operacional')),
-    dataCadastro DATETIME DEFAULT CURRENT_TIMESTAMP
+CREATE TABLE IF NOT EXISTS Usuario (
+    idUsuario INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(255) NOT NULL,
+    cargo VARCHAR(45) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    senha VARCHAR(512) NOT NULL,
+    dataCadastro DATETIME NOT NULL
 );
 
 
+CREATE TABLE IF NOT EXISTS Log (
+    idLog INT PRIMARY KEY AUTO_INCREMENT,
+    tipo VARCHAR(45) NOT NULL,
+    descricao TEXT NOT NULL,
+    dataCriacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    fkUsuario INT,
+    FOREIGN KEY (fkUsuario) REFERENCES Usuario(idUsuario)
+);
+
+
+CREATE TABLE IF NOT EXISTS Concessionaria (
+    idConcessionaria INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(45) NOT NULL
+);
+
+
+CREATE TABLE IF NOT EXISTS Rodovia (
+    idRodovia INT AUTO_INCREMENT,
+    nome VARCHAR(45) NOT NULL,
+    denominacao VARCHAR(45),
+    municipio VARCHAR(45),
+    regionalDer VARCHAR(45),
+    regionalAdmSp VARCHAR(45),
+    fkConcessionaria INT NOT NULL,
+    FOREIGN KEY (fkConcessionaria) REFERENCES Concessionaria(idConcessionaria),
+    PRIMARY KEY (idRodovia, fkConcessionaria)
+);
+
+
+CREATE TABLE IF NOT EXISTS Notificacao (
+    idNotificacao INT AUTO_INCREMENT,
+    dataCriacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    titulo VARCHAR(45) NOT NULL,
+    conteudo TEXT NOT NULL,
+    fkUsuario INT NOT NULL,
+    fkConcessionaria INT NOT NULL,
+    FOREIGN KEY (fkUsuario) REFERENCES Usuario(idUsuario),
+    FOREIGN KEY (fkConcessionaria) REFERENCES Concessionaria(idConcessionaria),
+    PRIMARY KEY (idNotificacao, fkUsuario, fkConcessionaria)
+);
+
+
+CREATE TABLE IF NOT EXISTS Acidente (
+    idAcidente INT AUTO_INCREMENT,
+    marcoKm DECIMAL(10, 2) NOT NULL,
+    dtHoraAcidente DATETIME NOT NULL,
+    tipoAcidente VARCHAR(45) NOT NULL,
+    causaAcidente VARCHAR(45) NOT NULL,
+    clima VARCHAR(45) NOT NULL,
+    qtdVitFatal INT NOT NULL,
+    qtdVitGrave INT NOT NULL,
+    qtdVitLeve INT NOT NULL,
+    tipoPista VARCHAR(45) NOT NULL,
+    veiculosEnvolvidos VARCHAR(255) NOT NULL,
+    fkRodovia INT NOT NULL,
+    fkConcessionaria INT NOT NULL,
+    FOREIGN KEY (fkRodovia) REFERENCES Rodovia(idRodovia),
+    FOREIGN KEY (fkConcessionaria) REFERENCES Rodovia(fkConcessionaria),
+    PRIMARY KEY (idAcidente, fkRodovia, fkConcessionaria)
+);
