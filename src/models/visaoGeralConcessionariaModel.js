@@ -35,7 +35,7 @@ AcidentesUltimoMes AS (
 )
 SELECT
     c.idConcessionaria,
-    c.nomeConcessionaria,
+    c.nome as nomeConcessionaria, 
     COALESCE(ama.total_acidentes_mes_anterior, 0) AS acidentes_mes_anterior,
     COALESCE(aum.total_acidentes_ultimo_mes, 0) AS acidentes_ultimo_mes,
     -- Calcula a porcentagem de aumento/diminuição
@@ -65,7 +65,7 @@ ORDER BY
 function municipios(dataInicio, dataFim) {
     var instrucaoSql = `
     SELECT
-    R.municipioRodovia,
+    R.municipio as municipioRodovia,
     COUNT(A.idAcidente) AS totalAcidentes
 FROM
     Acidente AS A
@@ -75,7 +75,7 @@ WHERE
     A.dtHoraAcidente >= '${dataInicio} 00:00:00'
     AND A.dtHoraAcidente <= '${dataFim} 23:59:59'
 GROUP BY
-    R.municipioRodovia
+    R.municipio
 ORDER BY
     totalAcidentes DESC
 LIMIT 10;
@@ -87,7 +87,7 @@ LIMIT 10;
 function regionalDer(dataInicio, dataFim) {
     var instrucaoSql = `
     SELECT
-    R.regionalDer AS regionalDer,
+    R.regionalDer as regionalDer,
     COUNT(A.idAcidente) AS totalAcidentes
 FROM
     Acidente AS A

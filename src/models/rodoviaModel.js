@@ -3,12 +3,12 @@ var database = require("../database/config")
 function obterRodoviasComMaisAcidente(fkConcessionaria) {
     var instrucaoSql = `
         SELECT 
-            r.nomeRodovia,
-            SUM(a.vitLeve + a.vitGrave + a.vitFatal) AS quantidade
+            r.nome,
+            SUM(a.qtdVitLeve + a.qtdVitGrave + a.qtdVitFatal) AS quantidade
         FROM Rodovia r
         JOIN Acidente a ON a.fkRodovia = r.idRodovia
         WHERE r.fkConcessionaria = ${fkConcessionaria}
-        GROUP BY r.nomeRodovia
+        GROUP BY r.nome
         ORDER BY quantidade DESC;
     `;
     return database.executar(instrucaoSql);
@@ -17,12 +17,12 @@ function obterRodoviasComMaisAcidente(fkConcessionaria) {
 function obterRodoviasComMaisAcidenteComIntervalo(fkConcessionaria, dataInicio, dataFim) {
     var instrucaoSql = `
         SELECT 
-            r.nomeRodovia,
-            SUM(a.vitLeve + a.vitGrave + a.vitFatal) AS quantidade
+            r.nome as nomeRodovia,
+            SUM(a.qtdVitLeve + a.qtdVitGrave + a.qtdVitFatal) AS quantidade
         FROM Rodovia r
         JOIN Acidente a ON a.fkRodovia = r.idRodovia
         WHERE r.fkConcessionaria = ${fkConcessionaria} AND a.dtHoraAcidente BETWEEN '${dataInicio}' AND '${dataFim}'
-        GROUP BY r.nomeRodovia
+        GROUP BY r.nome
         ORDER BY quantidade DESC;
     `;
     return database.executar(instrucaoSql);
@@ -32,9 +32,9 @@ function obterGravidadeDasVitimas(fkConcessionaria) {
     console.log("FK CONCESSIONARIA MODEL: " + fkConcessionaria)
     var instrucaoSql = `
         SELECT 
-            SUM(a.vitLeve) AS quantidadeLeve,
-            SUM(a.vitGrave) AS quantidadeGrave,
-            SUM(a.vitFatal) AS quantidadeFatal
+            SUM(a.qtdVitLeve) AS quantidadeLeve,
+            SUM(a.qtdVitGrave) AS quantidadeGrave,
+            SUM(a.qtdVitFatal) AS quantidadeFatal
         FROM Rodovia r
         JOIN Acidente a ON a.fkRodovia = r.idRodovia
         WHERE r.fkConcessionaria = ${fkConcessionaria};

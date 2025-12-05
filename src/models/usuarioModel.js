@@ -3,7 +3,7 @@ var database = require("../database/config")
 function autenticar(email, senha) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", email, senha)
     var instrucaoSql = `
-        SELECT id, nome, email, cargo FROM usuario WHERE email = '${email}' AND senha = SHA2('${senha}', 256);
+        SELECT idUsuario, nome, email, cargo FROM Usuario WHERE email = '${email}' AND senha = SHA2('${senha}', 256);
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -29,7 +29,7 @@ function editar(id, email, nome) {
 
     // Montar o SQL dinamicamente
     const instrucaoSql = `
-        UPDATE usuario 
+        UPDATE Usuario
         SET ${campos.join(", ")}
         WHERE id = ${id};
     `;
@@ -58,9 +58,9 @@ function editarUsuarioUnico(id, email, cargo) {
 
     // Montar o SQL dinamicamente
     const instrucaoSql = `
-        UPDATE usuario 
+        UPDATE Usuario
         SET ${camposUsuario.join(", ")}
-        WHERE id = ${id};
+        WHERE idUsuario = ${id};
     `;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
@@ -72,7 +72,7 @@ function editarRodovia(id, valorDenominacao, valorRegionalAdm, valorRegionalDer,
     var camposRodovia = [];
 
     if (valorDenominacao) {
-        camposRodovia.push(`denominacaoRodovia = '${valorDenominacao}'`);
+        camposRodovia.push(`denominacao = '${valorDenominacao}'`);
     }
 
     if (valorRegionalAdm) {
@@ -95,7 +95,7 @@ function editarRodovia(id, valorDenominacao, valorRegionalAdm, valorRegionalDer,
 
     // Montar o SQL dinamicamente
     const instrucaoSql = `
-        UPDATE rodovia 
+        UPDATE Rodovia 
         SET ${camposRodovia.join(", ")}
         WHERE idRodovia = ${id};
     `;
@@ -106,7 +106,7 @@ function editarRodovia(id, valorDenominacao, valorRegionalAdm, valorRegionalDer,
 
 function deletar(id) {
     var instrucaoSql = `
-        DELETE FROM usuario WHERE id = ${id};
+        DELETE FROM Usuario WHERE idUsuario = ${id};
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -114,7 +114,7 @@ function deletar(id) {
 
 function listarUsuarios() {
     var instrucaoSql = `
-        SELECT id, nome, email, cargo FROM usuario;
+        SELECT idUsuario, nome, email, cargo FROM Usuario;
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -122,9 +122,9 @@ function listarUsuarios() {
 
 function listarRodovias() {
     var instrucaoSql = `
-        SELECT r.idRodovia, r.nomeRodovia, r.denominacaoRodovia, r.regionalDer,
-        r.regionalAdmSp, r.fkConcessionaria, c.nomeConcessionaria
-        FROM rodovia as r JOIN concessionaria as c
+        SELECT r.idRodovia, r.nome, r.denominacao, r.regionalDer,
+        r.regionalAdmSp, r.fkConcessionaria, c.nome AS nomeConcessionaria
+        FROM Rodovia as r JOIN Concessionaria as c
         ON r.fkConcessionaria = c.idConcessionaria;;
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
@@ -136,7 +136,7 @@ function cadastrar(nome, email, senha, cargo) {
 
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
-    var instrucaoSql = `INSERT INTO usuario (nome, email, senha, cargo) VALUES ('${nome}', '${email}', SHA2('${senha}', 256), '${cargo}');`;
+    var instrucaoSql = `INSERT INTO Usuario (nome, email, senha, cargo) VALUES ('${nome}', '${email}', SHA2('${senha}', 256), '${cargo}');`;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
@@ -144,14 +144,14 @@ function cadastrar(nome, email, senha, cargo) {
 
 function buscarPorEmail(email) {
 
-    var instrucaoSql = `SELECT * FROM usuario WHERE email = '${email}';`;
+    var instrucaoSql = `SELECT * FROM Usuario WHERE email = '${email}';`;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
 function registrarLog(descricao, tipo = 'INFO') {
 
-    var instrucaoSql = `INSERT INTO logs (tipo, descricao, dataCriacao) VALUES ('${tipo}', '${descricao}', NOW(6));`;
+    var instrucaoSql = `INSERT INTO Log (tipo, descricao, dataCriacao) VALUES ('${tipo}', '${descricao}', NOW(6));`;
     console.log("Executando a instrução SQL de LOG: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 

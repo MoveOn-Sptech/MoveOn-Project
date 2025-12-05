@@ -1,6 +1,6 @@
 var visaoGeralConcessionariaModel = require("../models/visaoGeralConcessionariaModel");
 
-function concessionarias(req,res) {
+function concessionarias(req, res) {
 
     var vetorNome = [];
     var vetorPorcentagem = [];
