@@ -1,59 +1,67 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MoveOn | Login</title>
 
-  <title>MoveOn | Login</title>
+    <link rel="stylesheet" href="./css/login&cadastro.css" />
+    <link rel="icon" href="./imagens/logo_alternativa_branca.png" />
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </head>
 
-  <link rel="stylesheet" href="./css/login&cadastro.css" />
-  <link rel="icon" href="./imagens/logo_alternativa_branca.png" />
-  <!-- SweetAlert2 -->
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-</head>
+  <body>
+    <div class="container_login">
+      <div class="logo">
+        <img src="./imagens/logo_branca.png" />
+      </div>
 
-<body>
-  <div class="container_login">
+      <div class="bemvindo">
+        <span>Bem-Vindo de volta!</span>
+      </div>
 
-    <div class="logo">
-      <img src="./imagens/logo_branca.png" />
-    </div>
+      <div class="card">
+        <div class="formulario">
+          <h1>Login</h1>
 
-    <div class="bemvindo">
-      <span>Bem-Vindo de volta!</span>
-    </div>
+          <div class="campo">
+            <p>E-mail corporativo</p>
+            <img src="./imagens/icones/email.png" />
+            <input
+              id="input_email"
+              type="text"
+              placeholder="Digite seu e-mail"
+            />
+          </div>
+          <div class="campo">
+            <p>Senha</p>
+            <img src="./imagens/icones/lock.png" />
+            <input
+              id="input_senha"
+              type="password"
+              placeholder="Digite sua senha"
+            />
+            <img
+              id="see_password"
+              class="see_password"
+              src="./imagens/icones/see_password.png"
+            />
+          </div>
 
-    <div class="card">
-      <div class="formulario">
-        <h1>Login</h1>
-
-        <div class="campo">
-          <p>E-mail corporativo</p>
-          <img src="./imagens/icones/email.png" />
-          <input id="input_email" type="text" placeholder="Digite seu e-mail" />
+          <button class="login" onclick="login()">Entrar</button>
+          <p class="temConta">
+            Não tem uma conta? <a href="./cadastro.html"><b>Cadastre-se</b></a>
+          </p>
         </div>
-        <div class="campo">
-          <p>Senha</p>
-          <img src="./imagens/icones/lock.png" />
-          <input id="input_senha" type="password" placeholder="Digite sua senha" />
-          <img id="see_password" class="see_password" src="./imagens/icones/see_password.png" />
-        </div>
-
-        <button class="login" onclick="login()">Entrar</button>
-        <p class="temConta">
-          Não tem uma conta? <a href="./cadastro.html"><b>Cadastre-se</b></a>
-        </p>
       </div>
     </div>
-  </div>
-</body>
-
+  </body>
 </html>
 
 <script>
-
   // Função para alternar a visibilidade da senha
   document
     .getElementById("see_password")
@@ -65,7 +73,6 @@
     });
 
   function login() {
-
     var email = document.getElementById("input_email").value;
     var senha = document.getElementById("input_senha").value;
 
@@ -90,35 +97,33 @@
         },
         body: JSON.stringify({
           emailServer: email,
-          senhaServer: senha
+          senhaServer: senha,
         }),
       })
         .then((response) => {
           if (response.ok) {
-
             Swal.fire({
               icon: "success",
               title: "Sucesso",
               text: "Autenticação realizado com sucesso!",
-            })
+            });
 
-            response.json().then(data => {
+            response.json().then((data) => {
+              console.log(data);
+              sessionStorage.clear();
+              sessionStorage.setItem("nomeUsuario", data.nomeUsuario);
+              sessionStorage.setItem("emailUsuario", data.emailUsuario);
+              sessionStorage.setItem("cargoUsuario", data.cargoUsuario);
+              sessionStorage.setItem("idUsuario", data.idUsuario);
+
               if (data.cargoUsuario == "Estratégico") {
-                window.location.href = "/dashboard/visao-geral-concessionaria.html";
+                window.location.href =
+                  "/dashboard/visao-geral-concessionaria.html";
               }
               if (data.cargoUsuario == "Operacional") {
                 window.location.href = "/dashboard/visao-geral-rodovia.html";
               }
-
-              console.log(data);
-
-              sessionStorage.setItem('nomeUsuario', data.nomeUsuario);
-              sessionStorage.setItem('emailUsuario', data.emailUsuario);
-              sessionStorage.setItem('cargoUsuario', data.cargoUsuario);
-              sessionStorage.setItem('idUsuario', data.idUsuario);
-
-            })
-
+            });
           } else {
             return response.json().then((data) => {
               throw new Error(data.message || "Erro ao autenticar.");
@@ -133,7 +138,5 @@
           });
         });
     }
-
   }
-
 </script>

@@ -105,6 +105,21 @@ async function gerarRelatorio(req, res) {
     const rodoviasComMaisAcidentes = await rodoviaModel.obterRodoviasComMaisAcidenteComIntervalo(fkConcessionaria, dataInicio, dataFim);
     const totalAcidentes = rodoviasComMaisAcidentes.reduce((acc, curr) => acc + parseInt(curr.quantidade), 0);
 
+    // DATA DO ANO PASSADO yyyy-mm-dd
+
+    const dataInicioAnoPassado = new Date(dataInicioObj.getFullYear() - 1, dataInicioObj.getMonth(), dataInicioObj.getDate());
+    const dataFimAnoPassado = new Date(dataFimObj.getFullYear() - 1, dataFimObj.getMonth(), dataFimObj.getDate());
+
+    const dataInicioAnoPassadoStr = `${dataInicioAnoPassado.getFullYear()}-${String(dataInicioAnoPassado.getMonth() + 1).padStart(2, '0')}-${String(dataInicioAnoPassado.getDate()).padStart(2, '0')}`;
+    const dataFimAnoPassadoStr = `${dataFimAnoPassado.getFullYear()}-${String(dataFimAnoPassado.getMonth() + 1).padStart(2, '0')}-${String(dataFimAnoPassado.getDate()).padStart(2, '0')}`;
+
+    const rodoviasComMaisAcidentesDoAnoPassado = await rodoviaModel.obterRodoviasComMaisAcidenteComIntervalo(fkConcessionaria, dataInicioAnoPassadoStr, dataFimAnoPassadoStr);
+    const totalAcidentesDoAnoPassado = rodoviasComMaisAcidentesDoAnoPassado.reduce((acc, curr) => acc + parseInt(curr.quantidade), 0);
+
+    console.log({
+        totalAcidentes,
+        totalAcidentesDoAnoPassado
+    })
 
     const gravidadePorVitima = (await rodoviaModel.obterGravidadeDasVitimas(fkConcessionaria))[0]
     const totalGravidadePorVitima = parseInt(gravidadePorVitima.quantidadeLeve) + parseInt(gravidadePorVitima.quantidadeGrave) + parseInt(gravidadePorVitima.quantidadeFatal);
@@ -116,12 +131,7 @@ async function gerarRelatorio(req, res) {
     const totalTipoPista = tipoPista.reduce((acc, curr) => acc + curr.quantidade, 0);
 
 
-
-    const dataPassadoInicio = dataInicioObj.getDate() + "/" + (dataInicioObj.getMonth() + 1) + "/" + (dataInicioObj.getFullYear() - 1);
-    const dataPassadoFim = dataFimObj.getDate() + "/" + (dataFimObj.getMonth() + 1) + "/" + (dataFimObj.getFullYear() - 1);
-
-
-    const variacaoPercentual = (((totalAcidentes - totalAcidentes) / totalAcidentes) * 100).toFixed(2);
+    const variacaoPercentual = (((totalAcidentes / totalAcidentesDoAnoPassado) * 100) - 100.00).toFixed(2);
 
     const titulo = `Relatório de Acidentes - MoveOn - Concessionária ${concessionaria}`;
     const teamplate = `*${titulo}*
@@ -146,9 +156,9 @@ ${tipoPista.map(pista => `- ${pista.tipoPista}: ${pista.quantidade} acidentes ($
 ---
 
 *📈 Comparativo de acidentes (Ano atual vs Ano passado)*
-- Ano Atual: Inicio: ${dataInicio} - Fim: ${dataFim} - Total: ${totalAcidentes}
-- Ano Passado: Inicio: ${dataPassadoInicio} - Fim: ${dataPassadoFim} - Total: ${totalAcidentes}
-- Variação: ${variacaoPercentual}%
+- Ano Atual: Inicio: ${Intl.DateTimeFormat('pt-BR').format(dataInicioObj)} - Fim: ${Intl.DateTimeFormat('pt-BR').format(dataFimObj)} - Total: ${totalAcidentes}
+- Ano Passado: Inicio: ${Intl.DateTimeFormat('pt-BR').format(new Date(dataInicioAnoPassado))} - Fim: ${Intl.DateTimeFormat('pt-BR').format(new Date(dataFimAnoPassado))} - Total: ${totalAcidentesDoAnoPassado}
+- Variação: ${variacaoPercentual > 0 ? 'Aumento de' : 'Diminuição de'} ${variacaoPercentual}% compara ao ano passado.
 
 ---
 

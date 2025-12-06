@@ -73,7 +73,7 @@ LEFT JOIN
 LEFT JOIN
     AcidentesUltimoMes aum ON c.idConcessionaria = aum.fkConcessionaria
 ORDER BY
-    porcentagem_aumento; -- Ordena da maior porcentagem de aumento para a menor (ou maior diminuição)
+    porcentagem_aumento ; -- Ordena da maior porcentagem de aumento para a menor (ou maior diminuição)
 
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);

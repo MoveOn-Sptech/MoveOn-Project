@@ -88,8 +88,11 @@
         <span class="filter">
           <p class="filtro">Filtro</p>
           <p>Selecione o ano:</p>
-          <select name="select_filtro_ano" id="select_filtro_ano">
-            <option value="2025">2025</option>
+          <select
+            name="select_filtro_ano"
+            id="select_filtro_ano"
+            onchange="onChangeFilterDate()"
+          >
             <option value="2024">2024</option>
             <option value="2023">2023</option>
             <option value="2022">2022</option>
@@ -169,14 +172,23 @@
   }
 
   function onChangeFilterDate() {
-    const dataInicio = document.getElementById("input_data_inicio").value;
-    const dataFim = document.getElementById("input_data_fim").value;
+    const ano = document.getElementById("select_filtro_ano").value;
+
+    if (ano == "") {
+      return;
+    }
+
+    let dataInicio = document.getElementById("input_data_inicio").value;
+    let dataFim = document.getElementById("input_data_fim").value;
 
     if (dataInicio == "" || dataFim == "") {
       return;
     }
 
-    console.log(dataInicio, dataFim);
+    dataInicio = `${ano}-${dataInicio.slice(5, 10)}`;
+
+    dataFim = `${ano}-${dataFim.slice(5, 10)}`;
+
     window.location.href = `./pagina-concessionaria.html?idConcessionaria=${fkConcessionaria}&dataInicio=${dataInicio}&dataFim=${dataFim}&nomeConcessionaria=${span_nome_concessionaria.innerText}`;
   }
 

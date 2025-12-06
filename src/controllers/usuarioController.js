@@ -22,7 +22,7 @@ function autenticar(req, res) {
                         var cargo = resultadoAutenticar[0].cargo
                         var emailBd = resultadoAutenticar[0].email
                         var nomeBd = resultadoAutenticar[0].nome
-                        var id = resultadoAutenticar[0].id;
+                        var id = resultadoAutenticar[0].idUsuario;
                         res.status(200).json(
                             {
                                 emailUsuario: emailBd,

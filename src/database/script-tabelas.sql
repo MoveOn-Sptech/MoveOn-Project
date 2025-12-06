@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS Rodovia (
 CREATE TABLE IF NOT EXISTS Notificacao (
     idNotificacao INT AUTO_INCREMENT,
     dataCriacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    titulo VARCHAR(45) NOT NULL,
+    titulo VARCHAR(255) NOT NULL,
     conteudo TEXT NOT NULL,
     fkUsuario INT NOT NULL,
     fkConcessionaria INT NOT NULL,
