@@ -1,8 +1,25 @@
 var database = require("../database/config")
 
-function concessionarias() {
+function concessionarias(dataFim) {
+    //  MES ANTERIOR
+
+    const dataFimDate = new Date(dataFim);
+    const dataFimMenosUmMes = new Date(dataFimDate.getFullYear(), dataFimDate.getMonth() - 1, dataFimDate.getDate());
+
+    const dataFimFormatada = `${dataFimDate.getFullYear()}-${String(dataFimDate.getMonth() + 1).padStart(2, '0')}-${String(dataFimDate.getDate()).padStart(2, '0')}`;
+    const dataFimMenosUmMesFormatada = `${dataFimMenosUmMes.getFullYear()}-${String(dataFimMenosUmMes.getMonth() + 1).padStart(2, '0')}-${String(dataFimMenosUmMes.getDate()).padStart(2, '0')}`;
+
+    console.log("Data Fim: ", dataFimFormatada);
+    console.log("Data Fim - 1 Mês: ", dataFimMenosUmMesFormatada);
+
+
+    const dataFimMenosDoisMeses = new Date(dataFimDate.getFullYear(), dataFimDate.getMonth() - 2, dataFimDate.getDate());
+    const dataFimMenosDoisMesesFormatada = `${dataFimMenosDoisMeses.getFullYear()}-${String(dataFimMenosDoisMeses.getMonth() + 1).padStart(2, '0')}-${String(dataFimMenosDoisMeses.getDate()).padStart(2, '0')}`;
+
+    console.log("Data Fim - 2 Meses: ", dataFimMenosDoisMesesFormatada);
+
     var instrucaoSql = `
-    WITH AcidentesMesAnterior AS (
+       WITH AcidentesMesAnterior AS (
     SELECT
         r.fkConcessionaria,
         COUNT(a.idAcidente) AS total_acidentes_mes_anterior
@@ -14,7 +31,7 @@ function concessionarias() {
         -- Filtra acidentes do mês anterior (assumindo que o "mês atual" para o cálculo é Nov/2024,
         -- então o mês anterior é Out/2024).
         -- Substitua '2024-11-01' pela data de início do "mês atual" que você está usando como referência.
-        a.dtHoraAcidente >= '2024-11-01 00:00:00' AND a.dtHoraAcidente < '2024-12-01 00:00:00'
+        a.dtHoraAcidente >= '${dataFimMenosUmMesFormatada} 00:00:00' AND a.dtHoraAcidente < '${dataFimFormatada} 00:00:00'
     GROUP BY
         r.fkConcessionaria
 ),
@@ -29,13 +46,13 @@ AcidentesUltimoMes AS (
     WHERE
         -- Filtra acidentes do último mês (assumindo que o "mês atual" para o cálculo é Nov/2024).
         -- Substitua '2024-11-01' pela data de início do "mês atual" que você está usando como referência.
-        a.dtHoraAcidente >= '2024-12-01 00:00:00' AND a.dtHoraAcidente < '2025-01-01 00:00:00'
+        a.dtHoraAcidente >= '${dataFimMenosDoisMesesFormatada} 00:00:00' AND a.dtHoraAcidente < '${dataFimMenosUmMesFormatada} 00:00:00'
     GROUP BY
         r.fkConcessionaria
 )
 SELECT
     c.idConcessionaria,
-    c.nome as nomeConcessionaria, 
+    c.nome as nomeConcessionaria,
     COALESCE(ama.total_acidentes_mes_anterior, 0) AS acidentes_mes_anterior,
     COALESCE(aum.total_acidentes_ultimo_mes, 0) AS acidentes_ultimo_mes,
     -- Calcula a porcentagem de aumento/diminuição
@@ -56,7 +73,8 @@ LEFT JOIN
 LEFT JOIN
     AcidentesUltimoMes aum ON c.idConcessionaria = aum.fkConcessionaria
 ORDER BY
-    porcentagem_aumento DESC; -- Ordena da maior porcentagem de aumento para a menor (ou maior diminuição)
+    porcentagem_aumento; -- Ordena da maior porcentagem de aumento para a menor (ou maior diminuição)
+
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

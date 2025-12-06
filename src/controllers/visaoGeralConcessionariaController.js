@@ -6,7 +6,12 @@ function concessionarias(req, res) {
     var vetorPorcentagem = [];
     var vetorId = [];
 
-    visaoGeralConcessionariaModel.concessionarias()
+    const dataInicio = req.query.dataInicio;
+    const dataFim = req.query.dataFim;
+
+    console.log(dataInicio, dataFim);
+
+    visaoGeralConcessionariaModel.concessionarias(dataFim)
         .then(
             function (resultadoAutenticar) {
                 console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);

@@ -6,6 +6,7 @@
     <title>Dashboard: Concessionária</title>
     <link rel="stylesheet" href="../css/dashboard/concessionaria.css" />
     <link rel="icon" href="../imagens/logo_alternativa_branca.png" />
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
     <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
@@ -34,7 +35,14 @@
 
     <section class="section_principal">
       <div class="div_container_concessionarias">
-        <h2>Rodovias com mais acidentes</h2>
+        <div class="titles">
+          <h2>Rodovias com mais acidentes</h2>
+          <h4>
+            <span id="span_inicio_data"> </span>
+
+            <span id="span_fim_data"> </span>
+          </h4>
+        </div>
 
         <div class="div_pesquisar_concessionarias">
           <p>Pesquisar rodovia:</p>
@@ -55,11 +63,6 @@
             onchange="onChangeSelectedFilter()"
           >
             <option value="-1" onclick="allRodovias()">Todos</option>
-
-            <!-- <option value="norte">Rodovias na região norte</option> -->
-            <!-- <option value="sul">Rodovias na região sul</option> -->
-            <!-- <option value="leste">Rodovias na região leste</option> -->
-            <!-- <option value="oeste">Rodovias na região oeste</option> -->
           </select>
         </div>
 
@@ -108,7 +111,7 @@
 
         <div class="div_graficos">
           <div class="div_grafico">
-            <canvas id="myChart" class="grafico"></canvas>
+            <canvas id="myChart4" class="grafico"></canvas>
           </div>
 
           <div class="graficos_pizza">
@@ -122,7 +125,7 @@
           </div>
 
           <div class="div_grafico">
-            <canvas id="myChart4" class="grafico"></canvas>
+            <canvas id="myChart" class="grafico"></canvas>
           </div>
         </div>
       </div>
@@ -137,7 +140,7 @@
     const urlParams = new URLSearchParams(window.location.search);
 
     const fkConcessionaria = urlParams.get("idConcessionaria");
-
+    console.log("fkConcessionaria " + fkConcessionaria);
     const email = sessionStorage.getItem("emailUsuario");
 
     console.log("email " + email);
@@ -226,12 +229,22 @@
     dataFim == undefined
   ) {
     window.location.href =
-      "./pagina-concessionaria.html?idConcessionaria=1&dataInicio=2024-01-01&dataFim=2024-12-31&nomeConcessionaria=" +
-      nomeConcessionariaSpan;
+      "./pagina-concessionaria.html?idConcessionaria=1&dataInicio=2024-01-01&dataFim=2024-12-31&nomeConcessionaria=SPVIAS";
   }
 
   input_data_inicio.value = dataInicio;
   input_data_fim.value = dataFim;
+
+  const dataInicioFormatada = Intl.DateTimeFormat("pt-BR").format(
+    new Date(dataInicio)
+  );
+
+  const dataFimFormatada = Intl.DateTimeFormat("pt-BR").format(
+    new Date(dataFim)
+  );
+
+  span_inicio_data.innerText = `De: ${dataInicioFormatada}`;
+  span_fim_data.innerText = ` Até: ${dataFimFormatada}`;
 
   select_filtro_ano.value = dataInicio.split("-")[0];
 
@@ -507,6 +520,41 @@
             },
           },
         },
+        plugins: [
+          {
+            id: "customLabels",
+            afterDatasetsDraw(chart) {
+              const { ctx } = chart;
+              const meta = chart.getDatasetMeta(0);
+
+              // calcula o total apenas das fatias visíveis
+              const visibleTotal = meta.data.reduce((acc, element, i) => {
+                if (!element.hidden) {
+                  acc += parseFloat(chart.data.datasets[0].data[i]);
+                }
+                return acc;
+              }, 0);
+
+              meta.data.forEach((element, index) => {
+                if (element.hidden) return; // não desenha se a fatia estiver oculta
+
+                const { x, y } = element.tooltipPosition();
+                ctx.save();
+                ctx.fillStyle = "black";
+                ctx.font = "14px Arial";
+                ctx.textAlign = "center";
+                ctx.textBaseline = "bottom";
+
+                const value = chart.data.datasets[0].data[index];
+                const percentage =
+                  ((value / visibleTotal) * 100).toFixed(1) + "%";
+
+                ctx.fillText(percentage, x, y - 10);
+                ctx.restore();
+              });
+            },
+          },
+        ],
       });
     });
   });
@@ -580,6 +628,41 @@
             },
           },
         },
+        plugins: [
+          {
+            id: "customLabels",
+            afterDatasetsDraw(chart) {
+              const { ctx } = chart;
+              const meta = chart.getDatasetMeta(0);
+
+              // calcula o total apenas das fatias visíveis
+              const visibleTotal = meta.data.reduce((acc, element, i) => {
+                if (!element.hidden) {
+                  acc += parseFloat(chart.data.datasets[0].data[i]);
+                }
+                return acc;
+              }, 0);
+
+              meta.data.forEach((element, index) => {
+                if (element.hidden) return; // não desenha se a fatia estiver oculta
+
+                const { x, y } = element.tooltipPosition();
+                ctx.save();
+                ctx.fillStyle = "black";
+                ctx.font = "14px Arial";
+                ctx.textAlign = "center";
+                ctx.textBaseline = "bottom";
+
+                const value = chart.data.datasets[0].data[index];
+                const percentage =
+                  ((value / visibleTotal) * 100).toFixed(1) + "%";
+
+                ctx.fillText(percentage, x, y - 10);
+                ctx.restore();
+              });
+            },
+          },
+        ],
       });
     });
   });

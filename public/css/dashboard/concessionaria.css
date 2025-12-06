@@ -1,310 +1,324 @@
 /* Estilização páginas de concessionaria */
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 * {
-    margin: 0;
-    padding: 0;
-    font-family: "Inter", sans-serif;
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", sans-serif;
 }
 
 body {
-    background-image: url('../../assets/imgs/fundo-dashboard.png');
+  background-image: url("../../assets/imgs/fundo-dashboard.png");
 }
 
 /* NAVBAR */
 
 nav {
-    width: 100%;
-    height: 10vh;
-    display: flex;
-    align-items: center;
-    color: white;
-    font-family: "Poppins", sans-serif;
-    font-weight: 800;
-    background-color: #010358;
+  width: 100%;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  color: white;
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  background-color: #010358;
 }
 
 nav .logo_nav {
-    width: 20%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 20%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 nav .logo_nav a {
-    width: 70%;
+  width: 70%;
 }
 
 nav .logo_nav img {
-    width: 80%;
+  width: 80%;
 }
 
 nav .user_name {
-    width: 60%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 150%;
+  width: 60%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 150%;
 }
 
 nav .page_link {
-    width: 10%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 120%;
+  width: 10%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 120%;
 }
 
 nav .user_icon {
-    width: 10%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 10%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 nav .user_icon img {
-    width: 30%;
+  width: 30%;
 }
 
 nav .user_icon img:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .titulo_dashboard {
-    color: #010358;
-    text-align: center;
-    font-weight: 700;
-    font-size: 40px;
-    margin-top: 15px;
-    margin-bottom: 15px;
+  color: #010358;
+  text-align: center;
+  font-weight: 700;
+  font-size: 40px;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 .section_principal {
-    display: flex;
-    width: 100%;
-    justify-content: space-around;
-    height: 750px;
-    margin-bottom: 10px;
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  height: 750px;
+  margin-bottom: 10px;
 }
 
 .div_container_concessionarias {
-    display: flex;
-    flex-direction: column;
-    width: 40%;
-    background-color: #010358;
-    border-radius: 10px;
-    border: 1px solid #010358;
-    height: 100%;
-    justify-content: space-around;
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  background-color: #010358;
+  border-radius: 10px;
+  border: 1px solid #010358;
+  height: 100%;
+  justify-content: space-around;
 }
 
 .div_container_concessionarias h2 {
-    text-align: center;
-    color: white;
+  text-align: center;
+  color: white;
+}
+
+.titles {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
 }
 
 .div_pesquisar_concessionarias {
-    margin: 0 auto;
-    width: 70%;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+  margin: 0 auto;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .div_pesquisar_concessionarias p {
-    color: white;
-    font-size: 16px;
+  color: white;
+  font-size: 16px;
 }
 
 .div_pesquisar_concessionarias input {
-    height: 35px;
-    background-color: #c6c6c6;
-    text-align: center;
-    border: 1px solid #c6c6c6;
-    border-radius: 8px;
+  height: 35px;
+  background-color: #c6c6c6;
+  text-align: center;
+  border: 1px solid #c6c6c6;
+  border-radius: 8px;
 }
 
 .div_filtrar {
-    margin: 0 auto;
-    width: 75%;
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    align-items: center;
-    justify-content: space-around;
+  margin: 0 auto;
+  width: 75%;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-around;
 }
 
 .div_filtrar p {
-    color: white;
-    font-size: 18px;
+  color: white;
+  font-size: 18px;
 }
 
 .div_filtrar select {
-    height: 35px;
-    background-color: #c6c6c6;
-    text-align: center;
-    border: 1px solid #c6c6c6;
-    border-radius: 8px;
-    padding: 5px;
+  height: 35px;
+  background-color: #c6c6c6;
+  text-align: center;
+  border: 1px solid #c6c6c6;
+  border-radius: 8px;
+  padding: 5px;
 }
 
 table {
-    text-align: center;
-    width: 65%;
-    margin: 0 auto;
-    border-collapse: separate;
-    border-spacing: 0 11px;
+  text-align: center;
+  width: 65%;
+  margin: 0 auto;
+  border-collapse: separate;
+  border-spacing: 0 11px;
 }
 
 thead {
-    color: white;
-    font-size: 20px;
+  color: white;
+  font-size: 20px;
 }
 
 .tabela_concessionarias tbody {
-    display: block;
-    /* faz tbody se comportar como bloco separado */
-    max-height: 450px;
-    /* altura máxima visível antes de aparecer o scroll */
-    overflow-y: auto;
-    /* ativa rolagem vertical */
+  display: block;
+  /* faz tbody se comportar como bloco separado */
+  max-height: 450px;
+  /* altura máxima visível antes de aparecer o scroll */
+  overflow-y: auto;
+  /* ativa rolagem vertical */
 }
 
 .tabela_concessionarias thead,
 .tabela_concessionarias tbody tr {
-    display: table;
-    /* mantém o layout de tabela correto */
-    width: 100%;
-    /* mantém colunas alinhadas */
-    table-layout: fixed;
-    /* evita que colunas se desalinhem */
+  display: table;
+  /* mantém o layout de tabela correto */
+  width: 100%;
+  /* mantém colunas alinhadas */
+  table-layout: fixed;
+  /* evita que colunas se desalinhem */
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.tabela_concessionarias thead:first-child {
+  text-decoration: none;
+  cursor: none;
 }
 
 .tr_rodovia {
-    background-color: #c6c6c6;
-    margin-bottom: 3px;
+  background-color: #c6c6c6;
+  margin-bottom: 3px;
 }
 
 .div_btn {
-    width: 100%;
-    display: flex;
-    justify-content: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .btn_gerarRelatorio {
-    width: 40%;
-    background-color: #41b8d5;
-    border: 1px solid #41b8d5;
-    height: 30px;
-    color: whitesmoke;
-    font-size: 18px;
-    border-radius: 8px;
+  width: 40%;
+  background-color: #41b8d5;
+  border: 1px solid #41b8d5;
+  height: 30px;
+  color: whitesmoke;
+  font-size: 18px;
+  border-radius: 8px;
 }
 
 .btn_gerarRelatorio:hover {
-    background-color: #2d8bba;
-    border: 1px solid #41b8d5;
-    transition: 0.4s;
+  background-color: #2d8bba;
+  border: 1px solid #41b8d5;
+  transition: 0.4s;
 }
 
 /* Gráficos */
 
 .div_container_graficos {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .div_filtro_data {
-    display: flex;
-    gap: 10px;
-    font-size: 18px;
-    align-items: center;
-    height: 5%;
+  display: flex;
+  gap: 10px;
+  font-size: 18px;
+  align-items: center;
+  height: 5%;
 }
 
 .div_filtro_data input {
-    padding: 2px;
-    font-size: 14px;
+  padding: 2px;
+  font-size: 14px;
 }
 
 .div_graficos {
-    height: 95%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    gap: 10px;
+  height: 95%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 10px;
 }
 
 .div_grafico {
-    width: 100%;
-    height: 35%;
-    background-color: #aca8a8;
-    border: 1px solid #c6c6c6;
-    border-radius: 10px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 35%;
+  background-color: #aca8a8;
+  border: 1px solid #c6c6c6;
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 .graficos_pizza {
-    width: 100%;
-    height: 35%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  width: 100%;
+  height: 35%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .graficos_pizza div {
-    background-color: #010358;
-    border-radius: 10px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-    width: 40%;
+  background-color: #010358;
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  width: 40%;
 }
 
-
 .filter {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    gap: 1%;
-    height: 5%;
-    color: #010358;
-    font-family: "Poppins", sans-serif;
-    font-weight: 500;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 1%;
+  height: 5%;
+  color: #010358;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
 }
 
 .filtro {
-    background-color: #010358;
-    border-radius: 20px;
-    color: white;
-    width: 8%;
-    display: flex;
-    justify-content: center;
+  background-color: #010358;
+  border-radius: 20px;
+  color: white;
+  width: 8%;
+  display: flex;
+  justify-content: center;
 }
 
 .filter input {
-    background-color: transparent;
-    border-color: #010358;
-    border-radius: 10px;
-    text-align: center;
+  background-color: transparent;
+  border-color: #010358;
+  border-radius: 10px;
+  text-align: center;
 }
 
 .filter input:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .filter select {
-    background-color: transparent;
-    border-color: #010358;
-    border-radius: 10px;
-    text-align: center;
+  background-color: transparent;
+  border-color: #010358;
+  border-radius: 10px;
+  text-align: center;
 }
 
 .filter select:hover {
-    cursor: pointer;
+  cursor: pointer;
 }

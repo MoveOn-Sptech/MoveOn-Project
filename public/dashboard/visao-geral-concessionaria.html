@@ -33,7 +33,14 @@
 
     <section class="section_principal">
       <div class="div_container_concessionarias">
-        <h2>Concessionárias com mais acidentes</h2>
+        <div class="titles">
+          <h2>Concessionárias com mais acidentes</h2>
+
+          <h4>
+            Comparação de <span id="span_mes_atual"></span> para
+            <span id="span_mes_anterior"></span>
+          </h4>
+        </div>
 
         <div class="div_pesquisar_concessionarias">
           <p>Pesquisar concessionária:</p>
@@ -83,12 +90,16 @@
         <span class="filter">
           <p class="filtro">Filtro</p>
           <p>Selecione o ano:</p>
-          <select name="filtro_ano" id="filtro_ano">
-            <option value="2025">2025</option>
-            <option value="2025">2024</option>
-            <option value="2025">2023</option>
-            <option value="2025">2022</option>
-            <option value="2025">2021</option>
+          <select
+            name="filtro_ano"
+            id="filtro_ano"
+            onchange="onChangeFilterDate()"
+          >
+            <option value="2024">2024</option>
+            <option value="2023">2023</option>
+            <option value="2022">2022</option>
+            <option value="2021">2021</option>
+            <option value="2020">2020</option>
           </select>
           <p>selecione um intervalo:</p>
           <input
@@ -143,18 +154,48 @@
   }
 
   function onChangeFilterDate() {
-    const dataInicio = document.getElementById("input_data_inicio").value;
-    const dataFim = document.getElementById("input_data_fim").value;
+    const ano = document.getElementById("filtro_ano").value;
+
+    if (ano == "") {
+      return;
+    }
+
+    let dataInicio = document.getElementById("input_data_inicio").value;
+    let dataFim = document.getElementById("input_data_fim").value;
 
     if (dataInicio == "" || dataFim == "") {
       return;
     }
+
+    dataInicio = `${ano}-${dataInicio.slice(5, 10)}`;
+
+    dataFim = `${ano}-${dataFim.slice(5, 10)}`;
 
     window.location.href = `./visao-geral-concessionaria.html?dataInicio=${dataInicio}&dataFim=${dataFim}`;
   }
 
   input_data_inicio.value = dataInicio;
   input_data_fim.value = dataFim;
+  filtro_ano.value = dataInicio.slice(0, 4);
+
+  const mapMeses = {
+    "01": "Janeiro",
+    "02": "Fevereiro",
+    "03": "Março",
+    "04": "Abril",
+    "05": "Maio",
+    "06": "Junho",
+    "07": "Julho",
+    "08": "Agosto",
+    "09": "Setembro",
+    10: "Outubro",
+    11: "Novembro",
+    12: "Dezembro",
+  };
+
+  span_mes_atual.innerText = mapMeses[dataFim.slice(5, 7)];
+  span_mes_anterior.innerText =
+    mapMeses[String(parseInt(dataFim.slice(5, 7)) - 1).padStart(2, "0")];
 
   function direcionarPaginaConcessionaria(
     idConcessionaria,
@@ -187,7 +228,7 @@
       if (nomeFiltro != "" && porcentagemFiltro != "") {
         if (
           nomeAtual.toLowerCase().includes(nomeFiltro.toLowerCase()) &&
-          porcentagemDeAumento[i] > parseFloat(porcentagemFiltro)
+          Math.abs(porcentagemDeAumento[i]) > parseFloat(porcentagemFiltro)
         ) {
           nomeConcessionariaFiltrado.push(nomeAtual);
           porcentagemDeAumentoFiltrado.push(porcentagemDeAumento[i]);
@@ -200,7 +241,7 @@
           idConcessionariaFiltrado.push(idConcessionaria[i]);
         }
       } else if (porcentagemFiltro != "") {
-        if (porcentagemDeAumento[i] > parseFloat(porcentagemFiltro)) {
+        if (Math.abs(porcentagemDeAumento[i]) > parseFloat(porcentagemFiltro)) {
           nomeConcessionariaFiltrado.push(nomeAtual);
           porcentagemDeAumentoFiltrado.push(porcentagemDeAumento[i]);
           idConcessionariaFiltrado.push(idConcessionaria[i]);
@@ -227,33 +268,49 @@
       if (porcentagemDeAumento[i] > 0) {
         tbody.innerHTML += `
 
-          <tr class="negativo tr_concessionaria" onclick="direcionarPaginaConcessionaria(${idConcessionaria[i]}, '${nomeConcessionaria[i]}')">
-            <td>${nomeConcessionaria[i]}</td>
-            <td>+${porcentagemDeAumento[i]}%</td>
-          </tr>
+            <tr class="positivo tr_concessionaria" onclick="direcionarPaginaConcessionaria(${idConcessionaria[i]}, '${nomeConcessionaria[i]}')">
+              <td>${nomeConcessionaria[i]}</td>
+              <td>-${porcentagemDeAumento[i]}%</td>
+            </tr>
 
-          `;
+            `;
       } else {
-        tbody.innerHTML += `
+        if (porcentagemDeAumento[i] == 0.0) {
+          tbody.innerHTML += `
 
-          <tr class="positivo tr_concessionaria" onclick="direcionarPaginaConcessionaria(${idConcessionaria[i]}, '${nomeConcessionaria[i]}')">
-            <td>${nomeConcessionaria[i]}</td>
-            <td>${porcentagemDeAumento[i]}%</td>
-          </tr>
+            <tr class="positivo tr_concessionaria" onclick="direcionarPaginaConcessionaria(${idConcessionaria[i]}, '${nomeConcessionaria[i]}')">
+              <td>${nomeConcessionaria[i]}</td>
+              <td>0%</td>
+            </tr>
 
-          `;
+            `;
+        } else {
+          tbody.innerHTML += `
+
+            <tr class="negativo tr_concessionaria" onclick="direcionarPaginaConcessionaria(${
+              idConcessionaria[i]
+            }, '${nomeConcessionaria[i]}')">
+              <td>${nomeConcessionaria[i]}</td>
+              <td>+${new String(porcentagemDeAumento[i]).slice(1, 5)}%</td>
+            </tr>
+
+            `;
+        }
       }
     }
   }
 
   function pegarConcessionarias() {
-    fetch("/visaoGeralConcessionaria/concessionarias", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({}),
-    })
+    fetch(
+      `/visaoGeralConcessionaria/concessionarias?dataInicio=${dataInicio}&dataFim=${dataFim}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({}),
+      }
+    )
       .then((response) => {
         if (response.ok) {
           response.json().then((data) => {
@@ -308,11 +365,17 @@
             vetorAcidentes = data.acidentesMunicipio;
 
             const ctx = document.getElementById("myChart");
+            const vetorMunicipioReduzido = vetorMunicipio.map((municipio) => {
+              if (municipio.length > 10) {
+                return municipio.slice(0, 7).concat("...");
+              }
+              return municipio;
+            });
 
             new Chart(ctx, {
               type: "bar",
               data: {
-                labels: vetorMunicipio,
+                labels: vetorMunicipioReduzido, // reduzido só para exibição
                 datasets: [
                   {
                     data: vetorAcidentes,
@@ -329,33 +392,43 @@
                   legend: {
                     display: false,
                   },
-                  labels: {
-                    font: {
-                      size: 10,
-                      weight: "bold",
-                    },
-                  },
                   title: {
                     display: true,
-                    text: "Municípios com mais acidentes",
+                    text: `Municípios com mais acidentes (${dataInicio.slice(
+                      5,
+                      7
+                    )}/${dataInicio.slice(0, 4)} até ${dataFim.slice(
+                      5,
+                      7
+                    )}/${dataFim.slice(0, 4)})`,
                     font: {
                       size: 20,
                       weight: "bold",
                     },
                     color: "#010358",
                   },
+                  tooltip: {
+                    callbacks: {
+                      // aqui você mostra o nome completo
+                      title: function (context) {
+                        const index = context[0].dataIndex;
+                        return vetorMunicipio[index]; // usa o vetor original
+                      },
+                      label: function (context) {
+                        return "Acidentes: " + context.formattedValue;
+                      },
+                    },
+                  },
                 },
                 scales: {
                   x: {
-                    // Eixo X
                     ticks: {
                       font: {
-                        size: 10, // Define o tamanho da fonte em pixels
+                        size: 10,
                       },
                     },
                   },
                   y: {
-                    // Eixo Y
                     ticks: {
                       beginAtZero: true,
                       font: {
@@ -408,10 +481,19 @@
 
             const ctx2 = document.getElementById("myChart2");
 
+            const vetorRegionalDerReduzido = vetorRegionalDer.map(
+              (regional) => {
+                if (regional.length > 10) {
+                  return regional.slice(0, 7).concat("...");
+                }
+                return regional;
+              }
+            );
+
             new Chart(ctx2, {
               type: "bar",
               data: {
-                labels: vetorRegionalDer,
+                labels: vetorRegionalDerReduzido, // reduzido só para exibição
                 datasets: [
                   {
                     data: vetorAcidentes,
@@ -428,33 +510,43 @@
                   legend: {
                     display: false,
                   },
-                  labels: {
-                    font: {
-                      size: 10,
-                      weight: "bold",
-                    },
-                  },
                   title: {
                     display: true,
-                    text: "Regional DER com mais acidentes",
+                    text: `Regional DER com mais acidentes (${dataInicio.slice(
+                      5,
+                      7
+                    )}/${dataInicio.slice(0, 4)} até ${dataFim.slice(
+                      5,
+                      7
+                    )}/${dataFim.slice(0, 4)})`,
                     font: {
                       size: 20,
                       weight: "bold",
                     },
                     color: "#010358",
                   },
+                  tooltip: {
+                    callbacks: {
+                      // Mostra o nome completo no tooltip
+                      title: function (context) {
+                        const index = context[0].dataIndex;
+                        return vetorRegionalDer[index]; // usa o vetor original
+                      },
+                      label: function (context) {
+                        return "Acidentes: " + context.formattedValue;
+                      },
+                    },
+                  },
                 },
                 scales: {
                   x: {
-                    // Eixo X
                     ticks: {
                       font: {
-                        size: 10, // Define o tamanho da fonte em pixels
+                        size: 10,
                       },
                     },
                   },
                   y: {
-                    // Eixo Y
                     ticks: {
                       beginAtZero: true,
                       font: {
@@ -507,10 +599,27 @@
 
             const ctx3 = document.getElementById("myChart3");
 
+            const dataInicioFormatada = Intl.DateTimeFormat("pt-BR").format(
+              new Date(dataInicio)
+            );
+
+            const dataFimFormatada = Intl.DateTimeFormat("pt-BR").format(
+              new Date(dataFim)
+            );
+
+            const vetorRegionalAdmReduzido = vetorRegionalAdm.map(
+              (regional) => {
+                if (regional.length > 10) {
+                  return regional.slice(0, 7).concat("...");
+                }
+                return regional;
+              }
+            );
+
             new Chart(ctx3, {
               type: "bar",
               data: {
-                labels: vetorRegionalAdm,
+                labels: vetorRegionalAdmReduzido, // reduzido só para exibição
                 datasets: [
                   {
                     data: vetorAcidentes,
@@ -527,33 +636,43 @@
                   legend: {
                     display: false,
                   },
-                  labels: {
-                    font: {
-                      size: 10,
-                      weight: "bold",
-                    },
-                  },
                   title: {
                     display: true,
-                    text: "Regional ADM com mais acidentes",
+                    text: `Regional ADM com mais acidentes (${dataInicio.slice(
+                      5,
+                      7
+                    )}/${dataInicio.slice(0, 4)} até ${dataFim.slice(
+                      5,
+                      7
+                    )}/${dataFim.slice(0, 4)})`,
                     font: {
                       size: 20,
                       weight: "bold",
                     },
                     color: "#010358",
                   },
+                  tooltip: {
+                    callbacks: {
+                      // Mostra o nome completo no tooltip
+                      title: function (context) {
+                        const index = context[0].dataIndex;
+                        return vetorRegionalAdm[index]; // usa o vetor original
+                      },
+                      label: function (context) {
+                        return "Acidentes: " + context.formattedValue;
+                      },
+                    },
+                  },
                 },
                 scales: {
                   x: {
-                    // Eixo X
                     ticks: {
                       font: {
-                        size: 10, // Define o tamanho da fonte em pixels
+                        size: 10,
                       },
                     },
                   },
                   y: {
-                    // Eixo Y
                     ticks: {
                       beginAtZero: true,
                       font: {
