@@ -62,11 +62,7 @@
         </thead>
 
         <tbody id="tbody">
-          <!-- <tr class="negativo tr_concessionaria" onclick="direcionarPaginaConcessionaria(${data.idConcessionaria[i]})">
-                        <td>COLINAS</td>
-                        <td>+10%</td>
-                    </tr>
--->
+          <!-- Conteúdo gerado via JS -->
         </tbody>
       </table>
     </div>
@@ -103,6 +99,12 @@
       </div>
     </div>
   </section>
+
+  <!-- LOADING SCREEN -->
+  <div id="div_aguardar" class="loading-div">
+    <img src="../assets/tela_carregamento.gif" id="loading-gif">
+  </div>
+
 </body>
 
 </html>
@@ -171,11 +173,18 @@
   span_mes_anterior.innerText =
     mapMeses[String(parseInt(dataFim.slice(5, 7)) - 1).padStart(2, "0")];
 
+  // --- ALTERAÇÃO AQUI: Função de redirecionamento com Loading ---
   function direcionarPaginaConcessionaria(
     idConcessionaria,
     nomeConcessionaria
   ) {
-    window.location.href = `./pagina-concessionaria.html?idConcessionaria=${idConcessionaria}&nomeConcessionaria=${nomeConcessionaria}&dataInicio=${dataInicio}&dataFim=${dataFim}`;
+    // Exibe o GIF
+    document.getElementById("div_aguardar").style.display = "flex";
+
+    // Aguarda 1.5s antes de mudar de página
+    setTimeout(() => {
+        window.location.href = `./pagina-concessionaria.html?idConcessionaria=${idConcessionaria}&nomeConcessionaria=${nomeConcessionaria}&dataInicio=${dataInicio}&dataFim=${dataFim}`;
+    }, 1500);
   }
 
   let nomeConcessionaria = [];
@@ -328,13 +337,6 @@
 
             vetorMunicipio = data.nomeMunicipios;
 
-            // for (let index = 0; index < vetorMunicipio.length; index++) {
-            //     const element = vetorMunicipio[index];
-            //     if(element.length > 12){
-            //         vetorMunicipio[index] = element.slice(0,7).concat("...")
-            //     }
-            // }
-
             vetorAcidentes = data.acidentesMunicipio;
 
             const ctx = document.getElementById("myChart");
@@ -442,13 +444,6 @@
             console.log(data);
 
             vetorRegionalDer = data.nomeRegionalDer;
-
-            // for (let index = 0; index < vetorMunicipio.length; index++) {
-            //     const element = vetorMunicipio[index];
-            //     if(element.length > 12){
-            //         vetorMunicipio[index] = element.slice(0,7).concat("...")
-            //     }
-            // }
 
             vetorAcidentes = data.acidentesRegionalDer;
 
@@ -560,13 +555,6 @@
             console.log(data);
 
             vetorRegionalAdm = data.nomeRegionalAdm;
-
-            // for (let index = 0; index < vetorMunicipio.length; index++) {
-            //     const element = vetorMunicipio[index];
-            //     if(element.length > 12){
-            //         vetorMunicipio[index] = element.slice(0,7).concat("...")
-            //     }
-            // }
 
             vetorAcidentes = data.acidentesRegionalAdm;
 

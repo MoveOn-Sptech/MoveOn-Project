@@ -1,4 +1,4 @@
-/* Estilização páginas de concessionaria */
+/* Estilização páginas de concessionaria - Padrão MoveOn */
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 * {
@@ -9,10 +9,11 @@
 
 body {
   background-image: url("../../assets/imgs/fundo-dashboard.png");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 /* NAVBAR */
-
 nav {
     width: 100%;
     height: 10vh;
@@ -70,6 +71,7 @@ nav .user_icon img:hover {
 .titulo_dashboard {
   color: #010358;
   text-align: center;
+  font-family: "Poppins", sans-serif;
   font-weight: 700;
   font-size: 40px;
   margin-top: 15px;
@@ -84,19 +86,16 @@ nav .user_icon img:hover {
   margin-bottom: 10px;
 }
 
+/* CARD ESQUERDA - LISTA DE RODOVIAS */
 .div_container_concessionarias {
   display: flex;
   flex-direction: column;
   width: 40%;
   background-color: #010358;
-  border-radius: 10px;
-  border: 1px solid #010358;
+  border-radius: 20px; /* Padrão Rodovia */
+  box-shadow: 5px 5px 20px 0px black; /* Padrão Rodovia */
   height: 100%;
   justify-content: space-around;
-}
-
-.div_container_concessionarias h2 {
-  text-align: center;
   color: white;
 }
 
@@ -108,54 +107,73 @@ nav .user_icon img:hover {
   color: white;
 }
 
+.titles h2 {
+    font-family: "Poppins", sans-serif;
+    margin-top: 5%;
+}
+
 .div_pesquisar_concessionarias {
   margin: 0 auto;
-  width: 70%;
+  width: 80%;
   display: flex;
   flex-direction: column;
   gap: 5px;
+  align-items: center;
+  font-weight: 600;
 }
 
 .div_pesquisar_concessionarias p {
   color: white;
   font-size: 16px;
+  align-self: flex-start;
+  margin-left: 10%;
 }
 
 .div_pesquisar_concessionarias input {
   height: 35px;
-  background-color: #c6c6c6;
+  width: 80%;
+  background-color: #f5f5f5; /* Padrão Rodovia */
   text-align: center;
-  border: 1px solid #c6c6c6;
+  border: 1px solid #f5f5f5;
   border-radius: 8px;
+  font-weight: 600;
+  color: #010358;
 }
 
 .div_filtrar {
   margin: 0 auto;
-  width: 75%;
+  width: 80%;
   display: flex;
-  flex-direction: row;
-  gap: 10px;
+  flex-direction: column;
+  gap: 5px;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
+  font-weight: 600;
 }
 
 .div_filtrar p {
   color: white;
-  font-size: 18px;
+  font-size: 16px;
+  align-self: flex-start;
+  margin-left: 10%;
 }
 
 .div_filtrar select {
   height: 35px;
-  background-color: #c6c6c6;
+  width: 80%;
+  background-color: #f5f5f5; /* Padrão Rodovia */
   text-align: center;
-  border: 1px solid #c6c6c6;
+  border: 1px solid #f5f5f5;
   border-radius: 8px;
   padding: 5px;
+  font-weight: 600;
+  color: #010358;
+  cursor: pointer;
 }
 
 table {
   text-align: center;
-  width: 65%;
+  width: 80%;
   margin: 0 auto;
   border-collapse: separate;
   border-spacing: 0 11px;
@@ -163,115 +181,68 @@ table {
 
 thead {
   color: white;
-  font-size: 20px;
+  font-size: 100%;
 }
 
 .tabela_concessionarias tbody {
   display: block;
-  /* faz tbody se comportar como bloco separado */
   max-height: 450px;
-  /* altura máxima visível antes de aparecer o scroll */
   overflow-y: auto;
-  /* ativa rolagem vertical */
 }
 
 .tabela_concessionarias thead,
 .tabela_concessionarias tbody tr {
   display: table;
-  /* mantém o layout de tabela correto */
   width: 100%;
-  /* mantém colunas alinhadas */
   table-layout: fixed;
-  /* evita que colunas se desalinhem */
-  cursor: pointer;
-  text-decoration: underline;
 }
 
-.tabela_concessionarias thead:first-child {
-  text-decoration: none;
-  cursor: none;
-}
-
+/* Linhas da Tabela - Estilo Rodovia */
 .tr_rodovia {
-  background-color: #c6c6c6;
-  margin-bottom: 3px;
+  background-color: #f5f5f5; /* Padrão Rodovia */
+  color: #010358;
+  font-weight: 600;
+  border-radius: 10px;
+  margin-bottom: 5px;
+  transition: transform 0.2s;
+}
+
+.tr_rodovia:hover {
+    cursor: pointer;
+    transform: scale(1.02);
 }
 
 .div_btn {
   width: 100%;
   display: flex;
   justify-content: center;
+  margin-bottom: 20px;
 }
 
 .btn_gerarRelatorio {
-  width: 40%;
+  width: 50%;
   background-color: #41b8d5;
-  border: 1px solid #41b8d5;
-  height: 30px;
+  border: none;
+  height: 40px;
   color: whitesmoke;
   font-size: 18px;
-  border-radius: 8px;
+  font-weight: 700;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.3s;
 }
 
 .btn_gerarRelatorio:hover {
   background-color: #2d8bba;
-  border: 1px solid #41b8d5;
-  transition: 0.4s;
+  transform: scale(1.05);
 }
 
-/* Gráficos */
-
+/* GRÁFICOS DIREITA */
 .div_container_graficos {
   width: 50%;
   display: flex;
   flex-direction: column;
   height: 100%;
-}
-
-.div_filtro_data {
-  display: flex;
-  gap: 10px;
-  font-size: 18px;
-  align-items: center;
-  height: 5%;
-}
-
-.div_filtro_data input {
-  padding: 2px;
-  font-size: 14px;
-}
-
-.div_graficos {
-  height: 95%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  gap: 10px;
-}
-
-.div_grafico {
-  width: 100%;
-  height: 35%;
-  background-color: #aca8a8;
-  border: 1px solid #c6c6c6;
-  border-radius: 10px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-}
-
-.graficos_pizza {
-  width: 100%;
-  height: 35%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.graficos_pizza div {
-  background-color: #010358;
-  border-radius: 10px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-  width: 40%;
 }
 
 .filter {
@@ -282,36 +253,75 @@ thead {
   height: 5%;
   color: #010358;
   font-family: "Poppins", sans-serif;
-  font-weight: 500;
+  font-weight: 600;
+  justify-content: flex-end;
 }
 
 .filtro {
   background-color: #010358;
   border-radius: 20px;
   color: white;
-  width: 8%;
+  padding: 5px 15px;
+  margin-right: 10px;
+}
+
+.filter input, .filter select {
+  background-color: transparent;
+  border: 1px solid #010358;
+  border-radius: 10px;
+  text-align: center;
+  color: #010358;
+  font-weight: 600;
+}
+
+.filter input:hover, .filter select:hover {
+  cursor: pointer;
+  background-color: #e0e0e0;
+}
+
+.div_graficos {
+  height: 95%;
   display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 15px;
+  padding-top: 10px;
+}
+
+/* Container de Gráficos de Barra (Cinza) */
+.div_grafico {
+  width: 100%;
+  height: 35%;
+  background-color: #b5b5b5; /* Padrão Rodovia */
+  border: none;
+  border-radius: 15px;
+  box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.4);
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/* Container dos Gráficos de Pizza (Azul) */
+.graficos_pizza {
+  width: 100%;
+  height: 35%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.graficos_pizza div {
+  background-color: #010358; /* Azul Escuro */
+  border-radius: 15px;
+  box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.4);
+  width: 48%; /* Levemente maior que 40% para preencher melhor */
+  padding: 10px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
   justify-content: center;
 }
 
-.filter input {
-  background-color: transparent;
-  border-color: #010358;
-  border-radius: 10px;
-  text-align: center;
-}
-
-.filter input:hover {
-  cursor: pointer;
-}
-
-.filter select {
-  background-color: transparent;
-  border-color: #010358;
-  border-radius: 10px;
-  text-align: center;
-}
-
-.filter select:hover {
-  cursor: pointer;
+.grafico {
+    width: 100% !important;
+    height: 100% !important;
 }
