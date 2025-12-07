@@ -67,7 +67,6 @@ CREATE TABLE IF NOT EXISTS Acidente (
     veiculosEnvolvidos VARCHAR(255) NOT NULL,
     fkRodovia INT NOT NULL,
     fkConcessionaria INT NOT NULL,
-    FOREIGN KEY (fkRodovia) REFERENCES Rodovia(idRodovia),
-    FOREIGN KEY (fkConcessionaria) REFERENCES Rodovia(fkConcessionaria),
-    PRIMARY KEY (idAcidente, fkRodovia, fkConcessionaria)
+   FOREIGN KEY (fkRodovia, fkConcessionaria) REFERENCES Rodovia(idRodovia, fkConcessionaria),
+   PRIMARY KEY (idAcidente, fkRodovia, fkConcessionaria)
 );
