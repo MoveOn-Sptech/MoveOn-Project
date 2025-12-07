@@ -4,9 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Página rodovia | Dashboard</title>
-
     <link rel="stylesheet" href="../css/dashboard/rodovia.css" />
     <link rel="icon" href="../assets/icon/volante_MoveOn.png" />
 </head>
@@ -14,7 +12,6 @@
 <body>
 
     <nav>
-
         <span class="logo_nav">
             <a href="visao-geral-rodovia.html"><img src="../assets/logo_branca.png" alt=""></a>
         </span>
@@ -24,7 +21,6 @@
         <span class="user_icon">
             <a href="../perfil.html"><img src="../assets/icon/user-dash.png" alt=""></a>
         </span>
-
     </nav>
 
     <section class="rodovia_main">
@@ -36,324 +32,263 @@
         <a class="voltar" href="visao-geral-rodovia.html"><button>Voltar</button></a>
 
         <div class="card_rodovia2">
-
-            <h2>Rodovia com mais acidentes</h2>
-
-            <span class="info">
-
-                <p>Denominação: <b>ANHANGUERA</b></p>
-                <p>Concessionária: <b>ANHANGUERA</b></p>
-                <p>Município: <b>Campinas</b></p>
-                <p>Regional DER: <b>Campinas</b></p>
-
+            <h2>Rodovia selecionada</h2>
+            <span class="info" id="info_rodovia">
+                <p>Carregando...</p>
             </span>
-
         </div>
 
         <span class="filter">
             <p class="filtro">Filtro</p>
             <p>Selecione o ano:</p>
-            <select name="filtro_ano" id="filtro_ano">
+            <select name="filtro_ano" id="filtro_ano" onchange="mudarAno()">
                 <option value="2025">2025</option>
-                <option value="2025">2024</option>
-                <option value="2025">2023</option>
-                <option value="2025">2022</option>
-                <option value="2025">2021</option>
+                <option value="2024" selected>2024</option>
+                <option value="2023">2023</option>
             </select>
             <p> selecione um intervalo: </p>
-            <input type="date">
+            <input type="date" id="data_inicio">
             <p>até</p>
-            <input type="date">
+            <input type="date" id="data_fim">
+            <button onclick="carregarDados()" style="margin-left: 10px; padding: 5px; border-radius: 5px; cursor: pointer; font-weight: bold; color: #010358;">Filtrar</button>
         </span>
 
         <div class="kpis">
-
             <div class="kpi">
                 <p class="kpi_text">Total de acidentes</p>
-                <p class="kpi_data">127</p>
+                <p class="kpi_data" id="kpi_total">0</p>
             </div>
             <div class="kpi">
                 <p class="kpi_text">Total de óbitos</p>
-                <p class="kpi_data">74</p>
+                <p class="kpi_data" id="kpi_obitos">0</p>
             </div>
             <div class="kpi">
                 <p class="kpi_text">Índice de gravidade</p>
-                <p class="kpi_data">23%</p>
+                <p class="kpi_data" id="kpi_gravidade">0%</p>
             </div>
-
         </div>
 
+        <!-- GRÁFICOS -->
         <div class="card_frequencia">
             <p class="card_text">Tipos de acidentes mais frequentes</p>
-            <p class="card_legenda">Filtro aplicado de: 01/06/24 até 01/06/25</p>
-            <div class="grafico_barra">
-                <canvas id="myChart1" class="bar"></canvas>
-            </div>
+            <p class="card_legenda" id="legenda_freq">Filtro aplicado...</p>
+            <div class="grafico_barra"><canvas id="myChart1"></canvas></div>
         </div>
 
         <div class="card_clima">
             <p class="card_text2">Condição climática</p>
-            <p class="card_legenda2">Filtro aplicado de: 01/06/24 até 01/06/25</p>
-            <div class="grafico_rosca">
-                <canvas id="myChart2" class="rosca"></canvas>
-            </div>
+            <p class="card_legenda2" id="legenda_clima">Filtro aplicado...</p>
+            <div class="grafico_rosca"><canvas id="myChart2"></canvas></div>
         </div>
 
         <div class="card_veiculos">
             <p class="card_text2">Veículos</p>
-            <p class="card_legenda2">Filtro aplicado de: 01/06/24 até 01/06/25</p>
-            <div class="grafico_pizza">
-                <canvas id="myChart3" class="pizza"></canvas>
-            </div>
+            <p class="card_legenda2" id="legenda_veic">Filtro aplicado...</p>
+            <div class="grafico_pizza"><canvas id="myChart3"></canvas></div>
         </div>
 
         <div class="card_vitimas">
             <p class="card_text">Vítimas por gravidade</p>
-            <p class="card_legenda">Filtro aplicado de: 01/06/24 até 01/06/25</p>
-            <div class="grafico_barra">
-                <canvas id="myChart4" class="bar"></canvas>
-            </div>
+            <p class="card_legenda" id="legenda_vit">Filtro aplicado...</p>
+            <div class="grafico_barra"><canvas id="myChart4"></canvas></div>
         </div>
 
         <div class="card_periodos">
             <p class="card_text">Períodos dos acidentes</p>
-            <p class="card_legenda">Filtro aplicado de: 01/06/24 até 01/06/25</p>
-            <div class="grafico_pizza">
-                <canvas id="myChart5" class="pizza"></canvas>
-            </div>
+            <p class="card_legenda" id="legenda_per">Filtro aplicado...</p>
+            <div class="grafico_pizza"><canvas id="myChart5"></canvas></div>
         </div>
 
         <div class="card_marcokm">
             <p class="card_text">Marco KM com mais acidentes</p>
-            <p class="card_legenda">Filtro aplicado de: 01/06/24 até 01/06/25</p>
-            <div class="grafico_barra">
-                <canvas id="myChart6" class="bar"></canvas>
-            </div>
+            <p class="card_legenda" id="legenda_km">Filtro aplicado...</p>
+            <div class="grafico_barra"><canvas id="myChart6"></canvas></div>
         </div>
 
         <a href="#" class="up"></a>
-
     </section>
 
 </body>
-
 </html>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 
 <script>
+    const params = new URLSearchParams(window.location.search);
+    const idRodovia = params.get("id");
+    let charts = {};
 
-    // Acidentes mais frequentes
-    const chartFreq = document.getElementById('myChart1');
-
-    new Chart(chartFreq, {
-        type: 'bar',
-        data: {
-            labels: ["Tipo 1", "Tipo 2", "Tipo 3", "Tipo 4"],
-            datasets: [{
-                data: [5, 12, 8, 16],
-                borderWidth: 1,
-                borderRadius: 10,
-                backgroundColor: [
-                    '#6ce5e8',
-                    '#2f5f98',
-                    '#2d8bba',
-                    '#41b8d5'
-                ]
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            layout: { padding: 10 },
-            plugins: {
-                legend: {
-                    display: false
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
+    window.onload = () => {
+        mudarAno(); 
+        
+        if(idRodovia) {
+            carregarDados();
+        } else {
+            console.warn("ID da rodovia não encontrado na URL.");
         }
-    });
+    };
 
-    // Condição climática (Rosca)
-    const chartClima = document.getElementById('myChart2');
-    new Chart(chartClima, {
-        type: 'doughnut',
-        data: {
-            labels: ['Sol', 'Neblima', 'Chuva'],
-            datasets: [{
-                data: [43, 21, 35],
-                backgroundColor: [
-                    '#6ce5e8',
-                    '#2f5f98',
-                    '#2d8bba'
-                ],
-                borderWidth: 0
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            layout: { padding: 10 },
-            plugins: {
-                legend: {
-                    display: true,
-                    position: 'bottom',
-                    labels: {
+    function mudarAno() {
+        var ano = document.getElementById("filtro_ano").value;
+        document.getElementById("data_inicio").value = `${ano}-01-01`;
+        document.getElementById("data_fim").value = `${ano}-12-31`;
+    }
+
+    function atualizarLegendas(inicio, fim) {
+        const formatar = (data) => data.split('-').reverse().join('/');
+        const texto = `Filtro aplicado de: ${formatar(inicio)} até ${formatar(fim)}`;
+
+        const ids = ['legenda_freq', 'legenda_clima', 'legenda_veic', 'legenda_vit', 'legenda_per', 'legenda_km'];
+        ids.forEach(id => {
+            const el = document.getElementById(id);
+            if(el) el.innerText = texto;
+        });
+    }
+
+    function carregarDados() {
+        const inicio = document.getElementById("data_inicio").value;
+        const fim = document.getElementById("data_fim").value;
+
+        atualizarLegendas(inicio, fim);
+
+        fetch(`/visaoDetalhadaRodovia/dados/${idRodovia}?inicio=${inicio}&fim=${fim}`)
+            .then(res => {
+                if(!res.ok) throw new Error("Erro na API");
+                return res.json();
+            })
+            .then(data => {
+                atualizarKPIs(data.kpis);
+                atualizarInfo(data.info);
+                renderizarGraficos(data);
+            })
+            .catch(err => console.error("Erro ao carregar dados:", err));
+    }
+
+    function atualizarKPIs(kpis) {
+        document.getElementById("kpi_total").innerText = kpis.totalAcidentes || 0;
+        document.getElementById("kpi_obitos").innerText = kpis.totalObitos || 0;
+        
+        let gravidade = 0;
+        if (kpis.totalAcidentes > 0) {
+            gravidade = (kpis.totalGravesFatais / kpis.totalAcidentes) * 100;
+        }
+        document.getElementById("kpi_gravidade").innerText = gravidade.toFixed(1) + "%";
+    }
+
+    function atualizarInfo(info) {
+        if(!info) return;
+        document.getElementById("info_rodovia").innerHTML = `
+            <p>Denominação: <b>${info.denominacaoRodovia}</b></p>
+            <p>Concessionária: <b>${info.nomeConcessionaria}</b></p>
+            <p>Município: <b>${info.municipioRodovia}</b></p>
+            <p>Regional DER: <b>${info.regionalDer}</b></p>
+        `;
+    }
+
+    function criarGrafico(canvasId, type, labels, data, colors, legend = false, showLabelsInside = false) {
+        const ctx = document.getElementById(canvasId);
+        if (charts[canvasId]) charts[canvasId].destroy();
+
+        const colorLabel = (canvasId === 'myChart2' || canvasId === 'myChart3') ? 'white' : '#010358';
+
+        charts[canvasId] = new Chart(ctx, {
+            type: type,
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: data,
+                    backgroundColor: colors,
+                    borderWidth: 1,
+                    borderRadius: type === 'bar' ? 10 : 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { 
+                        display: legend, 
+                        position: 'bottom',
+                        labels: { color: colorLabel }
+                    },
+                    datalabels: {
+                        display: showLabelsInside,
                         color: 'white',
                         font: {
-                            size: 14
-                        }
+                            weight: 'bold',
+                            size: 12
+                        },
+                        formatter: (value, context) => {
+                            // Se a fatia for muito pequena (< 5%), esconde o texto para não poluir
+                            let sum = 0;
+                            let dataArr = context.chart.data.datasets[0].data;
+                            dataArr.map(data => { sum += data; });
+                            let percentage = (value*100 / sum).toFixed(0);
+                            
+                            if (percentage < 3) return ""; // Esconde se for menor que 3%
+                            return context.chart.data.labels[context.dataIndex];
+                        },
+                        anchor: 'center',
+                        align: 'center'
                     }
-                }
-            }
-        }
-    });
-
-    // Veículos
-    const chartVeiculos = document.getElementById('myChart3');
-    new Chart(chartVeiculos, {
-        type: 'pie',
-        data: {
-            labels: ['Moto', 'Caminhão', 'Carro'],
-            datasets: [{
-                data: [26, 34, 40],
-                backgroundColor: [
-                    '#6ce5e8',
-                    '#2f5f98',
-                    '#2d8bba'
-                ],
-                borderWidth: 0
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            layout: { padding: 10 },
-            plugins: {
-                legend: {
-                    display: true,
-                    position: 'bottom',
-                    labels: {
-                        color: 'white',
-                        font: {
-                            size: 14
-                        }
+                },
+                scales: {
+                    y: {
+                        display: type === 'bar', 
+                        ticks: { color: '#010358' }
+                    },
+                    x: {
+                        display: type === 'bar',
+                        ticks: { color: '#010358' }
                     }
-                }
-            }
-        }
-    });
-
-    // Vítimas por gravidade
-    const chartVit = document.getElementById('myChart4');
-
-    new Chart(chartVit, {
-        type: 'bar',
-        data: {
-            labels: ["Gravidade 1", "Gravidade 2", "Gravidade 3", "Gravidade 4"],
-            datasets: [{
-                data: [30, 26, 18, 42],
-                borderWidth: 1,
-                borderRadius: 10,
-                backgroundColor: [
-                    '#6ce5e8',
-                    '#2f5f98',
-                    '#2d8bba',
-                    '#41b8d5'
-                ]
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            layout: { padding: 10 },
-            plugins: {
-                legend: {
-                    display: false
                 }
             },
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
+            plugins: [ChartDataLabels]
+        });
+    }
 
-    // Períodos dos acidentes
-    const chartPeriodo = document.getElementById('myChart5');
-    new Chart(chartPeriodo, {
-        type: 'pie',
-        data: {
-            labels: ['Manhã', 'Tarde', 'Noite'],
-            datasets: [{
-                data: [37, 20, 43],
-                backgroundColor: [
-                    '#6ce5e8',
-                    '#2d8bba',
-                    '#2f5f98'
-                ],
-                borderWidth: 0
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            layout: { padding: 10 },
-            plugins: {
-                legend: {
-                    display: true,
-                    position: 'left',
-                    labels: {
-                        color: 'black',
-                        font: {
-                            size: 20
-                        }
-                    }
-                }
-            }
-        }
-    });
+    function renderizarGraficos(dados) {
+        const coresAzul = ['#6ce5e8', '#2f5f98', '#2d8bba', '#41b8d5', '#1a3c61', '#4aa3c9'];
 
-    // Marco KM com mais acidentes
-    const chartkm = document.getElementById('myChart6');
+        // Tipos
+        criarGrafico('myChart1', 'bar', 
+            dados.tipos.map(i => i.tipoAcidente), 
+            dados.tipos.map(i => i.qtd), 
+            coresAzul
+        );
 
-    new Chart(chartkm, {
-        type: 'bar',
-        data: {
-            labels: ["Km 0 ao 50", "Km 50 ao 100", "Km 100 ao 150", "Km 150 ao 200"],
-            datasets: [{
-                data: [20, 51, 30, 23],
-                borderWidth: 1,
-                borderRadius: 10,
-                backgroundColor: [
-                    '#6ce5e8',
-                    '#2f5f98',
-                    '#2d8bba',
-                    '#41b8d5'
-                ]
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            layout: { padding: 10 },
-            plugins: {
-                legend: {
-                    display: false
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
+        // Clima
+        criarGrafico('myChart2', 'doughnut', 
+            dados.clima.map(i => i.condicaoMeteorologica), 
+            dados.clima.map(i => i.qtd), 
+            coresAzul, true, true 
+        );
 
+        // Veículos
+        criarGrafico('myChart3', 'pie', 
+            dados.veiculos.map(i => i.tipoVeiculo), 
+            dados.veiculos.map(i => i.qtd), 
+            coresAzul, true, true 
+        );
+
+        // Vítimas
+        const labelsVit = ['Leve', 'Grave', 'Fatal'];
+        const dataVit = [dados.vitimas.leve || 0, dados.vitimas.grave || 0, dados.vitimas.fatal || 0];
+        criarGrafico('myChart4', 'bar', labelsVit, dataVit, coresAzul);
+
+        // Horários
+        criarGrafico('myChart5', 'pie', 
+            dados.horarios.map(i => i.periodo), 
+            dados.horarios.map(i => i.qtd), 
+            coresAzul, true, true
+        );
+
+        // KMs
+        criarGrafico('myChart6', 'bar', 
+            dados.kms.map(i => i.faixaKm), 
+            dados.kms.map(i => i.qtd), 
+            coresAzul
+        );
+    }
 </script>

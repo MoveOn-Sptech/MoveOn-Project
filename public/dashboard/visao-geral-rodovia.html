@@ -14,7 +14,6 @@
 <body>
 
     <nav>
-
         <span class="logo_nav">
             <a href="visao-geral-rodovia.html"><img src="../assets/logo_branca.png" alt=""></a>
         </span>
@@ -24,7 +23,6 @@
         <span class="user_icon">
             <a href="../perfil.html"><img src="../assets/icon/user-dash.png" alt=""></a>
         </span>
-
     </nav>
 
     <section class="geral_main">
@@ -46,74 +44,37 @@
                 <label for="aplicar_filtro">Aplicar um filtro:</label>
                 <select name="aplicar_filtro" id="aplicar_filtro">
                     <option selected value="#">Escolher filtro</option>
-                    <option value="50+">Rodovias com 50+ acidentes</option>
-                    <option value="100+">Rodovias com 100+ acidentes</option>
-                    <option value="500+">Rodovias com 500+ acidentes</option>
-                    <option value="1000+">Rodovias com 1000+ acidentes</option>
-                    <option value="norte">Rodovias na região norte</option>
-                    <option value="sul">Rodovias na região sul</option>
-                    <option value="leste">Rodovias na região leste</option>
-                    <option value="oeste">Rodovias na região oeste</option>
+                    <option value="50+">50+ acidentes</option>
+                    <option value="100+">100+ acidentes</option>
+                    <option value="200+">200+ acidentes</option>
                 </select>
             </span>
 
-            <table>
+            <button onclick="limparFiltros()" class="btn-limpar">Limpar Filtros</button>
 
-                <table class="table_rodovias">
-
-                    <thead>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Quantidade</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-
-                        <tr onclick="showCard()" class="rodovia">
-                            <td>SP348</td>
-                            <td>50</td>
-                        </tr>
-                        <tr onclick="showCard()" class="rodovia">
-                            <td>SP348</td>
-                            <td>50</td>
-                        </tr>
-                        <tr onclick="showCard()" class="rodovia">
-                            <td>SP348</td>
-                            <td>50</td>
-                        </tr>
-                        <tr onclick="showCard()" class="rodovia">
-                            <td>SP348</td>
-                            <td>50</td>
-                        </tr>
-                        <tr onclick="showCard()" class="rodovia">
-                            <td>SP348</td>
-                            <td>50</td>
-                        </tr>
-
-                    </tbody>
-
-                </table>
-
+            <table class="table_rodovias">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Quantidade</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody_rodovias">
+                    <!-- Conteúdo gerado via JS -->
+                </tbody>
             </table>
 
         </div>
 
         <div id="card_rodovia" class="card_rodovia" style="display: none;">
 
-            <h2>Rodovia com mais acidentes</h2>
+            <h2>Rodovia selecionada</h2>
 
             <span class="info">
-
-                <p>Denominação: <b>ANHANGUERA</b></p>
-                <p>Concessionária: <b>ANHANGUERA</b></p>
-                <p>Município: <b>Campinas</b></p>
-                <p>Regional DER: <b>Campinas</b></p>
-
+                <!-- Conteúdo preenchido via JS -->
             </span>
 
             <button onclick="verMais()" id="ver_mais">Ver mais</button>
-
 
             <div id="div_aguardar" class="loading-div">
                 <img src="../assets/tela_carregamento.gif" id="loading-gif">
@@ -132,23 +93,137 @@
 </html>
 
 <script>
+    let listaRodovias = [];
+    let rodoviaSelecionadaId = 0;
 
-    // mostra a tela de redirecionamento
+    window.onload = () => {
+        listarRodovias();
+        configurarEventos();
+    };
+
+    function configurarEventos() {
+        document.getElementById("input_rodovia").addEventListener("keypress", function (event) {
+            if (event.key === "Enter") {
+                listarRodovias();
+            }
+        });
+
+        document.getElementById("aplicar_filtro").addEventListener("change", function () {
+            listarRodovias();
+        });
+    }
+
+    function limparFiltros() {
+        document.getElementById("input_rodovia").value = "";
+        document.getElementById("aplicar_filtro").value = "#";
+
+        // Recarrega a lista padrão
+        listarRodovias();
+    }
+
+    function listarRodovias() {
+        var pesquisaVar = document.getElementById("input_rodovia").value;
+        var filtroVar = document.getElementById("aplicar_filtro").value;
+
+        console.log(`Buscando rodovias... Pesquisa: "${pesquisaVar}", Filtro: "${filtroVar}"`);
+
+        fetch(`/visaoGeralRodovia/listar?pesquisa=${pesquisaVar}&filtro=${filtroVar}`, {
+            method: "GET",
+        })
+            .then(response => {
+                if (response.status === 204) {
+                    renderizarTabelaVazia();
+                    listaRodovias = [];
+                    return;
+                }
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    console.error("Erro na resposta da API:", response.status);
+                    renderizarErro();
+                }
+            })
+            .then(data => {
+                if (!data) return;
+
+                listaRodovias = data;
+                renderizarTabela();
+            })
+            .catch(error => {
+                console.error("Erro na requisição:", error);
+                renderizarErro();
+            });
+    }
+
+    function renderizarTabelaVazia() {
+        var tbody = document.getElementById("tbody_rodovias");
+        tbody.innerHTML = "<tr><td colspan='2' style='text-align:center; padding: 20px; color: white;'>Nenhum registro encontrado para Dez/2024.</td></tr>";
+    }
+
+    function renderizarErro() {
+        var tbody = document.getElementById("tbody_rodovias");
+        tbody.innerHTML = "<tr><td colspan='2' style='text-align:center; padding: 20px; color: yellow;'>Erro ao buscar dados.</td></tr>";
+    }
+
+    function renderizarTabela() {
+        var tbody = document.getElementById("tbody_rodovias");
+        tbody.innerHTML = "";
+
+        if (listaRodovias.length === 0) {
+            renderizarTabelaVazia();
+            return;
+        }
+
+        for (let i = 0; i < listaRodovias.length; i++) {
+            var rodovia = listaRodovias[i];
+
+            tbody.innerHTML += `
+                <tr onclick="showCard(${rodovia.idRodovia})" class="rodovia">
+                    <td>${rodovia.nomeRodovia}</td>
+                    <td>${rodovia.qtdAcidentes}</td>
+                </tr>
+            `;
+        }
+    }
+
+    function showCard(idRodovia) {
+        rodoviaSelecionadaId = idRodovia;
+
+        fetch(`/visaoGeralRodovia/buscar/${idRodovia}`, {
+            method: "GET"
+        })
+            .then(response => {
+                if (response.ok) return response.json();
+                else console.error("Erro ao buscar detalhes da rodovia");
+            })
+            .then(dadosRodovia => {
+                var card = document.getElementById("card_rodovia");
+                var infoDiv = card.querySelector(".info");
+
+                infoDiv.innerHTML = `
+                <p>Denominação: <b>${dadosRodovia.denominacaoRodovia}</b></p>
+                <p>Concessionária: <b>${dadosRodovia.nomeConcessionaria}</b></p>
+                <p>Município: <b>${dadosRodovia.municipioRodovia}</b></p>
+                <p>Regional DER: <b>${dadosRodovia.regionalDer}</b></p>
+            `;
+
+                document.getElementById("card_rodovia").style.display = "flex";
+                document.getElementById("div_logo").style.display = "none";
+            })
+            .catch(erro => {
+                console.error("Erro ao buscar detalhes:", erro);
+            });
+    }
+
     function aguardar() {
         document.getElementById("div_aguardar").style.display = "flex";
     }
 
     function verMais() {
+        if (rodoviaSelecionadaId === 0) return;
         aguardar();
-
         setTimeout(() => {
-            window.location = "pagina-rodovia.html";
+            window.location = "pagina-rodovia.html?id=" + rodoviaSelecionadaId;
         }, 1500);
     }
-
-    function showCard() {
-        document.getElementById("card_rodovia").style.display = "flex";
-        document.getElementById("div_logo").style.display = "none";
-    }
-
 </script>

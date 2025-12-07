@@ -18,10 +18,13 @@ var app = express();
 var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
 var visaoGeralConcessionariaRouter = require("./src/routes/visaoGeralConcessionaria");
+var visaoGeralRodoviaRouter = require("./src/routes/visaoGeralRodovia");
+var visaoDetalhadaRodoviaRouter = require("./src/routes/visaoDetalhadaRodovia");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
+app.use("/visaoDetalhadaRodovia", visaoDetalhadaRodoviaRouter);
 
 app.use(cors());
 
@@ -29,6 +32,7 @@ app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
 app.use("/visaoGeralConcessionaria", visaoGeralConcessionariaRouter);
 app.use("/concessionaria", require("./src/routes/concessionaria"));
+app.use("/visaoGeralRodovia", visaoGeralRodoviaRouter);
 
 
 app.listen(PORTA_APP, function () {
