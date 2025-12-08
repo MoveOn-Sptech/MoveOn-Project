@@ -50,39 +50,75 @@ function editar(req, res) {
     var emailUsuario = req.body.email;
     var id = req.body.idUsuarioVar;
 
-    usuarioModel.editar(id, emailUsuario, nomeUsuario)
-        .then(
-            function (resultadoAutenticar) {
-                console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
-                console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`);
+    // 1. Buscar todos os usuários
+    usuarioModel.listarUsuarios()
+        .then((resultadoUsuarios) => {
 
-                if (resultadoAutenticar.affectedRows == 1) {
-                    var mensagem = "sucesso";
+            // 2. Verificar se o email já existe em outro usuário
+            const emailExistente = resultadoUsuarios.some(u =>
+                u.email === emailUsuario && u.idUsuario != id
+            );
 
-                    res.status(200).json(
-                        {
-                            mensagemRetorno: mensagem
-                        }
-                    );
-
-                } else {
-                    var mensagem = "fracasso";
-
-                    res.status(400).json(
-                        {
-                            mensagemRetorno: mensagem
-                        }
-                    );
-                }
-
+            if (emailExistente) {
+                return res.status(409).json({
+                    mensagemRetorno: "email_ja_existe"
+                });
             }
-        ).catch(
-            function (erro) {
-                console.log(erro);
-                console.log("\nHouve um erro ao editar! Erro: ", erro.sqlMessage);
-                res.status(500).json(erro.sqlMessage);
+
+            // 3. Se passou na validação, editar
+            return usuarioModel.editar(id, emailUsuario, nomeUsuario);
+        })
+        .then((resultadoEditar) => {
+
+            if (!resultadoEditar) return; // já respondeu erro de email
+
+            if (resultadoEditar.affectedRows == 1) {
+                res.status(200).json({ mensagemRetorno: "sucesso" });
+            } else {
+                res.status(400).json({ mensagemRetorno: "fracasso" });
             }
-        );
+
+        })
+        .catch((erro) => {
+            console.log(erro);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+function editarUsuarioUnico(req, res) {
+    var cargoUsuario = req.body.cargo;
+    var emailUsuario = req.body.email;
+    var id = req.body.idUsuarioVar;
+
+    usuarioModel.listarUsuarios()
+        .then((resultadoUsuarios) => {
+
+            const emailExistente = resultadoUsuarios.some(u =>
+                u.email === emailUsuario && u.idUsuario != id
+            );
+
+            if (emailExistente) {
+                return res.status(409).json({
+                    mensagemRetorno: "email_ja_existe"
+                });
+            }
+
+            return usuarioModel.editarUsuarioUnico(id, emailUsuario, cargoUsuario);
+        })
+        .then((resultadoEditar) => {
+
+            if (!resultadoEditar) return;
+
+            if (resultadoEditar.affectedRows == 1) {
+                res.status(200).json({ mensagemRetorno: "sucesso" });
+            } else {
+                res.status(400).json({ mensagemRetorno: "fracasso" });
+            }
+
+        })
+        .catch((erro) => {
+            console.log(erro);
+            res.status(500).json(erro.sqlMessage);
+        });
 }
 
 function editarRodovia(req, res) {
@@ -90,49 +126,10 @@ function editarRodovia(req, res) {
     var valorDenominacao = req.body.valorDenominacao;
     var valorRegionalAdm = req.body.valorRegionalAdm;
     var valorRegionalDer = req.body.valorRegionalDer;
-    var valorFkConcessionaria = req.body.fkConcessionaria;
+    // var valorFkConcessionaria = req.body.fkConcessionariaNova;
+    var valorFkConcessionariaAtual = req.body.fkConcessionariaAtual;
 
-    usuarioModel.editarRodovia(idRodovia, valorDenominacao, valorRegionalAdm, valorRegionalDer, valorFkConcessionaria)
-        .then(
-            function (resultadoAutenticar) {
-                console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
-                console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`);
-
-                if (resultadoAutenticar.affectedRows == 1) {
-                    var mensagem = "sucesso";
-
-                    res.status(200).json(
-                        {
-                            mensagemRetorno: mensagem
-                        }
-                    );
-
-                } else {
-                    var mensagem = "fracasso";
-
-                    res.status(400).json(
-                        {
-                            mensagemRetorno: mensagem
-                        }
-                    );
-                }
-
-            }
-        ).catch(
-            function (erro) {
-                console.log(erro);
-                console.log("\nHouve um erro ao editar! Erro: ", erro.sqlMessage);
-                res.status(500).json(erro.sqlMessage);
-            }
-        );
-}
-
-function editarUsuarioUnico(req, res) {
-    var cargoUsuario = req.body.cargo;
-    var emailUsuario = req.body.email;
-    var id = req.body.idUsuarioVar;
-
-    usuarioModel.editarUsuarioUnico(id, emailUsuario, cargoUsuario)
+    usuarioModel.editarRodovia(idRodovia, valorDenominacao, valorRegionalAdm, valorRegionalDer, valorFkConcessionariaAtual)
         .then(
             function (resultadoAutenticar) {
                 console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
@@ -232,7 +229,7 @@ function listarUsuarios(req, res) {
                         cargos[i] = resultadoAutenticar[i].cargo;
                         emails[i] = resultadoAutenticar[i].email;
                         nomes[i] = resultadoAutenticar[i].nome;
-                        ids[i] = resultadoAutenticar[i].id;
+                        ids[i] = resultadoAutenticar[i].idUsuario;
 
                     }
 
@@ -279,8 +276,8 @@ function listarRodovias(req, res) {
                     for (let i = 0; i < resultadoAutenticar.length; i++) {
 
                         listaIdRodovia[i] = resultadoAutenticar[i].idRodovia;
-                        listaNomeRodovia[i] = resultadoAutenticar[i].nomeRodovia;
-                        listaDenominacao[i] = resultadoAutenticar[i].denominacaoRodovia;
+                        listaNomeRodovia[i] = resultadoAutenticar[i].nome;
+                        listaDenominacao[i] = resultadoAutenticar[i].denominacao;
                         listaConcessionaria[i] = resultadoAutenticar[i].nomeConcessionaria;
                         listaRegionalAdm[i] = resultadoAutenticar[i].regionalAdmSp;
                         listaRegionalDer[i] = resultadoAutenticar[i].regionalDer;

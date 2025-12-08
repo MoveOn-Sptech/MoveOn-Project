@@ -212,7 +212,7 @@
                 </div>
                 <div class="input_group">
                     <label>Concessionária</label>
-                    <input type="text" value="ANHANGUERA" id="input_concessionaria">
+                    <input disabled type="text" value="ANHANGUERA" id="input_concessionaria">
                 </div>
 
                 <div class="input_group">
@@ -457,12 +457,13 @@
                     } else {
                         return response.json().then((data) => {
                             //throw new Error(data.message || "Erro ao deletar.");
+                            fecharModal('modal_editar_usuario_unico')
 
                             Swal.fire({
                                 icon: "error",
                                 title: "Erro",
                                 text:
-                                    "Usuário inválido!"
+                                    "E-mail já existe!"
                             });
 
                         });
@@ -594,12 +595,13 @@
 
                     } else {
                         return response.json().then((data) => {
+                            fecharModal("modal_editar_info")
 
                             Swal.fire({
                                 icon: "error",
                                 title: "Erro",
                                 text:
-                                    "Usuário inválido!"
+                                    "E-mail já existe!"
                             });
 
                         });
@@ -711,80 +713,70 @@
 
         function editarRodovia(idRodovia) {
 
+            const valorDenominacao = document.querySelector("#input_denominacao").value.trim();
+            const valorRegionalAdm = document.querySelector("#input_regionalAdm").value.trim();
+            const valorRegionalDer = document.querySelector("#input_regionalDer").value.trim();
+            const valorConcessionaria = document.querySelector("#input_concessionaria").value;
 
-            var valorDenominacao = document.querySelector("#input_denominacao").value;
-            var valorRegionalAdm = document.querySelector("#input_regionalAdm").value;
-            var valorRegionalDer = document.querySelector("#input_regionalDer").value;
+            const bodyRodovia = {
+                idRodovia: idRodovia
+            };
 
-            const bodyRodovia = { idRodovia: idRodovia }
-
-            if (valorDenominacao.trim() != "" || !valorDenominacao === null) {
-                bodyRodovia.valorDenominacao = valorDenominacao.trim();
+            // Envio somente se tiver valor preenchido
+            if (valorDenominacao !== "") {
+                bodyRodovia.valorDenominacao = valorDenominacao;
             }
 
-            if (valorRegionalAdm.trim() != "" || !valorRegionalAdm === null) {
-                bodyRodovia.valorRegionalAdm = valorRegionalAdm.trim();
+            if (valorRegionalAdm !== "") {
+                bodyRodovia.valorRegionalAdm = valorRegionalAdm;
             }
 
-            if (valorRegionalDer.trim() != "" || !valorRegionalDer === null) {
-                bodyRodovia.valorRegionalDer = valorRegionalDer.trim();
+            if (valorRegionalDer !== "") {
+                bodyRodovia.valorRegionalDer = valorRegionalDer;
             }
 
-            var valorConcessionaria = document.querySelector("#input_concessionaria").value;
-            var posicaoConcessionaria = listaConcessionaria.indexOf(valorConcessionaria);
+            // Buscar a fk da concessionaria selecionada
+            const posicaoConcessionaria = listaConcessionaria.indexOf(valorConcessionaria);
 
-            if (posicaoConcessionaria != -1) {
+            // if (posicaoConcessionaria !== -1) {
+            //     bodyRodovia.fkConcessionariaNova = listaFkConcessionaria[posicaoConcessionaria];
+            // }
 
-                bodyRodovia.fkConcessionaria = listaFkConcessionaria[posicaoConcessionaria];
-
-            }
+            bodyRodovia.fkConcessionariaAtual = listaFkConcessionaria[listaIdRodovia.indexOf(idRodovia)];
 
             fetch("/usuarios/editarRodovia", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({
-                    ...bodyRodovia
-                }),
+                body: JSON.stringify(bodyRodovia),
             })
                 .then((response) => {
-
-                    if (response.ok) {
-
-                        response.json().then((data) => {
-
-                            console.log(data);
-
-                            fecharModal("modal_editar_info")
-
-                            Swal.fire({
-                                icon: "success",
-                                title: "Sucesso",
-                                text: "Rodovia editada!",
-                            })
-
-                        })
-
-                    } else {
-                        return response.json().then((data) => {
-
+                    if (!response.ok) {
+                        return response.json().then(() => {
                             Swal.fire({
                                 icon: "error",
                                 title: "Erro",
-                                text:
-                                    "Rodovia inválida!"
+                                text: "Rodovia inválida!"
                             });
-
                         });
                     }
+
+                    return response.json().then((data) => {
+                        console.log(data);
+
+                        fecharModal("modal_editar_info");
+
+                        Swal.fire({
+                            icon: "success",
+                            title: "Sucesso",
+                            text: "Rodovia editada!"
+                        });
+                    });
                 })
                 .catch((error) => {
-                    console.log(error);
-
+                    console.error(error);
                 });
-
-
         }
 
     </script>

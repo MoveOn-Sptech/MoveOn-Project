@@ -9,7 +9,7 @@ function autenticar(email, senha) {
     return database.executar(instrucaoSql);
 }
 
-function editar(id, email, nome) {
+function editar(idUsuario, email, nome) {
     // console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", email, senha)
     let campos = [];
 
@@ -31,7 +31,7 @@ function editar(id, email, nome) {
     const instrucaoSql = `
         UPDATE Usuario
         SET ${campos.join(", ")}
-        WHERE id = ${id};
+        WHERE idUsuario = ${idUsuario};
     `;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
@@ -67,8 +67,7 @@ function editarUsuarioUnico(id, email, cargo) {
     return database.executar(instrucaoSql);
 }
 
-function editarRodovia(id, valorDenominacao, valorRegionalAdm, valorRegionalDer, valorFkConcessionaria) {
-    // console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", email, senha)
+function editarRodovia(idRodovia, valorDenominacao, valorRegionalAdm, valorRegionalDer, fkConcessionariaAtual) {
     var camposRodovia = [];
 
     if (valorDenominacao) {
@@ -83,21 +82,22 @@ function editarRodovia(id, valorDenominacao, valorRegionalAdm, valorRegionalDer,
         camposRodovia.push(`regionalDer = '${valorRegionalDer}'`);
     }
 
-    if (valorFkConcessionaria) {
-        camposRodovia.push(`fkConcessionaria = '${valorFkConcessionaria}'`);
-    }
+    // Se o usuário informar uma FK nova, atualiza
+    // if (fkConcessionariaNova) {
+    //     camposRodovia.push(`fkConcessionaria = ${fkConcessionariaNova}`);
+    // }
 
-    // Se nenhum campo foi enviado, não faz nada
     if (camposRodovia.length === 0) {
         console.log("Nenhum dado para atualizar.");
         return;
     }
 
-    // Montar o SQL dinamicamente
+    // ⚠️ WHERE usa a FK atual, não a nova
     const instrucaoSql = `
         UPDATE Rodovia 
         SET ${camposRodovia.join(", ")}
-        WHERE idRodovia = ${id};
+        WHERE idRodovia = ${idRodovia}
+        AND fkConcessionaria = ${fkConcessionariaAtual};
     `;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
@@ -125,7 +125,7 @@ function listarRodovias() {
         SELECT r.idRodovia, r.nome, r.denominacao, r.regionalDer,
         r.regionalAdmSp, r.fkConcessionaria, c.nome AS nomeConcessionaria
         FROM Rodovia as r JOIN Concessionaria as c
-        ON r.fkConcessionaria = c.idConcessionaria;;
+        ON r.fkConcessionaria = c.idConcessionaria;
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
