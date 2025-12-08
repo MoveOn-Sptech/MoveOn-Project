@@ -3,12 +3,13 @@ var database = require("../database/config")
 function obterRodoviasComMaisAcidente(fkConcessionaria) {
     var instrucaoSql = `
         SELECT 
+            r.idRodovia,
             r.nome,
             SUM(a.qtdVitLeve + a.qtdVitGrave + a.qtdVitFatal) AS quantidade
         FROM Rodovia r
         JOIN Acidente a ON a.fkRodovia = r.idRodovia
         WHERE r.fkConcessionaria = ${fkConcessionaria}
-        GROUP BY r.nome
+        GROUP BY r.nome, r.idRodovia
         ORDER BY quantidade DESC;
     `;
     return database.executar(instrucaoSql);
@@ -17,12 +18,13 @@ function obterRodoviasComMaisAcidente(fkConcessionaria) {
 function obterRodoviasComMaisAcidenteComIntervalo(fkConcessionaria, dataInicio, dataFim) {
     var instrucaoSql = `
         SELECT 
+            r.idRodovia,
             r.nome as nomeRodovia,
             SUM(a.qtdVitLeve + a.qtdVitGrave + a.qtdVitFatal) AS quantidade
         FROM Rodovia r
         JOIN Acidente a ON a.fkRodovia = r.idRodovia
         WHERE r.fkConcessionaria = ${fkConcessionaria} AND a.dtHoraAcidente BETWEEN '${dataInicio}' AND '${dataFim}'
-        GROUP BY r.nome
+        GROUP BY r.nome, r.idRodovia
         ORDER BY quantidade DESC;
     `;
     return database.executar(instrucaoSql);

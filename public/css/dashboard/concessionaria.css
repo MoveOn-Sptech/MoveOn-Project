@@ -15,57 +15,57 @@ body {
 
 /* NAVBAR */
 nav {
-    width: 100%;
-    height: 10vh;
-    display: flex;
-    align-items: center;
-    color: white;
-    font-family: "Poppins", sans-serif;
-    font-weight: 800;
-    background-color: #010358;
+  width: 100%;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  color: white;
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  background-color: #010358;
 }
 
 nav .logo_nav {
-    width: 20%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 20%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 nav .logo_nav a {
-    width: 70%;
+  width: 70%;
 }
 
 nav .logo_nav img {
-    width: 80%;
+  width: 80%;
 }
 
 nav .user_name {
-    width: 60%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 150%;
+  width: 60%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 150%;
 }
 
 nav .user_icon {
-    position: absolute;
-    right: 0;
-    width: 10%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: absolute;
+  right: 0;
+  width: 10%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 nav .user_icon img {
-    width: 30%;
+  width: 30%;
 }
 
 nav .user_icon img:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .titulo_dashboard {
@@ -108,8 +108,8 @@ nav .user_icon img:hover {
 }
 
 .titles h2 {
-    font-family: "Poppins", sans-serif;
-    margin-top: 5%;
+  font-family: "Poppins", sans-serif;
+  margin-top: 5%;
 }
 
 .div_pesquisar_concessionarias {
@@ -208,8 +208,8 @@ thead {
 }
 
 .tr_rodovia:hover {
-    cursor: pointer;
-    transform: scale(1.02);
+  cursor: pointer;
+  transform: scale(1.02);
 }
 
 .div_btn {
@@ -265,7 +265,8 @@ thead {
   margin-right: 10px;
 }
 
-.filter input, .filter select {
+.filter input,
+.filter select {
   background-color: transparent;
   border: 1px solid #010358;
   border-radius: 10px;
@@ -274,7 +275,8 @@ thead {
   font-weight: 600;
 }
 
-.filter input:hover, .filter select:hover {
+.filter input:hover,
+.filter select:hover {
   cursor: pointer;
   background-color: #e0e0e0;
 }
@@ -322,6 +324,6 @@ thead {
 }
 
 .grafico {
-    width: 100% !important;
-    height: 100% !important;
+  width: 100% !important;
+  height: 100% !important;
 }

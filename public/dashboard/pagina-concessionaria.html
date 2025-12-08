@@ -1,116 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard: Concessionária</title>
+    <link rel="stylesheet" href="../css/dashboard/concessionaria.css" />
+    <link rel="icon" href="../imagens/logo_alternativa_branca.png" />
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard: Concessionária</title>
-  <link rel="stylesheet" href="../css/dashboard/concessionaria.css" />
-  <link rel="icon" href="../imagens/logo_alternativa_branca.png" />
-  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
-  <!-- SweetAlert2 -->
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-</head>
-
-<body>
-
-  <nav>
-    <span class="logo_nav">
-      <a href="visao-geral-rodovia.html"><img src="../assets/logo_branca.png" alt=""></a>
-    </span>
-    <span class="user_name">
-      <p>Estratégico - ARTESP</p>
-    </span>
-    <span class="user_icon">
-      <a href="../perfil.html"><img src="../assets/icon/user-dash.png" alt=""></a>
-    </span>
-  </nav>
-
-  <h1 class="titulo_dashboard">
-    Concessionária: <span id="span_nome_concessionaria"></span>
-  </h1>
-
-  <section class="section_principal">
-    <div class="div_container_concessionarias">
-      <div class="titles">
-        <h2>Rodovias com mais acidentes</h2>
-        <h4>
-          <span id="span_inicio_data"> </span>
-
-          <span id="span_fim_data"> </span>
-        </h4>
-      </div>
-
-      <div class="div_pesquisar_concessionarias">
-        <p>Pesquisar rodovia:</p>
-        <input type="text" placeholder="Digite o nome da rodovia" id="input_nome" onkeydown="onChangeSelectedFilter()"
-          onkeyup="onChangeSelectedFilter()" />
-      </div>
-
-      <div class="div_filtrar">
-        <p>Aplicar um filtro:</p>
-        <select name="escolherFiltro" id="escolherFiltro" onchange="onChangeSelectedFilter()">
-          <option value="-1" onclick="allRodovias()">Todos</option>
-        </select>
-      </div>
-
-      <table class="tabela_concessionarias">
-        <thead>
-          <tr>
-            <th>Nome</th>
-            <th>Quantidade</th>
-          </tr>
-        </thead>
-
-        <tbody id="rodovias-tbody"></tbody>
-      </table>
-
-      <div class="div_btn">
-        <button class="btn_gerarRelatorio" onclick="gerarRelatorio()">
-          Gerar relatório
-        </button>
-      </div>
-    </div>
-
-    <div class="div_container_graficos">
-      <span class="filter">
-        <p class="filtro">Filtro</p>
-        <p>Selecione o ano:</p>
-        <select name="select_filtro_ano" id="select_filtro_ano" onchange="onChangeFilterDate()">
-          <option value="2024">2024</option>
-          <option value="2023">2023</option>
-          <option value="2022">2022</option>
-          <option value="2021">2021</option>
-        </select>
-        <p>selecione um intervalo:</p>
-        <input type="date" id="input_data_inicio" onchange="onChangeFilterDate()" />
-        <p>até</p>
-        <input type="date" id="input_data_fim" onchange="onChangeFilterDate()" />
+  <body>
+    <nav>
+      <span class="logo_nav">
+        <a href="visao-geral-rodovia.html"
+          ><img src="../assets/logo_branca.png" alt=""
+        /></a>
       </span>
+      <span class="user_name">
+        <p>Estratégico - ARTESP</p>
+      </span>
+      <span class="user_icon">
+        <a href="../perfil.html"
+          ><img src="../assets/icon/user-dash.png" alt=""
+        /></a>
+      </span>
+    </nav>
 
-      <div class="div_graficos">
-        <div class="div_grafico">
-          <canvas id="myChart4" class="grafico"></canvas>
+    <h1 class="titulo_dashboard">
+      Concessionária: <span id="span_nome_concessionaria"></span>
+    </h1>
+
+    <section class="section_principal">
+      <div class="div_container_concessionarias">
+        <div class="titles">
+          <h2>Rodovias com mais acidentes</h2>
+          <h4>
+            <span id="span_inicio_data"> </span>
+
+            <span id="span_fim_data"> </span>
+          </h4>
         </div>
 
-        <div class="graficos_pizza">
-          <div>
-            <canvas id="myChart2" class="grafico"></canvas>
-          </div>
-
-          <div>
-            <canvas id="myChart3" class="grafico"></canvas>
-          </div>
+        <div class="div_pesquisar_concessionarias">
+          <p>Pesquisar rodovia:</p>
+          <input
+            type="text"
+            placeholder="Digite o nome da rodovia"
+            id="input_nome"
+            onkeydown="onChangeSelectedFilter()"
+            onkeyup="onChangeSelectedFilter()"
+          />
         </div>
 
-        <div class="div_grafico">
-          <canvas id="myChart" class="grafico"></canvas>
+        <div class="div_filtrar">
+          <p>Aplicar um filtro:</p>
+          <select
+            name="escolherFiltro"
+            id="escolherFiltro"
+            onchange="onChangeSelectedFilter()"
+          >
+            <option value="-1" onclick="allRodovias()">Todos</option>
+          </select>
+        </div>
+
+        <table class="tabela_concessionarias">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Quantidade</th>
+            </tr>
+          </thead>
+
+          <tbody id="rodovias-tbody"></tbody>
+        </table>
+
+        <div class="div_btn">
+          <button class="btn_gerarRelatorio" onclick="gerarRelatorio()">
+            Gerar relatório
+          </button>
         </div>
       </div>
-    </div>
-  </section>
-</body>
 
+      <div class="div_container_graficos">
+        <span class="filter">
+          <p class="filtro">Filtro</p>
+          <p>Selecione o ano:</p>
+          <select
+            name="select_filtro_ano"
+            id="select_filtro_ano"
+            onchange="onChangeFilterDate()"
+          >
+            <option value="2024">2024</option>
+            <option value="2023">2023</option>
+            <option value="2022">2022</option>
+            <option value="2021">2021</option>
+          </select>
+          <p>selecione um intervalo:</p>
+          <input
+            type="date"
+            id="input_data_inicio"
+            onchange="onChangeFilterDate()"
+          />
+          <p>até</p>
+          <input
+            type="date"
+            id="input_data_fim"
+            onchange="onChangeFilterDate()"
+          />
+        </span>
+
+        <div class="div_graficos">
+          <div class="div_grafico">
+            <canvas id="myChart4" class="grafico"></canvas>
+          </div>
+
+          <div class="graficos_pizza">
+            <div>
+              <canvas id="myChart2" class="grafico"></canvas>
+            </div>
+
+            <div>
+              <canvas id="myChart3" class="grafico"></canvas>
+            </div>
+          </div>
+
+          <div class="div_grafico">
+            <canvas id="myChart" class="grafico"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
 </html>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -128,8 +150,10 @@
     console.log(fkConcessionaria);
     console.log(input_data_inicio.value, input_data_fim.value);
     fetch(
-      `/concessionaria/gerar-relatorio?fkConcessionaria=${fkConcessionaria}&email=${email}&dataInicio=${input_data_inicio.value
-      }&dataFim=${input_data_fim.value}&concessionaria=${span_nome_concessionaria.innerText
+      `/concessionaria/gerar-relatorio?fkConcessionaria=${fkConcessionaria}&email=${email}&dataInicio=${
+        input_data_inicio.value
+      }&dataFim=${input_data_fim.value}&concessionaria=${
+        span_nome_concessionaria.innerText
       }&responsavel=${sessionStorage.getItem(
         "nomeUsuario"
       )}&fkUsuario=${sessionStorage.getItem("idUsuario")}`
@@ -192,8 +216,8 @@
     renderRodovias(todasRodovia);
   }
 
-  function direcionarPaginaRodovia() {
-    window.location.href = "./pagina-rodovia.html";
+  function direcionarPaginaRodovia(rodoviaId) {
+    window.location.href = "./pagina-rodovia.html?id=" + rodoviaId;
   }
 
   const urlParams = new URLSearchParams(window.location.search);
@@ -248,7 +272,7 @@
 
     rodovias.forEach((rodovia) => {
       text += `
-          <tr class="tr_rodovia" onclick="direcionarPaginaRodovia()">
+          <tr class="tr_rodovia" onclick="direcionarPaginaRodovia(${rodovia.idRodovia})">
               <td>${rodovia.nomeRodovia}</td>
               <td>${rodovia.quantidade}</td>
           </tr>
@@ -439,9 +463,11 @@
           },
           title: {
             display: true,
-            text: `Acidentes de ${dataInicio.getMonth() + 1
-              }/${dataInicio.getFullYear()} a ${dataFim.getMonth() + 1
-              }/${dataFim.getFullYear()}`,
+            text: `Acidentes de ${
+              dataInicio.getMonth() + 1
+            }/${dataInicio.getFullYear()} a ${
+              dataFim.getMonth() + 1
+            }/${dataFim.getFullYear()}`,
             font: {
               size: 20,
               weight: "bold",
