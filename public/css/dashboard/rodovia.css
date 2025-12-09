@@ -600,3 +600,255 @@ thead {
   width: 85%;
   height: 80%;
 }
+
+/* ===========================
+   Responsividade: tablets e mobile
+   =========================== */
+
+@media (max-width: 768px) {
+  /* Navbar adjustments */
+  nav {
+    flex-wrap: wrap;
+    padding: 10px 14px;
+    height: auto;
+  }
+
+  nav .logo_nav {
+    width: auto;
+    flex: 0 0 auto;
+    padding-right: 8px;
+  }
+
+  nav .logo_nav img {
+    width: 140px;
+    max-width: 30vw;
+    height: auto;
+  }
+
+  nav .user_name {
+    flex: 1 1 auto;
+    text-align: center;
+    font-size: 1rem;
+    padding: 6px 8px;
+  }
+
+  nav .user_icon {
+    flex: 0 0 auto;
+    position: relative;
+    padding-left: 8px;
+  }
+
+  /* Main layout -> stack columns */
+  .rodovia_main {
+    flex-direction: column;
+    gap: 18px;
+    padding: 18px 12px;
+    height: auto;
+  }
+
+  /* Titles centered and static */
+  .title,
+  .title2 {
+    position: static;
+    margin: 8px 0 0 0;
+    text-align: center;
+    font-size: 1.8rem;
+  }
+
+  /* Make cards full-width and in-flow */
+  .card_rodovias,
+  .card_rodovia,
+  .card_rodovia2 {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    height: auto;
+    padding: 16px;
+    border-radius: 14px;
+  }
+
+  .card_rodovias {
+    margin-left: 0;
+  }
+
+  .card_rodovias .pesquisar_rodovia,
+  .card_rodovias .filtrar_rodovia {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: stretch;
+  }
+
+  .card_rodovias .pesquisar_rodovia input,
+  .card_rodovias .filtrar_rodovia select,
+  .filter input,
+  .filter select {
+    width: 100%;
+    height: 44px;
+    padding: 8px 10px;
+    box-sizing: border-box;
+  }
+
+  .btn-limpar {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+  }
+
+  .div_logo {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    padding: 12px 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .div_logo img {
+    width: 60%;
+    max-width: 260px;
+  }
+
+  /* KPIs flow */
+  .kpis {
+    position: relative;
+    right: 0;
+    margin-top: 12px;
+    margin-right: 0;
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-around;
+    gap: 12px;
+  }
+
+  .kpi {
+    width: 30%;
+    height: auto;
+    padding: 12px;
+  }
+
+  /* Make large cards stack and reduce height for mobile-friendly view */
+  .card_frequencia,
+  .card_vitimas,
+  .card_marcokm,
+  .card_periodos {
+    position: relative;
+    width: 100%;
+    height: 320px;
+    margin: 12px 0;
+    padding: 12px;
+  }
+
+  .card_clima,
+  .card_veiculos {
+    position: relative;
+    width: 48%;
+    margin: 8px 1%;
+    height: 260px;
+    display: inline-block;
+  }
+
+  .grafico_barra,
+  .grafico_pizza,
+  .grafico_rosca {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* prevent horizontal overflow from large elements */
+  html, body {
+    overflow-x: hidden;
+  }
+
+  .filter {
+    position: relative;
+    width: 100%;
+    margin: 0;
+    gap: 10px;
+    padding: 10px 0;
+    flex-wrap: wrap;
+  }
+
+  .filter input[type="date"],
+  .filter input,
+  .filter select {
+    min-width: 120px;
+    flex: 1 1 auto;
+  }
+
+  .voltar {
+    position: relative;
+    width: auto;
+    height: auto;
+    margin: 8px 0;
+  }
+
+  .voltar button {
+    padding: 8px 12px;
+    min-width: 90px;
+  }
+}
+
+@media (max-width: 600px) {
+  nav .logo_nav img {
+    width: 92px;
+    max-width: 28vw;
+  }
+
+  .title,
+  .title2 {
+    font-size: 1.4rem;
+    margin: 6px 0;
+  }
+
+  .card_rodovias,
+  .card_rodovia,
+  .card_rodovia2 {
+    padding: 12px;
+  }
+
+  .card_frequencia,
+  .card_vitimas,
+  .card_marcokm,
+  .card_periodos,
+  .card_clima,
+  .card_veiculos {
+    height: 240px;
+    padding: 10px;
+  }
+
+  .card_rodovias .pesquisar_rodovia input,
+  .card_rodovias .filtrar_rodovia select,
+  .filter input,
+  .filter select {
+    height: 48px;
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+
+  .btn-limpar {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+  }
+
+  .kpi {
+    width: 48%;
+  }
+
+  /* make these side cards full-width on small phones to avoid cutoff */
+  .card_clima,
+  .card_veiculos {
+    width: 100%;
+    margin: 8px 0;
+    display: block;
+  }
+
+  /* ensure no horizontal scroll */
+  body, html {
+    overflow-x: hidden;
+  }
+}

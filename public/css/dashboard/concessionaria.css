@@ -327,3 +327,223 @@ thead {
   width: 100% !important;
   height: 100% !important;
 }
+
+/* ===== Responsividade (tablet pequeno / mobile) ===== */
+@media (max-width: 768px) {
+  /* Navbar */
+  nav {
+    padding: 10px 12px;
+    height: auto;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  nav .logo_nav {
+    width: auto;
+    flex: 0 0 auto;
+    padding-right: 8px;
+  }
+
+  nav .logo_nav img {
+    display: block;
+    width: 120px; /* mantém visível em tablets */
+    max-width: 32vw;
+    height: auto;
+  }
+
+  nav .user_name {
+    flex: 1 1 auto;
+    text-align: center;
+    font-size: 1rem;
+    padding: 6px 8px;
+  }
+
+  nav .user_icon {
+    flex: 0 0 auto;
+    padding-left: 8px;
+  }
+
+  /* Layout principais */
+  .section_principal {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 22px;
+    padding: 18px;
+    height: auto;
+  }
+
+  .div_container_concessionarias,
+  .div_container_graficos {
+    width: 100%;
+    margin: 0;
+    height: auto;
+    padding: 14px;
+    border-radius: 12px;
+    box-sizing: border-box;
+  }
+
+  .div_container_concessionarias {
+    order: 1;
+  }
+
+  .div_container_graficos {
+    order: 2;
+  }
+
+  .titles h2 {
+    font-size: 20px;
+  }
+
+  /* Inputs / filtros */
+  .div_pesquisar_concessionarias,
+  .div_filtrar,
+  .filter {
+    width: 100%;
+    gap: 8px;
+    padding: 0;
+  }
+
+  .div_pesquisar_concessionarias input,
+  .div_filtrar select,
+  .filter input,
+  .filter select {
+    width: 100%;
+    font-size: 15px;
+    padding: 10px;
+    height: 44px;
+  }
+
+  /* Tabela */
+  .tabela_concessionarias {
+    width: 100%;
+    padding: 8px 0;
+  }
+
+  .tabela_concessionarias thead,
+  .tabela_concessionarias tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  .tabela_concessionarias tbody {
+    max-height: 260px;
+    overflow-y: auto;
+  }
+
+  .tabela_concessionarias tbody tr td {
+    padding: 14px;
+    font-size: 15px;
+  }
+
+  /* Gráficos */
+  .div_graficos {
+    gap: 12px;
+  }
+
+  .div_grafico {
+    height: 260px;
+    padding: 12px;
+  }
+
+  .graficos_pizza {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .graficos_pizza div {
+    width: 100%;
+    padding: 6px;
+  }
+
+  canvas {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  /* Botões */
+  .btn_gerarRelatorio {
+    width: 100%;
+    padding: 14px 18px;
+    font-size: 16px;
+    border-radius: 14px;
+    min-width: 0;
+  }
+}
+
+/* ===== Responsividade (mobile padrão) ===== */
+@media (max-width: 600px) {
+  nav .logo_nav img {
+    width: 96px; /* mantém logo visível em celulares */
+    max-width: 30vw;
+  }
+
+  nav .user_name p {
+    font-size: 14px;
+  }
+
+  .titulo_dashboard {
+    font-size: 26px;
+    margin: 8px 0;
+    text-align: center;
+  }
+
+  .titles h2 {
+    font-size: 18px;
+  }
+
+  .div_pesquisar_concessionarias p,
+  .div_filtrar p,
+  .filter p {
+    font-size: 13px;
+  }
+
+  .div_pesquisar_concessionarias input,
+  .div_filtrar select,
+  .filter input,
+  .filter select {
+    height: 46px;
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .tabela_concessionarias thead {
+    font-size: 14px;
+  }
+
+  .tabela_concessionarias tbody {
+    max-height: 200px;
+  }
+
+  .tabela_concessionarias tbody tr td {
+    padding: 12px;
+  }
+
+  .div_grafico {
+    height: 200px;
+    padding: 8px;
+  }
+
+  .graficos_pizza div {
+    width: 100%;
+    padding: 8px;
+  }
+
+  .btn_gerarRelatorio {
+    width: 100%;
+    font-size: 16px;
+    padding: 14px 12px;
+  }
+
+  /* Evita overflow de células e textos longos */
+  table,
+  tbody,
+  thead,
+  tr,
+  td,
+  th {
+    word-break: break-word;
+  }
+}
